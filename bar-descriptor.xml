@@ -53,7 +53,7 @@
     <!--  Name of author which is used for signing. Must match the developer name of your development certificate. -->
     <author>Dirk Songuer</author>
     <authorId>gYAAgBdeWwop_OlO2UhxazMyvtM</authorId>
-    <description>An Instagram viewer for BlackBerry. Browse popular photos, find interesting people and share beautiful images.</description>
+    <description>An Instagram viewer for BlackBerry. Browse popular photos, find interesting people and follow your friends on Instagram.</description>
     <category>core.media</category>
     <splashScreens>
        <image>instago_splash_768x1280.png</image>

@@ -1,5 +1,5 @@
-#ifndef ApplicationUI_HPP_
-#define ApplicationUI_HPP_
+#ifndef Instago_HPP_
+#define Instago_HPP_
 
 #include <QObject>
 
@@ -20,12 +20,12 @@ class QTranslator;
  *
  */
 
-class ApplicationUI : public QObject
+class Instago : public QObject
 {
     Q_OBJECT
 public:
-    ApplicationUI(bb::cascades::Application *app);
-    virtual ~ApplicationUI() { }
+    Instago(bb::cascades::Application *app);
+    virtual ~Instago() { }
 private slots:
     void onSystemLanguageChanged();
 private:
