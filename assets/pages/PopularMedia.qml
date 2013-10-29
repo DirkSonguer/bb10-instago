@@ -43,6 +43,12 @@ NavigationPane {
                 verticalAlignment: VerticalAlignment.Center
                 horizontalAlignment: HorizontalAlignment.Center
             }
+            
+            ErrorMessage {
+                id: errorMessage
+                verticalAlignment: VerticalAlignment.Center
+                horizontalAlignment: HorizontalAlignment.Center
+            }
         }
 
         // page creation is finished

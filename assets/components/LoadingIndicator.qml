@@ -15,8 +15,11 @@ import "../global/copytext.js" as Copytext
 Container {
     id: loadingIndicatorComponent
 
+    // show the loader with the given message
     signal showLoader(string message)
-    signal hideLoader();
+
+    // hide the loader and message
+    signal hideLoader()
 
     // layout definition
     layout: StackLayout {
@@ -50,17 +53,20 @@ Container {
         visible: false
     }
 
+    // show the loader with the given message
     onShowLoader: {
         // activity indicator active on page creation
         loaderActivityIndicator.running = true;
         loaderActivityIndicator.visible = true;
 
+        // only show message component if a message was given
         if (message) {
             loaderMessage.text = message;
             loaderMessage.visible = true;
         }
     }
 
+    // hide loader and message
     onHideLoader: {
         loaderActivityIndicator.running = false;
         loaderActivityIndicator.visible = false;

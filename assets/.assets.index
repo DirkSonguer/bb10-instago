@@ -1,5 +1,5 @@
 1
-29
+30
 classes/authenticationhandler.js
 classes/commenttransformator.js
 classes/locationtransformator.js
@@ -7,6 +7,7 @@ classes/mediatransformator.js
 classes/networkhandler.js
 classes/texttransformator.js
 classes/usertransformator.js
+components/ErrorMessage.qml
 components/LoadingIndicator.qml
 global/copytext.js
 global/globals.js
