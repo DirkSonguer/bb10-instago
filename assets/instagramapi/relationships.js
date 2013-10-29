@@ -7,11 +7,11 @@
 // *************************************************** //
 
 //include other scripts used here
-Qt.include(dirPaths.assetPath + "shared/global/instagramkeys.js");
-Qt.include(dirPaths.assetPath + "shared/classes/authenticationhandler.js");
-Qt.include(dirPaths.assetPath + "shared/classes/usertransformator.js");
-Qt.include(dirPaths.assetPath + "shared/classes/networkhandler.js");
-Qt.include(dirPaths.assetPath + "shared/structures/userdata.js");
+Qt.include(dirPaths.assetPath + "global/instagramkeys.js");
+Qt.include(dirPaths.assetPath + "classes/authenticationhandler.js");
+Qt.include(dirPaths.assetPath + "classes/usertransformator.js");
+Qt.include(dirPaths.assetPath + "classes/networkhandler.js");
+Qt.include(dirPaths.assetPath + "structures/userdata.js");
 
 // Load the users that are following the given Instagram user id
 // First parameter is the user id to get the data for

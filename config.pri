@@ -3,26 +3,32 @@ BASEDIR =  $$quote($$_PRO_FILE_PWD_)
 
 device {
     CONFIG(debug, debug|release) {
-        SOURCES +=  $$quote($$BASEDIR/src/instago.cpp) \
+        SOURCES +=  $$quote($$BASEDIR/src/Instago.cpp) \
+                 $$quote($$BASEDIR/src/WebImageView.cpp) \
                  $$quote($$BASEDIR/src/main.cpp)
 
-        HEADERS +=  $$quote($$BASEDIR/src/instago.hpp)
+        HEADERS +=  $$quote($$BASEDIR/src/Instago.hpp) \
+                 $$quote($$BASEDIR/src/WebImageView.h)
     }
 
     CONFIG(release, debug|release) {
-        SOURCES +=  $$quote($$BASEDIR/src/instago.cpp) \
+        SOURCES +=  $$quote($$BASEDIR/src/Instago.cpp) \
+                 $$quote($$BASEDIR/src/WebImageView.cpp) \
                  $$quote($$BASEDIR/src/main.cpp)
 
-        HEADERS +=  $$quote($$BASEDIR/src/instago.hpp)
+        HEADERS +=  $$quote($$BASEDIR/src/Instago.hpp) \
+                 $$quote($$BASEDIR/src/WebImageView.h)
     }
 }
 
 simulator {
     CONFIG(debug, debug|release) {
-        SOURCES +=  $$quote($$BASEDIR/src/instago.cpp) \
+        SOURCES +=  $$quote($$BASEDIR/src/Instago.cpp) \
+                 $$quote($$BASEDIR/src/WebImageView.cpp) \
                  $$quote($$BASEDIR/src/main.cpp)
 
-        HEADERS +=  $$quote($$BASEDIR/src/instago.hpp)
+        HEADERS +=  $$quote($$BASEDIR/src/Instago.hpp) \
+                 $$quote($$BASEDIR/src/WebImageView.h)
     }
 }
 

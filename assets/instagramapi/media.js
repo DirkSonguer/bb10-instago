@@ -6,14 +6,14 @@
 //*************************************************** //
 
 //include other scripts used here
-Qt.include(dirPaths.assetPath + "shared/global/instagramkeys.js");
-Qt.include(dirPaths.assetPath + "shared/global/copytext.js");
-Qt.include(dirPaths.assetPath + "shared/classes/authenticationhandler.js");
-Qt.include(dirPaths.assetPath + "shared/classes/networkhandler.js");
-Qt.include(dirPaths.assetPath + "shared/classes/mediatransformator.js");
-Qt.include(dirPaths.assetPath + "shared/classes/usertransformator.js");
-Qt.include(dirPaths.assetPath + "shared/classes/commenttransformator.js");
-Qt.include(dirPaths.assetPath + "shared/structures/mediadata.js");
+Qt.include(dirPaths.assetPath + "global/instagramkeys.js");
+Qt.include(dirPaths.assetPath + "global/copytext.js");
+Qt.include(dirPaths.assetPath + "classes/authenticationhandler.js");
+Qt.include(dirPaths.assetPath + "classes/networkhandler.js");
+Qt.include(dirPaths.assetPath + "classes/mediatransformator.js");
+Qt.include(dirPaths.assetPath + "classes/usertransformator.js");
+Qt.include(dirPaths.assetPath + "classes/commenttransformator.js");
+Qt.include(dirPaths.assetPath + "structures/mediadata.js");
 
 // Load the popular media stream from Instagram
 // The resulting media data is in the standard media format provided by the

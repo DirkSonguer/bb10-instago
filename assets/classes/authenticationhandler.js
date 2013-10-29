@@ -14,7 +14,7 @@
 
 // include other scripts used here
 if (typeof dirPaths !== "undefined") {
-	Qt.include(dirPaths.assetPath + "shared/global/instagramkeys.js");
+	Qt.include(dirPaths.assetPath + "global/instagramkeys.js");
 }
 
 // singleton instance of class

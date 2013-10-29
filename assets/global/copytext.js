@@ -11,6 +11,8 @@ var instagoLoginBody = "<html>You are not connected to Instagram, only the publi
 
 var instagoLoadingPopularMedia = "Loading popular media";
 
+var instagoTitlePopular = "Popular Images";
+
 var instagoErrorHeadline = "Uh, oh!";
 var instagoErrorMessagePrefix = "<html>Please check your network connection and tap to try again.";
 var instagoErrorMessagePostfix = "</html>";

@@ -6,8 +6,8 @@
 //*************************************************** //
 
 // include other scripts used here
-Qt.include(dirPaths.assetPath + "shared/global/globals.js");
-Qt.include(dirPaths.assetPath + "shared/structures/mediadata.js");
+Qt.include(dirPaths.assetPath + "global/globals.js");
+Qt.include(dirPaths.assetPath + "structures/mediadata.js");
 
 // Class function that gets the prototype methods
 function LocationTransformator() {

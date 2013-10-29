@@ -1,5 +1,5 @@
 // include application class
-#include "instago.hpp"
+#include "Instago.hpp"
 
 // include cascades classses
 #include <bb/cascades/Application>
@@ -9,6 +9,8 @@
 #include <bb/cascades/SceneCover>
 #include <bb/device/DisplayInfo>
 
+#include "WebImageView.h"
+
 // use blackberry namespaces
 using namespace bb::device;
 using namespace bb::cascades;
@@ -16,6 +18,7 @@ using namespace bb::cascades;
 Instago::Instago(bb::cascades::Application *app) :
         QObject(app)
 {
+    qmlRegisterType<WebImageView>("WebImageView", 1, 0, "WebImageView");
 	qmlRegisterType<QTimer>("QtTimer", 1, 0, "Timer");
 
 	// The SceneCover is registered so that it can be used in QML

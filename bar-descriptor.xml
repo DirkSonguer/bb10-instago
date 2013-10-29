@@ -96,6 +96,9 @@
     <asset path="icon.png">icon.png</asset>
     <asset path="assets">assets</asset>
     
+    <!-- Set theme to dark as default -->
+    <env var="CASCADES_THEME" value="dark"/>
+    
     <!-- Locale support -->
     <asset path="translations" dest="qm">
         <include name="*.qm"/>

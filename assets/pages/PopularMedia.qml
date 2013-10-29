@@ -32,18 +32,30 @@ NavigationPane {
         // signal if popular media data loading encountered an error
         signal popularMediaDataError(variant errorData)
 
+        titleBar: TitleBar {
+            title: Copytext.instagoTitlePopular
+        }
+
         // main content container
         Container {
             // layout definition
             layout: DockLayout {
             }
-            
+
+            // layout definition
+            topPadding: 1
+            bottomPadding: 1
+
+            ThumbnailGallery {
+                id: popularMediaThumbnails                
+            }
+
             LoadingIndicator {
                 id: loadingIndicator
                 verticalAlignment: VerticalAlignment.Center
                 horizontalAlignment: HorizontalAlignment.Center
             }
-            
+
             ErrorMessage {
                 id: errorMessage
                 verticalAlignment: VerticalAlignment.Center
@@ -54,10 +66,27 @@ NavigationPane {
         // page creation is finished
         // load the gallery content as soon as the page is ready
         onCreationCompleted: {
+            // console.log("# Creation of popular media page finished");
+
+            // show loader
             loadingIndicator.showLoader("Loading popular items");
-            
+
             // load popular media stream
-            // MediaRepository.getPopularMedia(popularMediaPage);
+            MediaRepository.getPopularMedia(popularMediaPage);
+        }
+
+        // popular media data loaded and transformed
+        // data is stored in "mediaDataArray" variant as array of type InstagramMediaData
+        onPopularMediaDataLoaded: {
+            // console.log("# Popular media data loaded. Found " + mediaDataArray.length + " items");
+
+            // iterate through data objects
+            for (var index in mediaDataArray) {
+                popularMediaThumbnails.addToGallery(mediaDataArray[index]);
+            }
+
+            // hide loader
+            loadingIndicator.hideLoader();
         }
     }
 

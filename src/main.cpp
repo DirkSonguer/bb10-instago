@@ -6,7 +6,7 @@
 #include <QTranslator>
 
 // include main app class
-#include "instago.hpp"
+#include "Instago.hpp"
 
 // include qt debug classs
 #include <Qt/qdeclarativedebug.h>
