@@ -1,17 +1,24 @@
-/*
- * WebImageView.cpp
- *
- *  Created on: 4 oct. 2012
- *      Author: schutz
- */
+// Source: https://github.com/RileyGB/BlackBerry10-Samples/tree/master/WebImageViewSample
 
 #include "WebImageView.h"
+#include <QNetworkReply>
+#include <QNetworkDiskCache>
+#include <QtGui/QDesktopServices>
 #include <bb/cascades/Image>
 
-QNetworkAccessManager * WebImageView::mNetManager = new QNetworkAccessManager;
+using namespace bb::cascades;
+
+QNetworkAccessManager * WebImageView::mNetManager = new QNetworkAccessManager();
+QNetworkDiskCache * WebImageView::mNetworkDiskCache = new QNetworkDiskCache();
 
 WebImageView::WebImageView() {
-	mLoading = 0;
+
+	// Initialize network cache
+	mNetworkDiskCache->setCacheDirectory(QDesktopServices::storageLocation(QDesktopServices::CacheLocation));
+
+	// Set cache in manager
+	mNetManager->setCache(mNetworkDiskCache);
+
 }
 
 const QUrl& WebImageView::url() const {
@@ -19,12 +26,30 @@ const QUrl& WebImageView::url() const {
 }
 
 void WebImageView::setUrl(const QUrl& url) {
+
+	// Variables
 	mUrl = url;
 	mLoading = 0;
-	QNetworkReply * reply = mNetManager->get(QNetworkRequest(url));
-	connect(reply, SIGNAL(finished()), this, SLOT(imageLoaded()));
-	connect(reply, SIGNAL(downloadProgress(qint64, qint64)), this,
-			SLOT(dowloadProgressed(qint64, qint64)));
+
+	// Reset the image
+	resetImage();
+
+	// Create request
+	QNetworkRequest request;
+	request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
+	request.setUrl(url);
+
+	// Create reply
+	QNetworkReply * reply = mNetManager->get(request);
+	QObject::connect(reply,SIGNAL(finished()), this, SLOT(imageLoaded()));
+	QObject::connect(reply,SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(dowloadProgressed(qint64,qint64)));
+
+	//
+	// Note:
+	// If you see Function "downloadProgress ( qint64 , qint64  ) is not defined"
+	// Simply close this file, delete the error and compile the project
+	//
+
 	emit urlChanged();
 }
 
@@ -34,17 +59,23 @@ double WebImageView::loading() const {
 
 void WebImageView::imageLoaded() {
 
+	// Get reply
 	QNetworkReply * reply = qobject_cast<QNetworkReply*>(sender());
-	setImage(Image(reply->readAll()));
 
+	// Process reply
+	QByteArray imageData = reply->readAll();
+
+	// Set image from data
+	setImage( Image(imageData) );
+
+	// Memory management
 	reply->deleteLater();
 
 }
 
-void WebImageView::dowloadProgressed(qint64 bytes, qint64 total) {
+void WebImageView::dowloadProgressed(qint64 bytes,qint64 total) {
 
-	mLoading = double(bytes) / double(total);
+	mLoading =  double(bytes)/double(total);
 	emit loadingChanged();
 
 }
-

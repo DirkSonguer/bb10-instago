@@ -1,15 +1,11 @@
-/*
- * WebImageView.h
- *
- *  Created on: 4 oct. 2012
- *      Author: schutz
- */
+// Source: https://github.com/RileyGB/BlackBerry10-Samples/tree/master/WebImageViewSample
 
 #ifndef WEBIMAGEVIEW_H_
 #define WEBIMAGEVIEW_H_
 
 #include <bb/cascades/ImageView>
 #include <QNetworkAccessManager>
+#include <QNetworkDiskCache>
 #include <QUrl>
 using namespace bb::cascades;
 
@@ -23,19 +19,21 @@ public:
 	const QUrl& url() const;
 	double loading() const;
 
-public Q_SLOTS:
+	public Q_SLOTS:
 	void setUrl(const QUrl& url);
 
-private Q_SLOTS:
+	private Q_SLOTS:
 	void imageLoaded();
-	void dowloadProgressed(qint64, qint64);
+	void dowloadProgressed(qint64,qint64);
 
 	signals:
 	void urlChanged();
 	void loadingChanged();
 
+
 private:
 	static QNetworkAccessManager * mNetManager;
+	static QNetworkDiskCache * mNetworkDiskCache;
 	QUrl mUrl;
 	float mLoading;
 };
