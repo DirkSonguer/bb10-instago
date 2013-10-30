@@ -1,7 +1,7 @@
 // *************************************************** //
-// Thumbnail List Component
+// Thumbnail Gallery Component
 //
-// This component shows a list of thumbnails with an
+// This component shows a gallery of thumbnails with an
 // optional text field
 // This component accepts data of type InstagramMediaData
 // *************************************************** //
@@ -48,7 +48,7 @@ Container {
     // item is given as type InstagramMediaData
     signal addToGallery(variant item)
     onAddToGallery: {
-        console.log("# Adding item with ID " + item.mediaId + " to thumbnail list data model");
+        // console.log("# Adding item with ID " + item.mediaId + " to thumbnail list data model");
         thumbnailGalleryComponent.currentItemIndex += 1;
         thumbnailGalleryDataModel.insert({
                 "mediaData": item,
@@ -59,7 +59,7 @@ Container {
 
     // signal if item was clicked
     signal itemClicked(variant mediaData)
-    
+
     // this is a workaround to make the signals visible inside the listview item scope
     // see here for details: http://supportforums.blackberry.com/t5/Cascades-Development/QML-Accessing-variables-defined-outside-a-list-component-from/m-p/1786265#M641
     onCreationCompleted: {
@@ -104,7 +104,7 @@ Container {
                     property string itemCreatedTime: ListItemData.mediaData.createdTime
 
                     // gallery image
-                    // this is a web image view provided by org.labsquare 1.0
+                    // this is a web image view provided by WebViewImage
                     WebImageView {
                         id: itemImage
 
@@ -113,7 +113,13 @@ Container {
                             spaceQuota: 1.0
                         }
 
-                        // layout definition
+                        // align the image in the center
+                        // as a result the image will be rezised around the center when pressed
+                        verticalAlignment: VerticalAlignment.Center
+                        horizontalAlignment: HorizontalAlignment.Center
+
+                        // set image size
+                        // this will be manipulated on press
                         preferredHeight: Qt.thumbnailSize
                         preferredWidth: Qt.thumbnailSize
                         minHeight: Qt.thumbnailSize
@@ -140,6 +146,33 @@ Container {
 
                         // url is given by the data model
                         url: ListItemData.mediaData.mediaThumbnailUrl
+                    }
+
+                    // image description
+                    // dark gray container containing the text
+                    Container {
+                        // layout definition
+                        verticalAlignment: VerticalAlignment.Bottom
+                        preferredWidth: Qt.thumbnailSize
+                        minWidth: Qt.thumbnailSize
+                        topPadding: 2
+                        leftPadding: 5
+                        bottomPadding: 2
+                        rightPadding: 5
+
+                        // color and transparency
+                        background: Color.create(Globals.instagoCoverBackgroundColor)
+                        opacity: 0.8
+
+                        // description text
+                        Label {
+                            text: ListItemData.mediaData.caption
+
+                            // layout definition
+                            textStyle.base: SystemDefaults.TextStyles.SmallText
+                            textStyle.fontWeight: FontWeight.W100
+                            textStyle.textAlign: TextAlign.Left
+                        }
                     }
 
                     // play button
@@ -177,9 +210,23 @@ Container {
                     // if item is tapped, change opacity
                     ListItem.onActivationChanged: {
                         if (active) {
+                            // set opacity to transparent, image wil lfade into the background
                             itemImage.opacity = 0.75
+
+                            // set size so that image gets smaller on press
+                            itemImage.preferredHeight = Qt.thumbnailSize - 20
+                            itemImage.preferredWidth = Qt.thumbnailSize - 20
+                            itemImage.minHeight = Qt.thumbnailSize - 20
+                            itemImage.minWidth = Qt.thumbnailSize - 20
                         } else {
+                            // reset opacity to normal
                             itemImage.opacity = 1.0
+
+                            // set size so that image resets to normal on release
+                            itemImage.preferredHeight = Qt.thumbnailSize
+                            itemImage.preferredWidth = Qt.thumbnailSize
+                            itemImage.minHeight = Qt.thumbnailSize
+                            itemImage.minWidth = Qt.thumbnailSize
                         }
                     }
                 }

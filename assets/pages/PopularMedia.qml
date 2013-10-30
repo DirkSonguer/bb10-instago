@@ -47,7 +47,10 @@ NavigationPane {
             bottomPadding: 1
 
             ThumbnailGallery {
-                id: popularMediaThumbnails                
+                id: popularMediaThumbnails
+                
+                // gallery sorted by index 
+                listSortingKey: "currentIndex"              
             }
 
             LoadingIndicator {
