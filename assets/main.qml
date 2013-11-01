@@ -47,4 +47,15 @@ TabbedPane {
             }
         }
     } //End of second tab
+    
+    // main logic on startup
+    onCreationCompleted: {
+        popularMediaComponent.source = "pages/PopularMedia.qml"
+        var popularMediaPage = popularMediaComponent.createObject();
+        popularMediaTab.setContent(popularMediaPage);
+        
+        // reset tab content by resetting the page
+        mainTabbedPane.activeTab = tab2;
+        mainTabbedPane.activeTab = popularMediaTab;        
+    }
 }

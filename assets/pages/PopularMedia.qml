@@ -32,25 +32,25 @@ NavigationPane {
         // signal if popular media data loading encountered an error
         signal popularMediaDataError(variant errorData)
 
-        titleBar: TitleBar {
-            title: Copytext.instagoTitlePopular
-        }
-
         // main content container
         Container {
             // layout definition
             layout: DockLayout {
             }
 
-            // layout definition
-            topPadding: 1
-            bottomPadding: 1
-
             ThumbnailGallery {
                 id: popularMediaThumbnails
                 
                 // gallery sorted by index 
-                listSortingKey: "currentIndex"              
+                listSortingKey: "currentIndex"
+                listSortAscending: true
+                
+                onItemClicked: {
+                    // console.log("# Item clicked: " + mediaData.mediaId);
+                    var detailImagePage = detailImageComponent.createObject();
+                    detailImagePage.mediaData = mediaData;
+                    navigationPane.push(detailImagePage);
+                }             
             }
 
             LoadingIndicator {
@@ -92,6 +92,16 @@ NavigationPane {
             loadingIndicator.hideLoader();
         }
     }
+    
+    // attach components
+    attachedObjects: [
+        // detail image page
+        // will be called if user clicks on image gallery item
+        ComponentDefinition {
+            id: detailImageComponent
+            source: "MediaDetail.qml"
+        }
+    ]
 
     // destroy pages after use
     onPopTransitionEnded: {

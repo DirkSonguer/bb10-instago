@@ -46,7 +46,40 @@ lupdate_inclusion {
              $$quote($$BASEDIR/../src/*.cxx) \
              $$quote($$BASEDIR/../assets/*.qml) \
              $$quote($$BASEDIR/../assets/*.js) \
-             $$quote($$BASEDIR/../assets/*.qs)
+             $$quote($$BASEDIR/../assets/*.qs) \
+             $$quote($$BASEDIR/../assets/classes/*.qml) \
+             $$quote($$BASEDIR/../assets/classes/*.js) \
+             $$quote($$BASEDIR/../assets/classes/*.qs) \
+             $$quote($$BASEDIR/../assets/components/*.qml) \
+             $$quote($$BASEDIR/../assets/components/*.js) \
+             $$quote($$BASEDIR/../assets/components/*.qs) \
+             $$quote($$BASEDIR/../assets/covers/*.qml) \
+             $$quote($$BASEDIR/../assets/covers/*.js) \
+             $$quote($$BASEDIR/../assets/covers/*.qs) \
+             $$quote($$BASEDIR/../assets/global/*.qml) \
+             $$quote($$BASEDIR/../assets/global/*.js) \
+             $$quote($$BASEDIR/../assets/global/*.qs) \
+             $$quote($$BASEDIR/../assets/images/*.qml) \
+             $$quote($$BASEDIR/../assets/images/*.js) \
+             $$quote($$BASEDIR/../assets/images/*.qs) \
+             $$quote($$BASEDIR/../assets/images/icons/*.qml) \
+             $$quote($$BASEDIR/../assets/images/icons/*.js) \
+             $$quote($$BASEDIR/../assets/images/icons/*.qs) \
+             $$quote($$BASEDIR/../assets/images/splashscreens/*.qml) \
+             $$quote($$BASEDIR/../assets/images/splashscreens/*.js) \
+             $$quote($$BASEDIR/../assets/images/splashscreens/*.qs) \
+             $$quote($$BASEDIR/../assets/instagramapi/*.qml) \
+             $$quote($$BASEDIR/../assets/instagramapi/*.js) \
+             $$quote($$BASEDIR/../assets/instagramapi/*.qs) \
+             $$quote($$BASEDIR/../assets/pages/*.qml) \
+             $$quote($$BASEDIR/../assets/pages/*.js) \
+             $$quote($$BASEDIR/../assets/pages/*.qs) \
+             $$quote($$BASEDIR/../assets/sheets/*.qml) \
+             $$quote($$BASEDIR/../assets/sheets/*.js) \
+             $$quote($$BASEDIR/../assets/sheets/*.qs) \
+             $$quote($$BASEDIR/../assets/structures/*.qml) \
+             $$quote($$BASEDIR/../assets/structures/*.js) \
+             $$quote($$BASEDIR/../assets/structures/*.qs)
 
     HEADERS +=  $$quote($$BASEDIR/../src/*.h) \
              $$quote($$BASEDIR/../src/*.h++) \

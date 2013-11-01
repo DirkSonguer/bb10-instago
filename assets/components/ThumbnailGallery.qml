@@ -13,9 +13,6 @@ import bb.cascades 1.2
 import "../global/globals.js" as Globals
 import "../global/copytext.js" as Copytext
 
-// import image url loader workaround
-import WebImageView 1.0
-
 Container {
     id: thumbnailGalleryComponent
 
@@ -48,7 +45,7 @@ Container {
     // item is given as type InstagramMediaData
     signal addToGallery(variant item)
     onAddToGallery: {
-        // console.log("# Adding item with ID " + item.mediaId + " to thumbnail list data model");
+        // console.log("# Adding item with ID " + item.mediaId + " of type " + item.mediaType + " to thumbnail list data model");
         thumbnailGalleryComponent.currentItemIndex += 1;
         thumbnailGalleryDataModel.insert({
                 "mediaData": item,
@@ -102,52 +99,20 @@ Container {
                     verticalAlignment: VerticalAlignment.Fill
                     horizontalAlignment: HorizontalAlignment.Fill
                     property string itemCreatedTime: ListItemData.mediaData.createdTime
-
-                    // gallery image
-                    // this is a web image view provided by WebViewImage
-                    WebImageView {
+                    
+                    // the actual thumbnail image
+					InstagramImageView {
                         id: itemImage
 
                         // position and layout properties
-                        layoutProperties: StackLayoutProperties {
-                            spaceQuota: 1.0
-                        }
-
-                        // align the image in the center
-                        // as a result the image will be rezised around the center when pressed
                         verticalAlignment: VerticalAlignment.Center
                         horizontalAlignment: HorizontalAlignment.Center
-
-                        // set image size
-                        // this will be manipulated on press
-                        preferredHeight: Qt.thumbnailSize
-                        preferredWidth: Qt.thumbnailSize
-                        minHeight: Qt.thumbnailSize
-                        minWidth: Qt.thumbnailSize
-
-                        // set initial visibility to false
-                        visible: false
-
-                        // prevent webview context menu
-                        touchPropagationMode: TouchPropagationMode.None
-
-                        // change loader with image if loading is complete
-                        onLoadingChanged: {
-                            if (loading == 1.0) {
-                                itemImageBackground.visible = false;
-                                itemImage.visible = true;
-
-                                // show play button if video
-                                if (ListItemData.mediaData.mediaType == "video") {
-                                    itemVideoPlay.visible = true;
-                                }
-                            }
-                        }
-
-                        // url is given by the data model
+                        
+                        imageSize: Qt.thumbnailSize
+                        mediaType: ListItemData.mediaData.mediaType
                         url: ListItemData.mediaData.mediaThumbnailUrl
-                    }
-
+					}
+					
                     // image description
                     // dark gray container containing the text
                     Container {
@@ -175,37 +140,6 @@ Container {
                         }
                     }
 
-                    // play button
-                    // this is set visible if the gallery item is a video
-                    ImageView {
-                        id: itemVideoPlay
-
-                        // position and layout properties
-                        verticalAlignment: VerticalAlignment.Center
-                        horizontalAlignment: HorizontalAlignment.Center
-                        imageSource: "asset:///images/icons/icon_play_white_background.png"
-                        opacity: 0.5
-
-                        // set initial visibility to false
-                        visible: false
-                    }
-
-                    // standard grey image substitute
-                    // the component will be set invisible when loading is finished
-                    Container {
-                        id: itemImageBackground
-
-                        // position and layout properties
-                        verticalAlignment: VerticalAlignment.Fill
-                        horizontalAlignment: HorizontalAlignment.Fill
-                        layoutProperties: StackLayoutProperties {
-                            spaceQuota: 1.0
-                        }
-
-                        // background color as defined in shared globals
-                        background: Color.create(Globals.instagoListItemBackgroundColor)
-                    }
-
                     // tap handling
                     // if item is tapped, change opacity
                     ListItem.onActivationChanged: {
@@ -214,19 +148,13 @@ Container {
                             itemImage.opacity = 0.75
 
                             // set size so that image gets smaller on press
-                            itemImage.preferredHeight = Qt.thumbnailSize - 20
-                            itemImage.preferredWidth = Qt.thumbnailSize - 20
-                            itemImage.minHeight = Qt.thumbnailSize - 20
-                            itemImage.minWidth = Qt.thumbnailSize - 20
+                            itemImage.imageSize = Qt.thumbnailSize - 20
                         } else {
                             // reset opacity to normal
                             itemImage.opacity = 1.0
 
                             // set size so that image resets to normal on release
-                            itemImage.preferredHeight = Qt.thumbnailSize
-                            itemImage.preferredWidth = Qt.thumbnailSize
-                            itemImage.minHeight = Qt.thumbnailSize
-                            itemImage.minWidth = Qt.thumbnailSize
+                            itemImage.imageSize = Qt.thumbnailSize
                         }
                     }
                 }
