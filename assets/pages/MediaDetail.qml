@@ -22,9 +22,6 @@ import "../instagramapi/media.js" as MediaRepository
 import "../instagramapi/users.js" as UserRepository
 import "../structures/userdata.js" as InstagramUserData
 
-// import image url loader component
-import WebImageView 1.0
-
 Page {
     id: imageDetailPage
 
@@ -102,86 +99,12 @@ Page {
                     }
                 }
                 
-                Container {
-                    layout: StackLayout {
-                        orientation: LayoutOrientation.LeftToRight
-                    }
-
-                    background: Color.create(Globals.instagoCoverBackgroundColor)
-                    preferredWidth: DisplayInfo.width
-                    topPadding: 20
-                    bottomPadding: 20
-                    leftPadding: 30
-                    rightPadding: 10
+                ImageDescription {
+                    id: mediaDetailImageDescription
                     topMargin: 1
-
-                    Container {
-                        layout: DockLayout {
-
-                        }
-                        // gallery image
-                        // this is a web image view provided by WebViewImage
-                        WebImageView {
-                            id: userProfileImage
-
-                            // align the image in the center
-                            verticalAlignment: VerticalAlignment.Center
-                            horizontalAlignment: HorizontalAlignment.Left
-
-                            // set image size to maximum screen size
-                            // this will be either 768x768 (Z10) or 720x720 (all others)
-                            preferredHeight: 150
-                            preferredWidth: 150
-                            minHeight: 150
-                            minWidth: 150
-                        }
-
-                        // this is set visible if the gallery item is a video
-                        ImageView {
-                            id: userProfileImageMask
-
-                            // position and layout properties
-                            verticalAlignment: VerticalAlignment.Center
-                            horizontalAlignment: HorizontalAlignment.Left
-
-                            // set image size to maximum screen size
-                            // this will be either 768x768 (Z10) or 720x720 (all others)
-                            preferredHeight: 150
-                            preferredWidth: 150
-                            minHeight: 150
-                            minWidth: 150
-
-                            imageSource: "asset:///images/mask_profile_pictures_black.png"
-                        }
-                    }
-
-                    Container {
-                        leftMargin: 40
-
-                        layout: StackLayout {
-                            orientation: LayoutOrientation.TopToBottom
-                        }
-
-                        Label {
-                            id: userName
-
-                            // layout definition
-                            textStyle.base: SystemDefaults.TextStyles.TitleText
-                            textStyle.fontWeight: FontWeight.W500
-                            textStyle.textAlign: TextAlign.Left
-                        }
-
-                        Label {
-                            id: imageCaption
-
-                            // layout definition
-                            textStyle.base: SystemDefaults.TextStyles.BodyText
-                            textStyle.fontWeight: FontWeight.W100
-                            textStyle.textAlign: TextAlign.Left
-                            multiline: true
-                        }
-                    }
                 }
+                
+                                
             }
         }
 
@@ -217,9 +140,9 @@ Page {
         mediaDetailContainer.visible = true;
         mediaDetailImage.url = mediaData.mediaStandardImage;
 
-        userProfileImage.url = mediaData.userData.profilePicture;
-        userName.text = mediaData.userData.username;
-        imageCaption.text = mediaData.caption;
+        mediaDetailImageDescription.userimage = mediaData.userData.profilePicture;
+        mediaDetailImageDescription.username = mediaData.userData.username;
+        mediaDetailImageDescription.imagecaption = mediaData.caption;
 
         mediaDetailLikeButton.count = mediaData.numberOfLikes;
         mediaDetailCommentButton.count = mediaData.numberOfComments;
