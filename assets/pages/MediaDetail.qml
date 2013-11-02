@@ -43,7 +43,7 @@ Page {
                 pinchToZoomEnabled: false
             }
 
-
+            // image content
             Container {
                 id: mediaDetailContainer
 
@@ -62,49 +62,65 @@ Page {
                     // position and layout properties
                     verticalAlignment: VerticalAlignment.Center
                     horizontalAlignment: HorizontalAlignment.Center
+                    
+                    onImageDoubleClicked: {
+                        mediaDetailLikeButton.pressButton();
+                    }
                 }
 
+                // the like and comment button
                 Container {
                     // layout definition
                     layout: StackLayout {
                         orientation: LayoutOrientation.LeftToRight
                     }
-                    
+
                     // layout definition
                     topMargin: 1
-                    
+
                     // like button
                     // this also contains the full like functionalites
                     LikeButton {
                         id: mediaDetailLikeButton
-                        
+
                         // position and layout properties
                         layoutProperties: StackLayoutProperties {
                             spaceQuota: 1.0
                         }
-                        
+
                         // layout definition
                         rightMargin: 1
                     }
-                    
+
                     // comment button
                     // this also contains the full comment functionalites
                     CommentButton {
                         id: mediaDetailCommentButton
-                        
+
                         // position and layout properties
                         layoutProperties: StackLayoutProperties {
                             spaceQuota: 1.0
                         }
                     }
                 }
-                
+
+                // the image description
+                // this contains user profile image, name and image caption
                 ImageDescription {
                     id: mediaDetailImageDescription
                     topMargin: 1
                 }
-                
-                                
+
+                Container {
+                    background: Color.create(Globals.instagoCoverBackgroundColor)
+                    topMargin: 1
+
+                    CommentPreview {
+                        id: mediaDetailCommentSummary
+                        
+                        preferredHeight: 600
+                    }
+                }
             }
         }
 
@@ -137,13 +153,16 @@ Page {
         // hide loader
         loadingIndicator.hideLoader();
 
+        // main image
         mediaDetailContainer.visible = true;
         mediaDetailImage.url = mediaData.mediaStandardImage;
 
+        // image description (profile picture, name and image description)
         mediaDetailImageDescription.userimage = mediaData.userData.profilePicture;
         mediaDetailImageDescription.username = mediaData.userData.username;
         mediaDetailImageDescription.imagecaption = mediaData.caption;
 
+        // likes + comments
         mediaDetailLikeButton.count = mediaData.numberOfLikes;
         mediaDetailCommentButton.count = mediaData.numberOfComments;
         mediaDetailLikeButton.mediaId = mediaData.mediaId;
@@ -151,5 +170,6 @@ Page {
             mediaDetailLikeButton.userHasLiked = mediaData.userHasLiked;
         }
 
+        mediaDetailCommentSummary.addToGallery(mediaData.commentPreviews);
     }
 }

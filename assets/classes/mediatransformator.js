@@ -143,6 +143,8 @@ MediaTransformator.prototype.getMediaDataFromObject = function(imageObject) {
 		tempCommentArray = imageObject.comments["data"];
 		mediaData.numberOfComments = tempCommentArray.length;
 	}
+	
+	mediaData.commentPreviews = imageObject.comments["data"];
 
 	// get and format date
 	mediaData.timestamp = imageObject.created_time;

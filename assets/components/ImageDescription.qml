@@ -1,8 +1,8 @@
 // *************************************************** //
 // Image Description Component
 //
-// This component shows the user profile image and
-// caption text
+// This component shows the user profile image name and
+// the image caption text
 // *************************************************** //
 
 // import blackberry components
@@ -60,8 +60,7 @@ Container {
             verticalAlignment: VerticalAlignment.Center
             horizontalAlignment: HorizontalAlignment.Left
 
-            // set image size to maximum screen size
-            // this will be either 768x768 (Z10) or 720x720 (all others)
+            // set image size to maximum profile picture size
             preferredHeight: 150
             preferredWidth: 150
             minHeight: 150
@@ -74,8 +73,7 @@ Container {
             verticalAlignment: VerticalAlignment.Center
             horizontalAlignment: HorizontalAlignment.Left
 
-            // set image size to maximum screen size
-            // this will be either 768x768 (Z10) or 720x720 (all others)
+            // set image size to maximum profile picture size
             preferredHeight: 150
             preferredWidth: 150
             minHeight: 150

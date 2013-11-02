@@ -1,5 +1,5 @@
 1
-43
+44
 classes/authenticationhandler.js
 classes/commenttransformator.js
 classes/locationtransformator.js
@@ -8,6 +8,7 @@ classes/networkhandler.js
 classes/texttransformator.js
 classes/usertransformator.js
 components/CommentButton.qml
+components/CommentPreview.qml
 components/ErrorMessage.qml
 components/ImageDescription.qml
 components/InstagramImageView.qml

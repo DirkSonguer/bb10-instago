@@ -24,6 +24,10 @@ Container {
     // signal if a like has been removed
     signal likeRemoved(string requestFeedback)
 
+    // signal for external sources to press the button
+    // programatically
+    signal pressButton()
+
     // flag to indicate if user has liked the media item
     // this can be set from either inside this component
     // or from outside pages / components
@@ -95,18 +99,11 @@ Container {
 
     // handle tap on like component
     gestureHandlers: [
-        // Add a handler for tap gestures
         TapHandler {
+            id: likeButtonTapHandler
+
             onTapped: {
-                // on tap just reverse the state of the like flag
-                // and call the respective like action
-                if (! likeButtonComponent.userHasLiked) {
-                    likeButtonComponent.userHasLiked = true;
-                    MediaRepository.addLike(likeButtonComponent.mediaId, likeButtonComponent);
-                } else {
-                    likeButtonComponent.userHasLiked = false;
-                    MediaRepository.removeLike(likeButtonComponent.mediaId, likeButtonComponent);
-                }
+                likeButtonComponent.pressButton();
             }
         }
     ]
@@ -151,6 +148,19 @@ Container {
         likeButtonToast.show();
     }
 
+    // this signal handles the actual logic of adding + removing the like
+    onPressButton: {
+        // on tap just reverse the state of the like flag
+        // and call the respective like action
+        if (! likeButtonComponent.userHasLiked) {
+            likeButtonComponent.userHasLiked = true;
+            MediaRepository.addLike(likeButtonComponent.mediaId, likeButtonComponent);
+        } else {
+            likeButtonComponent.userHasLiked = false;
+            MediaRepository.removeLike(likeButtonComponent.mediaId, likeButtonComponent);
+        }
+    }
+
     // attach components
     attachedObjects: [
         // system toast
@@ -160,5 +170,4 @@ Container {
             position: SystemUiPosition.TopCenter
         }
     ]
-
 }
