@@ -16,3 +16,4 @@ var instagoHighlightedTextColor = "#2E5E86";
 
 var instagoListItemBackgroundColor = "#DCDCDC";
 var instagoCoverBackgroundColor = "#222222";
+var instagoConfirmedBackgroundColor = "#3E9947";

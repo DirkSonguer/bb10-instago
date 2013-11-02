@@ -23,7 +23,7 @@ TabbedPane {
             popularMediaTab.setContent(popularMediaPage);
             
             // reset tab content by resetting the page
-            mainTabbedPane.activeTab = tab2;
+            mainTabbedPane.activeTab = designTestTab;
             mainTabbedPane.activeTab = popularMediaTab;
         }
         
@@ -37,15 +37,23 @@ TabbedPane {
     }
 
     Tab { //Second tab
-        id: tab2
-        title: qsTr("Tab 2") + Retranslate.onLocaleOrLanguageChanged
-        Page {
-            Container {
-                Label {
-                    text: qsTr("Second tab") + Retranslate.onLocaleOrLanguageChanged
-                }
-            }
+        id: designTestTab
+        title: "Design Test"
+        imageSource: "asset:///images/icons/icon_popular.png"
+        
+        onTriggered: {
+            designTestComponent.source = "pages/_designtest.qml"
+            var designTestPage = designTestComponent.createObject();
+            designTestTab.setContent(designTestPage);
         }
+        
+        // attach a component for the popular media page
+        // this is bound to the content property later on onCreationCompleted()
+        attachedObjects: [
+            ComponentDefinition {
+                id: designTestComponent
+            }
+        ]
     } //End of second tab
     
     // main logic on startup
@@ -55,7 +63,7 @@ TabbedPane {
         popularMediaTab.setContent(popularMediaPage);
         
         // reset tab content by resetting the page
-        mainTabbedPane.activeTab = tab2;
+        mainTabbedPane.activeTab = designTestTab;
         mainTabbedPane.activeTab = popularMediaTab;        
     }
 }

@@ -1,5 +1,5 @@
 1
-35
+42
 classes/authenticationhandler.js
 classes/commenttransformator.js
 classes/locationtransformator.js
@@ -7,13 +7,19 @@ classes/mediatransformator.js
 classes/networkhandler.js
 classes/texttransformator.js
 classes/usertransformator.js
+components/CommentButton.qml
 components/ErrorMessage.qml
 components/InstagramImageView.qml
+components/LikeButton.qml
 components/LoadingIndicator.qml
 components/ThumbnailGallery.qml
 global/copytext.js
 global/globals.js
 global/instagramkeys.js
+images/icons/icon_comments.png
+images/icons/icon_comments_dimmed.png
+images/icons/icon_like.png
+images/icons/icon_likes_dimmed.png
 images/icons/icon_play_white_background.png
 images/icons/icon_popular.png
 images/icons/icon_profile.png
@@ -31,6 +37,7 @@ instagramapi/users.js
 main.qml
 pages/MediaDetail.qml
 pages/PopularMedia.qml
+pages/_designtest.qml
 structures/commentdata.js
 structures/errordata.js
 structures/mediadata.js
