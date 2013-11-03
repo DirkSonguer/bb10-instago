@@ -36,6 +36,7 @@ Page {
         layout: DockLayout {
         }
 
+        // make the whole content container scrollables
         ScrollView {
             id: loginInstagramWebViewScrollContainer
             scrollViewProperties {
@@ -62,7 +63,7 @@ Page {
                     // position and layout properties
                     verticalAlignment: VerticalAlignment.Center
                     horizontalAlignment: HorizontalAlignment.Center
-                    
+
                     onImageDoubleClicked: {
                         mediaDetailLikeButton.pressButton();
                     }
@@ -111,13 +112,15 @@ Page {
                     topMargin: 1
                 }
 
+                // comment preview container
                 Container {
                     background: Color.create(Globals.instagoCoverBackgroundColor)
                     topMargin: 1
 
+                    // comment previews
                     CommentPreview {
                         id: mediaDetailCommentSummary
-                        
+
                         preferredHeight: 600
                     }
                 }
@@ -130,8 +133,8 @@ Page {
             horizontalAlignment: HorizontalAlignment.Center
         }
 
-        ErrorMessage {
-            id: errorMessage
+        InfoMessage {
+            id: infoMessage
             verticalAlignment: VerticalAlignment.Center
             horizontalAlignment: HorizontalAlignment.Center
         }

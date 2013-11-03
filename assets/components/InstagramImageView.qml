@@ -14,7 +14,6 @@ import bb.system 1.2
 // shared js files
 import "../global/globals.js" as Globals
 import "../global/copytext.js" as Copytext
-import "../instagramapi/media.js" as MediaRepository
 
 // import image url loader component
 import WebImageView 1.0

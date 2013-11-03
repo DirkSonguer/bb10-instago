@@ -59,8 +59,8 @@ NavigationPane {
                 horizontalAlignment: HorizontalAlignment.Center
             }
 
-            ErrorMessage {
-                id: errorMessage
+            InfoMessage {
+                id: infoMessage
                 verticalAlignment: VerticalAlignment.Center
                 horizontalAlignment: HorizontalAlignment.Center
             }
