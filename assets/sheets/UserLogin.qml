@@ -14,6 +14,7 @@ import "../components"
 // shared js files
 import "../global/globals.js" as Globals
 import "../global/copytext.js" as Copytext
+import "../global/instagramkeys.js" as InstagramKeys
 import "../classes/authenticationhandler.js" as Authentication
 
 Page {
@@ -53,13 +54,19 @@ Page {
                 // set initial visibility to false
                 visible: false
 
+                onLoadProgressChanged: {
+                    if ((loadProgress < 100) && (! loadingIndicator.loaderActive)) {
+                        // console.log("# Loading process started");
+                        loginInstagramWebView.visible = false
+                        loadingIndicator.showLoader("Loading login process");
+                    }
+                }
+
                 // if loading state has changed, check for current state
                 // if web view is loading, show activity indicator
                 onLoadingChanged: {
-                    if (loadRequest.status == WebLoadStatus.Started) {
-                        loginInstagramWebView.visible = false
-                        loadingIndicator.showLoader("Loading Instagram login process");
-                    } else {
+                    if (loadRequest.status == WebLoadStatus.Succeeded) {
+                        // console.log("# Loading process done");
                         loadingIndicator.hideLoader();
                         if (! authenticationDone) {
                             loginInstagramWebView.visible = true
@@ -75,9 +82,11 @@ Page {
 
                     // show the error message if the Instagram authentication was not successfull
                     if (instagramResponse["status"] === "AUTH_ERROR") {
-                        // console.log("# Authentication went wrong: " + instagramResponse["status"]);
-                        // loginErrorContainer.visible = true;
-                        // loginErrorText.text += "Instagram says: " + instagramResponse["error_description"];
+                        // console.log("# Authentication failed: " + instagramResponse["status"]);
+
+                        loginInstagramWebView.visible = false
+                        var errorMessage = loginErrorText.text += "Instagram says: " + instagramResponse["error_description"] + "(" + instagramResponse["status"] + ")";
+                        infoMessage.showMessage(errorMessage, Copytext.insagoLoginErrorTitle);
                         authenticationDone = false;
                     }
 
@@ -85,20 +94,20 @@ Page {
                     if (instagramResponse["status"] === "AUTH_SUCCESS") {
                         // console.log("# Authentication successful: " + instagramResponse["status"]);
 
-                        // changing views to login notification
-                        // loginInstagramWebView.visible = false
-                        // loginSuccessContainer.visible = true;
+                        loginInstagramWebView.visible = false
+                        infoMessage.showMessage(Copytext.instagoLoginSuccessMessage, Copytext.instagoLoginSuccessTitle);
                         authenticationDone = true;
+
+                        // changing available menu items
+                        mainMenu.removeAction(mainMenuAbout);
+                        mainMenu.removeAction(mainMenuRate);
+                        mainMenu.removeAction(mainMenuNews);
+                        mainMenu.addAction(mainMenuLogout);
+                        mainMenu.addAction(mainMenuAbout);
+                        mainMenu.addAction(mainMenuRate);
+                        mainMenu.addAction(mainMenuNews);
+
                         /*
-                         * // changing available menu items
-                         * mainMenu.removeAction(mainMenuAbout);
-                         * mainMenu.removeAction(mainMenuRate);
-                         * mainMenu.removeAction(mainMenuNews);
-                         * mainMenu.addAction(mainMenuLogout);
-                         * mainMenu.addAction(mainMenuAbout);
-                         * mainMenu.addAction(mainMenuRate);
-                         * mainMenu.addAction(mainMenuNews);
-                         * 
                          * // changing available tabs
                          * mainTabbedPane.remove(popularMediaTab);
                          * mainTabbedPane.remove(profileTab);
@@ -120,5 +129,37 @@ Page {
             verticalAlignment: VerticalAlignment.Center
             horizontalAlignment: HorizontalAlignment.Center
         }
+
+        InfoMessage {
+            id: infoMessage
+            verticalAlignment: VerticalAlignment.Center
+            horizontalAlignment: HorizontalAlignment.Center
+        }
     }
+
+    onCreationCompleted: {
+        loadingIndicator.showLoader("Loading login process");
+    }
+
+    // close action for the sheet
+    actions: [
+        ActionItem {
+            title: "Close"
+            ActionBar.placement: ActionBarPlacement.OnBar
+            imageSource: "asset:///images/icons/icon_close.png"
+
+            // close sheet when pressed
+            // note that the sheet is defined in the main.qml
+            onTriggered: {
+                loginSheet.close();
+
+                if (authenticationDone) {
+                    // reload profile page to login notification
+                    profileComponent.source = "../pages/UserProfile.qml"
+                    var profilePage = profileComponent.createObject();
+                    profileTab.setContent(profilePage);
+                }
+            }
+        }
+    ]
 }

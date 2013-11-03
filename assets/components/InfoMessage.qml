@@ -35,8 +35,7 @@ Container {
         id: infoTitle
         
         // text style definition
-        textStyle.fontSize: FontSize.PointValue
-        textStyle.base: SystemDefaults.TextStyles.TitleText
+        textStyle.base: SystemDefaults.TextStyles.BigText
         textStyle.fontWeight: FontWeight.W500
         textStyle.textAlign: TextAlign.Left
         multiline: true
@@ -50,7 +49,6 @@ Container {
         id: infoMessage
 
         // text style definition
-        textStyle.fontSize: FontSize.PointValue
         textStyle.base: SystemDefaults.TextStyles.BodyText
         textStyle.fontWeight: FontWeight.W100
         textStyle.textAlign: TextAlign.Left
@@ -79,7 +77,7 @@ Container {
 
         // only show title component if a title was given
         if (title) {
-            infoTitle.text = message;
+            infoTitle.text = title;
             infoTitle.visible = true;
         }
     }
