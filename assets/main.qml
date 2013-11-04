@@ -123,10 +123,10 @@ TabbedPane {
                 onTriggered: {
                     // delete the stored user data of the user from the database
                     Authentication.auth.deleteStoredInstagramData();
-                    
+
                     // remove tabs and menu items that are authenticated only
-                    mainMenu.removeAction(mainMenuLogout);                    
-                    
+                    mainMenu.removeAction(mainMenuLogout);
+
                     // change current tab to profile tab
                     popularMediaTab.triggered();
 
@@ -142,7 +142,7 @@ TabbedPane {
                 title: "About"
                 imageSource: "asset:///images/icons/icon_about.png"
                 onTriggered: {
-                    aboutSheet.open();
+                    // aboutSheet.open();
                 }
             },
             // action for rate sheet
@@ -151,7 +151,7 @@ TabbedPane {
                 title: "Update & Rate"
                 imageSource: "asset:///images/icons/icon_bbworld.png"
                 onTriggered: {
-                    rateAppLink.trigger("bb.action.OPEN");
+                    // rateAppLink.trigger("bb.action.OPEN");
                 }
             },
             // action for news sheet
@@ -161,9 +161,9 @@ TabbedPane {
                 imageSource: "asset:///images/icons/icon_news.png"
                 onTriggered: {
                     // create and open news sheet
-                    var newsPage = newsComponent.createObject();
-                    newsSheet.setContent(newsPage);
-                    newsSheet.open();
+                    // var newsPage = newsComponent.createObject();
+                    // newsSheet.setContent(newsPage);
+                    // newsSheet.open();
                 }
             }
         ]

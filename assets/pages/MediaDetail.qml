@@ -17,10 +17,6 @@ import "../components"
 // shared js files
 import "../global/globals.js" as Globals
 import "../global/copytext.js" as Copytext
-import "../classes/authenticationhandler.js" as Authentication
-import "../instagramapi/media.js" as MediaRepository
-import "../instagramapi/users.js" as UserRepository
-import "../structures/userdata.js" as InstagramUserData
 
 Page {
     id: imageDetailPage

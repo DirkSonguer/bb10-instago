@@ -25,6 +25,7 @@ var instagoTitlePopular = "Popular Images";
 var instagoAddLike = "Like";
 var instagoAddLikeSuccess = "Like added!";
 var instagoAddLikeError = "Could not add like. Instagram says: ";
+var instagoLikeNotLoggedIn = "Please log into your Instagram account to like images";
 
 var instagoRemoveLike = "Remove Like";
 var instagoRemoveLikeSuccess = "Like removed!";
@@ -33,6 +34,7 @@ var instagoRemoveLikeError = "Could not remove like. Instagram says: ";
 var instagoAddComment = "Comment";
 var instagoAddCommentSuccess = "Added comment for image";
 var instagoAddCommentError = "Could not add comment for image. Instagram says: ";
+var instagoCommentNotLoggedIn = "Please log into your Instagram account to comment images";
 
 var instagoDeleteCommentDialog = "Do you want to delete the selected comment?";
 var instagoDeleteCommentSuccess = "Deleted comment for image";

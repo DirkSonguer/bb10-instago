@@ -14,6 +14,7 @@ import bb.system 1.2
 import "../global/globals.js" as Globals
 import "../global/copytext.js" as Copytext
 import "../instagramapi/media.js" as MediaRepository
+import "../classes/authenticationhandler.js" as Authentication
 
 Container {
     id: likeButtonComponent
@@ -151,13 +152,21 @@ Container {
     // this signal handles the actual logic of adding + removing the like
     onPressButton: {
         // on tap just reverse the state of the like flag
-        // and call the respective like action
-        if (! likeButtonComponent.userHasLiked) {
-            likeButtonComponent.userHasLiked = true;
-            MediaRepository.addLike(likeButtonComponent.mediaId, likeButtonComponent);
+        // and call the respective like action if user is
+        // authenticated
+        if (Authentication.auth.isAuthenticated()) {
+            if (! likeButtonComponent.userHasLiked) {
+                likeButtonComponent.userHasLiked = true;
+                MediaRepository.addLike(likeButtonComponent.mediaId, likeButtonComponent);
+            } else {
+                likeButtonComponent.userHasLiked = false;
+                MediaRepository.removeLike(likeButtonComponent.mediaId, likeButtonComponent);
+            }
         } else {
-            likeButtonComponent.userHasLiked = false;
-            MediaRepository.removeLike(likeButtonComponent.mediaId, likeButtonComponent);
+            // user not logged in
+            // show message
+            likeButtonToast.body = Copytext.instagoLikeNotLoggedIn;
+            likeButtonToast.show();
         }
     }
 
