@@ -13,6 +13,7 @@ var instagoNewsURL = "http://instagoapp.tumblr.com/";
 var instagoDefaultTextColor = "#333333";
 var instagoLightTextColor = "#555555";
 var instagoHighlightedTextColor = "#2E5E86";
+var instagoLinkTextColor = "#0791FF";
 
 var instagoListItemBackgroundColor = "#DCDCDC";
 var instagoCoverBackgroundColor = "#222222";

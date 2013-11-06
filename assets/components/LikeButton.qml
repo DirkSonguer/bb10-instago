@@ -38,76 +38,34 @@ Container {
     property string mediaId
 
     // number of likes the media item has
-    property alias count: likeButtonCount.text
+    property alias count: likeButton.boldText
 
     // layout definition
     layout: StackLayout {
         orientation: LayoutOrientation.LeftToRight
     }
 
-    // layout definition
-    topPadding: 30
-    bottomPadding: 25
-    leftPadding: 30
-    rightPadding: 10
+    // actual like button component
+    CustomButton {
+        id: likeButton
 
-    // set initial background color
-    background: Color.create(Globals.instagoCoverBackgroundColor)
-
-    // like icon
-    ImageView {
-        id: likeButtonIcon
+        // button content
+        iconSource: "asset:///images/icons/icon_like.png"
+        narrowText: "likes"
 
         // position and layout properties
-        verticalAlignment: VerticalAlignment.Center
-        horizontalAlignment: HorizontalAlignment.Left
+        alignText: HorizontalAlignment.Left
 
-        // set size as it will be shown smaller as the original size
-        preferredHeight: 55
-        preferredWidth: 55
-        minHeight: 55
-        minWidth: 55
-
-        // icon file
-        imageSource: "asset:///images/icons/icon_like.png"
-    }
-
-    // number of likes
-    Label {
-        id: likeButtonCount
-
-        // layout definition
-        leftMargin: 0
-        rightMargin: 0
-        textStyle.base: SystemDefaults.TextStyles.BodyText
-        textStyle.fontWeight: FontWeight.W500
-        textStyle.textAlign: TextAlign.Left
-    }
-
-    // number of likes
-    Label {
-        id: likeButtonLabel
-
-        // button label
-        text: "likes"
-
-        // layout definition
-        leftMargin: 5
-        textStyle.base: SystemDefaults.TextStyles.BodyText
-        textStyle.fontWeight: FontWeight.W100
-        textStyle.textAlign: TextAlign.Left
-    }
-
-    // handle tap on like component
-    gestureHandlers: [
-        TapHandler {
-            id: likeButtonTapHandler
-
-            onTapped: {
-                likeButtonComponent.pressButton();
-            }
+        // position and layout properties
+        layoutProperties: StackLayoutProperties {
+            spaceQuota: 1.0
         }
-    ]
+
+        // call logic on button press
+        onButtonPressed: {
+            likeButtonComponent.pressButton();
+        }
+    }
 
     // user has liked flag changed
     // this can be because the user pressed the button
@@ -115,10 +73,10 @@ Container {
     onUserHasLikedChanged: {
         if (likeButtonComponent.userHasLiked) {
             // light green color
-            likeButtonComponent.background = Color.create(Globals.instagoConfirmedBackgroundColor);
+            likeButton.backgroundColor = Color.create(Globals.instagoConfirmedBackgroundColor);
         } else {
             // standard button color
-            likeButtonComponent.background = Color.create(Globals.instagoCoverBackgroundColor);
+            likeButton.backgroundColor = Color.create(Globals.instagoCoverBackgroundColor);
         }
     }
 

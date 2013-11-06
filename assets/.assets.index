@@ -1,5 +1,5 @@
 1
-49
+51
 classes/authenticationhandler.js
 classes/commenttransformator.js
 classes/locationtransformator.js
@@ -9,12 +9,14 @@ classes/texttransformator.js
 classes/usertransformator.js
 components/CommentButton.qml
 components/CommentPreview.qml
+components/CustomButton.qml
 components/ImageDescription.qml
 components/InfoMessage.qml
 components/InstagramImageView.qml
 components/LikeButton.qml
 components/LoadingIndicator.qml
 components/ThumbnailGallery.qml
+components/UserHeader.qml
 global/copytext.js
 global/globals.js
 global/instagramkeys.js

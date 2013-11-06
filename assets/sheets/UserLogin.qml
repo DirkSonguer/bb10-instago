@@ -95,10 +95,13 @@ Page {
                         // console.log("# Authentication successful: " + instagramResponse["status"]);
 
                         loginInstagramWebView.visible = false
+                        loadingIndicator.hideLoader();
                         infoMessage.showMessage(Copytext.instagoLoginSuccessMessage, Copytext.instagoLoginSuccessTitle);
                         authenticationDone = true;
 
                         // changing available menu items
+                        // first we remove all available items
+                        // afterwards we add them again in the right order
                         mainMenu.removeAction(mainMenuAbout);
                         mainMenu.removeAction(mainMenuRate);
                         mainMenu.removeAction(mainMenuNews);

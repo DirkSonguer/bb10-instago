@@ -36,70 +36,27 @@ Container {
     layout: StackLayout {
         orientation: LayoutOrientation.LeftToRight
     }
+    // actual like button component
+    CustomButton {
+        id: commentButton
 
-    // layout definition
-    topPadding: 30
-    bottomPadding: 25
-    leftPadding: 30
-    rightPadding: 10
-
-    // set initial background color
-    background: Color.create(Globals.instagoCoverBackgroundColor)
-
-    // comment icon
-    ImageView {
-        id: commentButtonIcon
+        // button content
+        iconSource: "asset:///images/icons/icon_comments.png"
+        narrowText: "comments"
 
         // position and layout properties
-        verticalAlignment: VerticalAlignment.Center
-        horizontalAlignment: HorizontalAlignment.Left
+        alignText: HorizontalAlignment.Left
 
-        // set size as it will be shown smaller as the original size
-        preferredHeight: 55
-        preferredWidth: 55
-        minHeight: 55
-        minWidth: 55
-
-        // icon file
-        imageSource: "asset:///images/icons/icon_comments.png"
-    }
-
-    // number of comments
-    Label {
-        id: commentButtonCount
-
-        // layout definition
-        leftMargin: 0
-        rightMargin: 0
-        textStyle.base: SystemDefaults.TextStyles.BodyText
-        textStyle.fontWeight: FontWeight.W500
-        textStyle.textAlign: TextAlign.Left
-    }
-
-    // number of comments
-    Label {
-        id: commentButtonLabel
-
-        // button label
-        text: "comments"
-
-        // layout definition
-        leftMargin: 5
-        textStyle.base: SystemDefaults.TextStyles.BodyText
-        textStyle.fontWeight: FontWeight.W100
-        textStyle.textAlign: TextAlign.Left
-    }
-
-    // handle tap on comment component
-    gestureHandlers: [
-        TapHandler {
-            id: commentButtonTapHandler
-
-            onTapped: {
-                commentButtonComponent.pressButton();
-            }
+        // position and layout properties
+        layoutProperties: StackLayoutProperties {
+            spaceQuota: 1.0
         }
-    ]
+
+        // call logic on button press
+        onButtonPressed: {
+            commentButtonComponent.pressButton();
+        }
+    }
 
     // this signal opens the comment logic
     onPressButton: {

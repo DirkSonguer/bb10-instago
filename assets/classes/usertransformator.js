@@ -22,13 +22,16 @@ UserTransformator.prototype.getUserDataFromObject = function(userObject) {
 	userData.userId = userObject.id;
 	userData.username = userObject.username;
 	userData.fullName = userObject.full_name;
-	if (userData.fullName == "")
-		userData.fullName = userData.username;
+	if (userData.fullName == "") {
+		userData.fullName = userData.username;		
+	}
 
 	userData.bio = userObject.bio;
 	if (userData.bio == "") {
 		userData.bio = "No user bio";
 	}
+
+	userData.website = userObject.website;
 	userData.profilePicture = userObject.profile_picture;
 
 	// this might be null as it is not included in the user summary

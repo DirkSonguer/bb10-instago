@@ -25,6 +25,9 @@ Container {
     // added to the data model
     property int currentItemIndex: 0
 
+    // signal to show that component has been clicked
+    signal commentPreviewClicked()
+
     // signal to clear the gallery contents
     signal clearGallery()
     onClearGallery: {
@@ -77,18 +80,18 @@ Container {
                         // layout definition
                         layout: DockLayout {
                         }
-                        
+
                         // profile image
                         // this is a web image view provided by WebViewImage
                         WebImageView {
                             id: imageDescriptionProfileImage
-                            
+
                             // align the image in the center
                             verticalAlignment: VerticalAlignment.Center
                             horizontalAlignment: HorizontalAlignment.Left
 
                             url: ListItemData.commentData.from["profile_picture"]
-                            
+
                             // set image size to maximum screen size
                             // this will be either 768x768 (Z10) or 720x720 (all others)
                             preferredHeight: 50
@@ -96,24 +99,24 @@ Container {
                             minHeight: 50
                             minWidth: 50
                         }
-                        
+
                         // mask the profile image to make it round
                         ImageView {
                             // position and layout properties
                             verticalAlignment: VerticalAlignment.Center
                             horizontalAlignment: HorizontalAlignment.Left
-                            
+
                             // set image size to maximum screen size
                             // this will be either 768x768 (Z10) or 720x720 (all others)
                             preferredHeight: 50
                             preferredWidth: 50
                             minHeight: 50
                             minWidth: 50
-                            
+
                             imageSource: "asset:///images/mask_profile_pictures_black.png"
                         }
                     }
-                    
+
                     // image caption
                     Label {
                         id: itemCaption
@@ -126,6 +129,15 @@ Container {
             }
         ]
     }
+
+    // handle tap on comment preview component
+    gestureHandlers: [
+        TapHandler {
+            onTapped: {
+                commentPreviewComponent.commentPreviewClicked();
+            }
+        }
+    ]
 
     // attached objects
     attachedObjects: [

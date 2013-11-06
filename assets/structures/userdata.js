@@ -12,6 +12,7 @@ function InstagramUserData()
 	this.username = "";
 	this.fullName = "";
 	this.bio = "";
+	this.website = "";
 	
 	this.profilePicture = ""; // 150x150
 	
