@@ -30,7 +30,7 @@ Container {
     property string mediaId
 
     // number of comments the media item has
-    property alias count: commentButtonCount.text
+    property alias count: commentButton.boldText
 
     // layout definition
     layout: StackLayout {
