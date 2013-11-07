@@ -17,6 +17,9 @@ import WebImageView 1.0
 
 Container {
     id: imageDescriptionComponent
+    
+    // signal that description has been clicked
+    signal clicked()
 
     // property for the use rprofile image
     // given as url
@@ -114,4 +117,13 @@ Container {
             multiline: true
         }
     }
+    
+    // handle tap on custom button
+    gestureHandlers: [
+        TapHandler {
+            onTapped: {
+                imageDescriptionComponent.clicked();
+            }
+        }
+    ]
 }

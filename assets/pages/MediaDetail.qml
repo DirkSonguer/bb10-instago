@@ -107,6 +107,13 @@ Page {
                 ImageDescription {
                     id: mediaDetailImageDescription
                     topMargin: 1
+                    
+                    onClicked: {
+                        // console.log("# Item clicked: " + mediaData.mediaId);
+                        var userDetailPage = userDetailComponent.createObject();
+                        userDetailPage.userId = mediaData.userData.userId;
+                        navigationPane.push(userDetailPage);                        
+                    }
                 }
 
                 // comment preview container
@@ -179,4 +186,14 @@ Page {
 
         mediaDetailCommentPreview.addToGallery(mediaData.commentPreviews);
     }
+    
+    // attach components
+    attachedObjects: [
+        // detail image page
+        // will be called if user clicks on image gallery item
+        ComponentDefinition {
+            id: userDetailComponent
+            source: "UserDetail.qml"
+        }
+    ]    
 }

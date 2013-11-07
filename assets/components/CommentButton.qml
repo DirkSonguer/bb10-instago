@@ -53,7 +53,7 @@ Container {
         }
 
         // call logic on button press
-        onButtonPressed: {
+        onClicked: {
             commentButtonComponent.pressButton();
         }
     }

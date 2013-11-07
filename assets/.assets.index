@@ -43,8 +43,8 @@ instagramapi/users.js
 main.qml
 pages/MediaDetail.qml
 pages/PopularMedia.qml
+pages/UserDetail.qml
 pages/UserLogin.qml
-pages/UserProfile.qml
 sheets/UserLogin.qml
 sheets/UserLogout.qml
 structures/commentdata.js

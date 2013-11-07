@@ -62,7 +62,7 @@ Container {
         }
 
         // call logic on button press
-        onButtonPressed: {
+        onClicked: {
             likeButtonComponent.pressButton();
         }
     }

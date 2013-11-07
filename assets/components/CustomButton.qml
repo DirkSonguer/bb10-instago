@@ -18,8 +18,8 @@ import "../classes/authenticationhandler.js" as Authentication
 Container {
     id: customButtonComponent
 
-    // signal that button has been pressed
-    signal buttonPressed()
+    // signal that button has been clicked
+    signal clicked()
 
     property alias backgroundColor: customButtonComponent.background
     property alias alignText: customButtonContainer.horizontalAlignment
@@ -109,7 +109,7 @@ Container {
     gestureHandlers: [
         TapHandler {
             onTapped: {
-                customButtonComponent.buttonPressed();
+                customButtonComponent.clicked();
             }
         }
     ]
