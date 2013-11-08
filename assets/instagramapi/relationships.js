@@ -177,8 +177,6 @@ function setRelationship(userId, relationship, callingPage) {
 
 	var req = new XMLHttpRequest();
 	req.onreadystatechange = function() {
-		
-		console.log("# " + req.responseText);
 
 		// this handles the result for each ready state
 		var jsonObject = network.handleHttpResult(req);
@@ -202,7 +200,7 @@ function setRelationship(userId, relationship, callingPage) {
 	var params = "access_token=" + instagramUserdata["access_token"] + "&action=" + relationship;
 
 	var url = instagramkeys.instagramAPIUrl + "/v1/users/" + userId + "/relationship";
-	// console.log("# Calling: " + url + " with params: " + params);
+
 	req.open("POST", url, true);
 	req.send(params);
 }

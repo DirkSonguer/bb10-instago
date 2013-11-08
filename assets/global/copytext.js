@@ -48,5 +48,11 @@ var instagoQueryCurrentPosition = "Trying to fix your current location";
 
 var instagoSearchNoItemsFound = "No items found for your search, sorry";
 
+var instagoFollowUser = "Follow @";
+var instagoFollowingUser = "You follow @";
+var instagoFollowPrivateUser = "Send follow request";
+var instagoFollowRequested = "You requested to follow @";
+var instagoFollowRequestedBy = " requested to follow you";
+
 var instagoWorking = "Working..";
 

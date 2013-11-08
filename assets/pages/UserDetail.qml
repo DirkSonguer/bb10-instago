@@ -30,6 +30,12 @@ Page {
     // signal if user profile data loading encountered an error
     signal userProfileDataError(variant errorData)
 
+    // signal if user media data loading is complete
+    signal userMediaDataLoaded(variant mediaDataArray, string paginationId)
+
+    // signal if user media data loading encountered an error
+    signal userMediaDataError(variant errorData)
+
     // property that holds the user ID to load
     // this is filled by the calling page
     property string userId
@@ -39,48 +45,85 @@ Page {
         layout: DockLayout {
         }
 
-        Container {
-            id: userProfileContainer
-
-            layout: StackLayout {
-                orientation: LayoutOrientation.TopToBottom
+        // make the whole content container scrollables
+        ScrollView {
+            id: loginInstagramWebViewScrollContainer
+            scrollViewProperties {
+                scrollMode: ScrollMode.Vertical
+                pinchToZoomEnabled: false
             }
 
-            // set initial visibility to false
-            visible: false
-
-            UserHeader {
-                id: userProfileHeader
-            }
-
-            // the like and comment button
             Container {
-                // layout definition
+                id: userProfileContainer
+
                 layout: StackLayout {
-                    orientation: LayoutOrientation.LeftToRight
+                    orientation: LayoutOrientation.TopToBottom
                 }
 
-                // layout definition
-                topMargin: 1
+                // set initial visibility to false
+                visible: false
 
-                CustomButton {
-                    id: userProfileFollowersCount
+                UserHeader {
+                    id: userProfileHeader
+                }
 
-                    // position and layout properties
-                    layoutProperties: StackLayoutProperties {
-                        spaceQuota: 1.0
+                FollowButton {
+                    id: userProfileFollowButton
+
+                    // layout definition
+                    topMargin: 1
+                }
+
+                // the like and comment button
+                Container {
+                    // layout definition
+                    layout: StackLayout {
+                        orientation: LayoutOrientation.LeftToRight
                     }
 
                     // layout definition
-                    rightMargin: 1
+                    topMargin: 1
+
+                    CustomButton {
+                        id: userProfileFollowersCount
+
+                        // position and layout properties
+                        layoutProperties: StackLayoutProperties {
+                            spaceQuota: 1.0
+                        }
+
+                        // layout definition
+                        rightMargin: 1
+                    }
+
+                    CustomButton {
+                        id: userProfileFollowingCount
+
+                        // position and layout properties
+                        layoutProperties: StackLayoutProperties {
+                            spaceQuota: 1.0
+                        }
+                    }
                 }
 
-                CustomButton {
-                    id: userProfileFollowingCount
+                ThumbnailGallery {
+                    id: userProfileMediaThumbnails
 
-                    // position and layout properties
-                    layoutProperties: StackLayoutProperties {
-                        spaceQuota: 1.0
+                    // gallery sorted by index
+                    listSortingKey: "currentIndex"
+                    listSortAscending: true
+
+                    // set initial visibility to false
+                    visible: false
+                    
+                    // calculate the actual height of the thumbnail gallery
+                    preferredHeight: Math.ceil(currentItemIndex/2)*(Math.round(DisplayInfo.width / 2)+1)
+
+                    onItemClicked: {
+                        // console.log("# Item clicked: " + mediaData.mediaId);
+                        var detailImagePage = detailImageComponent.createObject();
+                        detailImagePage.mediaData = mediaData;
+                        navigationPane.push(detailImagePage);
                     }
                 }
             }
@@ -105,6 +148,7 @@ Page {
 
         // console.log("# Loading current user data");
         UserRepository.getUserProfile(userProfilePage.userId, userProfilePage);
+        UserRepository.getUserMedia(userProfilePage.userId, 0, userProfilePage);
     }
 
     // user profile data loaded and transformed
@@ -124,5 +168,39 @@ Page {
         userProfileFollowersCount.narrowText = "followers";
         userProfileFollowingCount.boldText = userData.numberOfFollows;
         userProfileFollowingCount.narrowText = "following";
+
+        userProfileFollowButton.userId = userData.userId;
+        userProfileFollowButton.username = userData.username;
     }
+
+    // user media data loaded and transformed
+    // data is stored in "mediaDataArray" variant as array of type InstagramMediaData
+    onUserMediaDataLoaded: {
+        console.log("# User media data loaded. Found " + mediaDataArray.length + " items");
+
+        // set new pagination id
+        if (userProfileMediaThumbnails.paginationNextMaxId != paginationId) {
+            // set new pagination id to component
+            userProfileMediaThumbnails.paginationNextMaxId = paginationId;
+
+            // iterate through data objects
+            for (var index in mediaDataArray) {
+                // add each object to the gallery list data model
+                // console.log("# Adding item to list with ID: " + mediaDataArray[index].mediaId);
+                userProfileMediaThumbnails.addToGallery(mediaDataArray[index]);
+            }
+
+            userProfileMediaThumbnails.visible = true;
+        }
+    }
+
+    // attach components
+    attachedObjects: [
+        // detail image page
+        // will be called if user clicks on image gallery item
+        ComponentDefinition {
+            id: detailImageComponent
+            source: "MediaDetail.qml"
+        }
+    ]
 }
