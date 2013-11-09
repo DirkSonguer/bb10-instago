@@ -15,7 +15,6 @@ import "../components"
 // shared js files
 import "../global/globals.js" as Globals
 import "../global/copytext.js" as Copytext
-import "../classes/authenticationhandler.js" as Authentication
 
 Page {
     id: userLogoutSheet

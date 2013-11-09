@@ -1,5 +1,5 @@
 1
-56
+57
 classes/authenticationhandler.js
 classes/commenttransformator.js
 classes/locationtransformator.js
@@ -50,6 +50,7 @@ pages/PopularMedia.qml
 pages/UserDetail.qml
 pages/UserLogin.qml
 sheets/About.qml
+sheets/News.qml
 sheets/UserLogin.qml
 sheets/UserLogout.qml
 structures/commentdata.js

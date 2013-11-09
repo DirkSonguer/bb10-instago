@@ -188,7 +188,7 @@ TabbedPane {
                 title: "Update & Rate"
                 imageSource: "asset:///images/icons/icon_bbworld.png"
                 onTriggered: {
-                    // rateAppLink.trigger("bb.action.OPEN");
+                    rateAppLink.trigger("bb.action.OPEN");
                 }
             },
             // action for news sheet
@@ -198,9 +198,9 @@ TabbedPane {
                 imageSource: "asset:///images/icons/icon_news.png"
                 onTriggered: {
                     // create and open news sheet
-                    // var newsPage = newsComponent.createObject();
-                    // newsSheet.setContent(newsPage);
-                    // newsSheet.open();
+                    var newsPage = newsComponent.createObject();
+                    newsSheet.setContent(newsPage);
+                    newsSheet.open();
                 }
             }
         ]
@@ -213,7 +213,7 @@ TabbedPane {
         // this is used by the main menu about item
         Sheet {
             id: aboutSheet
-            
+
             // attach a component for the about page
             attachedObjects: [
                 ComponentDefinition {
@@ -247,6 +247,28 @@ TabbedPane {
                     source: "sheets/UserLogout.qml"
                 }
             ]
+        },
+        // sheet for news page
+        // this is used by the main menu news item
+        Sheet {
+            id: newsSheet
+            
+            // attach a component for the about page
+            attachedObjects: [
+                ComponentDefinition {
+                    id: newsComponent
+                    source: "sheets/News.qml"
+                }
+            ]
+        },
+        // invocation for bb world
+        // used by the action menu to switch to bb world
+        Invocation {
+            id: rateAppLink
+            query {
+                mimeType: "application/x-bb-appworld"
+                uri: "appworld://content/24485875"
+            }
         }
     ]
 }

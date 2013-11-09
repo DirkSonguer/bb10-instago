@@ -1,9 +1,8 @@
 // *************************************************** //
 // About Sheet
 //
-// The user logout sheet uses a webview to trigger the
-// logout functionality of Instagram. The platform will
-// invalidate the session keys accordingly.
+// The about sheet hows a description text for Instago
+// defined in the copytext file.
 // *************************************************** //
 
 // import blackberry components
@@ -15,7 +14,6 @@ import "../components"
 // shared js files
 import "../global/globals.js" as Globals
 import "../global/copytext.js" as Copytext
-import "../classes/authenticationhandler.js" as Authentication
 
 Page {
     // id: aboutSheet
