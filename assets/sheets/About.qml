@@ -1,5 +1,5 @@
 // *************************************************** //
-// User Logout Sheet
+// About Sheet
 //
 // The user logout sheet uses a webview to trigger the
 // logout functionality of Instagram. The platform will
@@ -18,8 +18,8 @@ import "../global/copytext.js" as Copytext
 import "../classes/authenticationhandler.js" as Authentication
 
 Page {
-    id: userLogoutSheet
-
+    // id: aboutSheet
+    
     Container {
         // layout definition
         layout: DockLayout {
@@ -30,20 +30,10 @@ Page {
             verticalAlignment: VerticalAlignment.Center
             horizontalAlignment: HorizontalAlignment.Center
         }
-
-        // webview container
-        Container {
-            // this webview just calls the Instagram logout functionality
-            WebView {
-                url: "https://instagram.com/accounts/logout/"
-                maxHeight: 0
-                maxWidth: 0
-            }
-        }
     }
     
     onCreationCompleted: {
-        infoMessage.showMessage(Copytext.instagoLogoutSuccessMessage, Copytext.instagoLogoutSuccessTitle);
+        infoMessage.showMessage(Copytext.instagoAboutBody, Copytext.instagoAboutHeadline);
     }
     
     // close action for the sheet
@@ -56,12 +46,7 @@ Page {
             // close sheet when pressed
             // note that the sheet is defined in the main.qml
             onTriggered: {
-                logoutSheet.close();
-                
-                // reload profile page to login notification
-                profileComponent.source = "../pages/UserLogin.qml"
-                var profilePage = profileComponent.createObject();
-                profileTab.setContent(profilePage);
+                aboutSheet.close();
             }
         }
     ]    

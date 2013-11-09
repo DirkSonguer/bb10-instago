@@ -95,7 +95,7 @@ NavigationPane {
         // popular media data loaded and transformed
         // data is stored in "mediaDataArray" variant as array of type InstagramMediaData
         onPersonalFeedLoaded: {
-            console.log("# Popular feed loaded. Found " + mediaDataArray.length + " items");
+            // console.log("# Personal feed loaded. Found " + mediaDataArray.length + " items");
 
             if (personalFeedThumbnails.paginationNextMaxId != paginationId) {
                 // set new pagination id to component

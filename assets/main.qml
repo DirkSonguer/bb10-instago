@@ -176,7 +176,10 @@ TabbedPane {
                 title: "About"
                 imageSource: "asset:///images/icons/icon_about.png"
                 onTriggered: {
-                    // aboutSheet.open();
+                    // create logout sheet
+                    var aboutSheetPage = aboutComponent.createObject();
+                    aboutSheet.setContent(aboutSheetPage);
+                    aboutSheet.open();
                 }
             },
             // action for rate sheet
@@ -206,6 +209,19 @@ TabbedPane {
     // attached objects
     // this contains the sheets which are used for general page based popupos
     attachedObjects: [
+        // sheet for about page
+        // this is used by the main menu about item
+        Sheet {
+            id: aboutSheet
+            
+            // attach a component for the about page
+            attachedObjects: [
+                ComponentDefinition {
+                    id: aboutComponent
+                    source: "sheets/About.qml"
+                }
+            ]
+        },
         // sheet for login page
         // this is used by the UserLogin page
         Sheet {

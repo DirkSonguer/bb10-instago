@@ -115,7 +115,7 @@ Container {
 
                         imageSize: Qt.thumbnailSize
                         mediaType: ListItemData.mediaData.mediaType
-                        url: ListItemData.mediaData.mediaThumbnailUrl
+                        url: ListItemData.mediaData.mediaStandardImage
                     }
 
                     // the image description
@@ -140,6 +140,7 @@ Container {
                         opacity: 0.97
                     }
 
+                    // bottom spacer
                     Container {
                         // layout definition
                         verticalAlignment: VerticalAlignment.Bottom

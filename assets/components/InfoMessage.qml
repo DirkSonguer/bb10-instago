@@ -29,6 +29,10 @@ Container {
     layout: StackLayout {
         orientation: LayoutOrientation.TopToBottom
     }
+    
+    // layout definition
+    leftPadding: 10
+    rightPadding: 10
 
     // the actual title text
     Label {

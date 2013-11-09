@@ -120,6 +120,9 @@ Page {
                 Container {
                     background: Color.create(Globals.instagoCoverBackgroundColor)
                     topMargin: 1
+                    
+                    // set initial visibility to false
+                    visible: false
 
                     // comment previews
                     CommentPreview {
@@ -184,7 +187,11 @@ Page {
             mediaDetailLikeButton.userHasLiked = mediaData.userHasLiked;
         }
 
-        mediaDetailCommentPreview.addToGallery(mediaData.commentPreviews);
+        // if the image has comments, show them in the preview component
+        if (mediaData.commentPreviews.length > 0) {
+            mediaDetailCommentPreview.addToGallery(mediaData.commentPreviews);
+            mediaDetailCommentPreview.visible = true;
+        }
     }
 
     // attach components

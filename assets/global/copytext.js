@@ -6,6 +6,7 @@
 // constants - if there was such a thing in JS).
 // *************************************************** //
 
+var instagoAboutHeadline = "Instago";
 var instagoAboutBody = "<html>Instago is an Instagram viewer for BlackBerry 10. Browse popular photos, find interesting people and follow your friends on Instagram.<br /><br />Code &amp; UI: Dirk Songuer (dirk@songuer.de).</html>";
 
 var instagoLoginBody = "<html>You are not connected to Instagram, only the public features are available at the moment.<br /><br />Please connect to Instagram to use features like following other users and liking or commenting photos.<br /><br />Note that you need an Instagram account to log in.</html>";
