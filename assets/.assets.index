@@ -1,5 +1,5 @@
 1
-52
+55
 classes/authenticationhandler.js
 classes/commenttransformator.js
 classes/locationtransformator.js
@@ -11,6 +11,7 @@ components/CommentButton.qml
 components/CommentPreview.qml
 components/CustomButton.qml
 components/FollowButton.qml
+components/FullsizeGallery.qml
 components/ImageDescription.qml
 components/InfoMessage.qml
 components/InstagramImageView.qml
@@ -25,6 +26,7 @@ images/icons/icon_about.png
 images/icons/icon_bbworld.png
 images/icons/icon_close.png
 images/icons/icon_comments.png
+images/icons/icon_home.png
 images/icons/icon_like.png
 images/icons/icon_news.png
 images/icons/icon_play_white_background.png
@@ -43,6 +45,7 @@ instagramapi/upload.js
 instagramapi/users.js
 main.qml
 pages/MediaDetail.qml
+pages/PersonalFeed.qml
 pages/PopularMedia.qml
 pages/UserDetail.qml
 pages/UserLogin.qml

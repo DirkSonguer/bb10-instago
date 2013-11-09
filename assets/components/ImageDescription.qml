@@ -30,6 +30,8 @@ Container {
 
     // property for the image caption
     property alias imagecaption: imageDescriptionCaption.text
+    
+    property alias captionMultiline: imageDescriptionCaption.multiline
 
     // layout definition
     layout: StackLayout {

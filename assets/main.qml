@@ -25,6 +25,31 @@ TabbedPane {
     showTabsOnActionBar: true
     activeTab: popularMediaTab
 
+    // tab for the personal user feed
+    // tab is only visible if user is logged in
+    Tab {
+        id: personalFeedTab
+        title: "Your Feed"
+        imageSource: "asset:///images/icons/icon_home.png"
+
+        // note that the page is bound to the component every time it loads
+        // this is because the page needs to be created as tapped
+        // if created on startup it does not work immediately after login
+        onTriggered: {
+            personalFeedComponent.source = "pages/PersonalFeed.qml";
+            var personalFeedPage = personalFeedComponent.createObject();
+            personalFeedTab.setContent(personalFeedPage);
+        }
+
+        // attach a component for the user feed page
+        // this is bound to the content property later on onCreationCompleted()
+        attachedObjects: [
+            ComponentDefinition {
+                id: personalFeedComponent
+            }
+        ]
+    }
+
     // tab for popular media page
     // tab is always visible regardless of login state
     Tab {
@@ -66,10 +91,10 @@ TabbedPane {
         onTriggered: {
             if (Authentication.auth.isAuthenticated()) {
                 console.log("# User logged in, loading user detail page");
-//                profileComponent.source = "pages/UserProfile.qml"
-//                var profilePage = profileComponent.createObject();
-//                profilePage.userId = "self";
-//                profileTab.setContent(profilePage);
+                //                profileComponent.source = "pages/UserProfile.qml"
+                //                var profilePage = profileComponent.createObject();
+                //                profilePage.userId = "self";
+                //                profileTab.setContent(profilePage);
             } else {
                 console.log("# User not logged in, loading login page");
                 profileComponent.source = "pages/UserLogin.qml"
@@ -103,11 +128,19 @@ TabbedPane {
         if (! Authentication.auth.isAuthenticated()) {
             // remove tabs and menu items that are authenticated only
             mainMenu.removeAction(mainMenuLogout);
-        }
+            mainTabbedPane.remove(personalFeedTab);
 
-        // reset tab content by resetting the page
-        mainTabbedPane.activeTab = profileTab;
-        mainTabbedPane.activeTab = popularMediaTab;
+            // reset tab content by resetting the page
+            mainTabbedPane.activeTab = profileTab;
+            mainTabbedPane.activeTab = popularMediaTab;
+        } else {
+            // activate tabs
+            // this is a workaround as the initial tab does not recognize taps
+            // and does not have the correct height / positioning
+            personalFeedTab.triggered();
+            mainTabbedPane.activeTab = profileTab;
+            mainTabbedPane.activeTab = personalFeedTab;
+        }
     }
 
     // application menu (top menu)

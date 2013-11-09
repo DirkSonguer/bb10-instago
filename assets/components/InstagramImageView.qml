@@ -26,6 +26,8 @@ Container {
 
     // property containing the image url
     property alias url: instagramImage.url
+    
+    property alias loadProgress: instagramImage.loading
 
     // property that defines the size of the image
     // this is the device screen width by default
