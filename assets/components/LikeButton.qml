@@ -81,30 +81,31 @@ Container {
     }
 
     // like has been added
-    // check response state and show toast
+    // check response state
     onLikeAdded: {
-        // change button state if like has been sucessfully added
+        // change button state if like could not be added
         if (requestFeedback != Copytext.instagoAddLikeSuccess) {
             likeButtonComponent.userHasLiked = false;
-        }
 
-        // show the message toast
-        // this will contain either the success or error message
-        likeButtonToast.body = requestFeedback;
-        likeButtonToast.show();
+            // show the message toast
+            // this will contain either the error message
+            likeButtonToast.body = requestFeedback;
+            likeButtonToast.show();
+        }
     }
 
     // like has been removed
-    // check response state and show toast
+    // check response state
     onLikeRemoved: {
+        // change button state if like could not be removed
         if (requestFeedback != Copytext.instagoRemoveLikeSuccess) {
             likeButtonComponent.userHasLiked = true;
-        }
 
-        // show the message toast
-        // this will contain either the success or error message
-        likeButtonToast.body = requestFeedback;
-        likeButtonToast.show();
+            // show the message toast
+            // this will contain either the error message
+            likeButtonToast.body = requestFeedback;
+            likeButtonToast.show();
+        }
     }
 
     // this signal handles the actual logic of adding + removing the like

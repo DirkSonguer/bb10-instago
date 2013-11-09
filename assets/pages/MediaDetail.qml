@@ -127,7 +127,7 @@ Page {
 
                         // set specific height for component
                         // otherwise the height will be too great for some reason
-                        preferredHeight: 600
+                        preferredHeight: 620
 
                         onCommentPreviewClicked: {
                             if (Authentication.auth.isAuthenticated()) {
