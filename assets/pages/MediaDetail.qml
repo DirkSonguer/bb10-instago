@@ -20,7 +20,7 @@ import "../global/copytext.js" as Copytext
 import "../classes/authenticationhandler.js" as Authentication
 
 Page {
-    id: imageDetailPage
+    id: mediaDetailPage
 
     // property containing the image data
     // this is filled by the calling page
@@ -120,9 +120,6 @@ Page {
                 Container {
                     background: Color.create(Globals.instagoCoverBackgroundColor)
                     topMargin: 1
-                    
-                    // set initial visibility to false
-                    visible: false
 
                     // comment previews
                     CommentPreview {
@@ -131,6 +128,9 @@ Page {
                         // set specific height for component
                         // otherwise the height will be too great for some reason
                         preferredHeight: 620
+
+                        // set initial visibility to false
+                        visible: false
 
                         onCommentPreviewClicked: {
                             if (Authentication.auth.isAuthenticated()) {

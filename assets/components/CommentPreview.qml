@@ -38,7 +38,7 @@ Container {
     // item is given as type InstagramCommentData
     signal addToGallery(variant item)
     onAddToGallery: {
-        console.log("# Adding comment items " + item.length);
+        // console.log("# Adding comment items " + item.length);
 
         // iterate through data objects
         for (var index in item) {
