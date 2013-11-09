@@ -9,6 +9,7 @@
 
 // import blackberry components
 import bb.cascades 1.2
+import bb.system 1.2
 
 // set import directory for components
 import "../components"
@@ -115,15 +116,41 @@ Page {
 
                     // set initial visibility to false
                     visible: false
-                    
+
                     // calculate the actual height of the thumbnail gallery
-                    preferredHeight: Math.ceil(currentItemIndex/2)*(Math.round(DisplayInfo.width / 2)+1)
+                    preferredHeight: Math.ceil(currentItemIndex / 2) * (Math.round(DisplayInfo.width / 2))
 
                     onItemClicked: {
                         // console.log("# Item clicked: " + mediaData.mediaId);
                         var detailImagePage = detailImageComponent.createObject();
                         detailImagePage.mediaData = mediaData;
                         navigationPane.push(detailImagePage);
+                    }
+                }
+            }
+
+            // check if list scrolled to bottom and load more images if available
+            // as the scolling is done by the page scrollview container
+            // the listview scroll indicators can't be used
+            onViewableAreaChanged: {
+                // calculate current view port and component height
+                var userMediaListHeight = Math.ceil(userProfileMediaThumbnails.currentItemIndex / 2) * (Math.round(DisplayInfo.width / 2));
+                var currentVisibleArea = viewableArea.height + viewableArea.y;
+                
+                // check if view port is at the bottom of the component height
+                if (currentVisibleArea > userMediaListHeight) {
+                    // console.log("# List bottom reached");
+                    
+                    // check if there is another page available
+                    // if so, load the data
+                    if ((userProfileMediaThumbnails.paginationNextMaxId != "") && (userProfileMediaThumbnails.paginationNextMaxId != 0)) {
+                        // console.log("# List bottom reached. Next pagination id is " + userProfileMediaThumbnails.paginationNextMaxId);
+                        UserRepository.getUserMedia(userProfilePage.userId, userProfileMediaThumbnails.paginationNextMaxId, userProfilePage);
+                        userProfileMediaThumbnails.paginationNextMaxId = 0;
+                        
+                        // show toast that new images are loading
+                        userDetailToast.body = "Loading more images..";
+                        userDetailToast.show();
                     }
                 }
             }
@@ -176,9 +203,9 @@ Page {
     // user media data loaded and transformed
     // data is stored in "mediaDataArray" variant as array of type InstagramMediaData
     onUserMediaDataLoaded: {
-        console.log("# User media data loaded. Found " + mediaDataArray.length + " items");
+        // console.log("# User media data loaded. Found " + mediaDataArray.length + " items");
 
-        // set new pagination id
+        // check if the result pagination id is another one than we already have
         if (userProfileMediaThumbnails.paginationNextMaxId != paginationId) {
             // set new pagination id to component
             userProfileMediaThumbnails.paginationNextMaxId = paginationId;
@@ -190,6 +217,7 @@ Page {
                 userProfileMediaThumbnails.addToGallery(mediaDataArray[index]);
             }
 
+            // show gallery component
             userProfileMediaThumbnails.visible = true;
         }
     }
@@ -201,6 +229,12 @@ Page {
         ComponentDefinition {
             id: detailImageComponent
             source: "MediaDetail.qml"
+        },
+        // system toast
+        // is used for messages
+        SystemToast {
+            id: userDetailToast
+            position: SystemUiPosition.TopCenter
         }
     ]
 }

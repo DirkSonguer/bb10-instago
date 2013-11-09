@@ -174,16 +174,19 @@ Container {
             ListScrollStateHandler {
                 id: scrollStateHandler
                 onAtBeginningChanged: {
+                    console.log("# onAtBeginningChanged");
                     if (scrollStateHandler.atBeginning) {
                         thumbnailGalleryComponent.listTopReached();
                     }
                 }
                 onAtEndChanged: {
+                    console.log("# onAtEndChanged");
                     if (scrollStateHandler.atEnd) {
                         thumbnailGalleryComponent.listBottomReached();
                     }
                 }
                 onScrollingChanged: {
+                    // console.log("# List is scrolling: " + scrollStateHandler.toDebugString());
                     if (! scrollStateHandler.atBeginning) {
                         thumbnailGalleryComponent.listIsScrolling();
                     }
