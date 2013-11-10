@@ -16,7 +16,7 @@ Qt.include(dirPaths.assetPath + "structures/userdata.js");
 // Load the user data for a given Instagram user id
 // First parameter is the user id to get the data for
 // Second parameter is the id of the calling page, which will receive the
-// userProfileDataLoaded() signal
+// userDetailDataLoaded() signal
 function getUserProfile(userId, callingPage) {
 	// console.log("# Loading user profile for user " + userId);
 
@@ -35,7 +35,7 @@ function getUserProfile(userId, callingPage) {
 			userItem = userTransformator.getUserDataFromObject(jsonObject.data);
 
 			// console.log("# Done loading user profile");
-			callingPage.userProfileDataLoaded(userItem);
+			callingPage.userDetailDataLoaded(userItem);
 		} else {
 			// normally there is no need for error handling here the normal
 			// user page will execute getRelationship, which will handle the
@@ -49,7 +49,7 @@ function getUserProfile(userId, callingPage) {
 				// console.log("# Error found with code " +
 				// network.errorData.errorCode + " and message " +
 				// network.errorData.errorMessage);
-				callingPage.userProfileDataError(network.errorData);
+				callingPage.userDetailDataError(network.errorData);
 				network.clearErrors();
 			}
 		}

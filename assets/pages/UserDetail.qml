@@ -23,13 +23,13 @@ import "../instagramapi/users.js" as UserRepository
 import WebImageView 1.0
 
 Page {
-    id: userProfilePage
+    id: userDetailPage
 
     // signal if user profile data loading is complete
-    signal userProfileDataLoaded(variant userData)
+    signal userDetailDataLoaded(variant userData)
 
     // signal if user profile data loading encountered an error
-    signal userProfileDataError(variant errorData)
+    signal userDetailDataError(variant errorData)
 
     // signal if user media data loading is complete
     signal userMediaDataLoaded(variant mediaDataArray, string paginationId)
@@ -55,7 +55,7 @@ Page {
             }
 
             Container {
-                id: userProfileContainer
+                id: userDetailContainer
 
                 layout: StackLayout {
                     orientation: LayoutOrientation.TopToBottom
@@ -65,11 +65,11 @@ Page {
                 visible: false
 
                 UserHeader {
-                    id: userProfileHeader
+                    id: userDetailHeader
                 }
 
                 FollowButton {
-                    id: userProfileFollowButton
+                    id: userDetailFollowButton
 
                     // layout definition
                     topMargin: 1
@@ -86,7 +86,7 @@ Page {
                     topMargin: 1
 
                     CustomButton {
-                        id: userProfileFollowersCount
+                        id: userDetailFollowersCount
 
                         // position and layout properties
                         layoutProperties: StackLayoutProperties {
@@ -98,7 +98,7 @@ Page {
                     }
 
                     CustomButton {
-                        id: userProfileFollowingCount
+                        id: userDetailFollowingCount
 
                         // position and layout properties
                         layoutProperties: StackLayoutProperties {
@@ -108,7 +108,7 @@ Page {
                 }
 
                 ThumbnailGallery {
-                    id: userProfileMediaThumbnails
+                    id: userDetailMediaThumbnails
 
                     // gallery sorted by index
                     listSortingKey: "currentIndex"
@@ -134,7 +134,7 @@ Page {
             // the listview scroll indicators can't be used
             onViewableAreaChanged: {
                 // calculate current view port and component height
-                var userMediaListHeight = Math.ceil(userProfileMediaThumbnails.currentItemIndex / 2) * (Math.round(DisplayInfo.width / 2));
+                var userMediaListHeight = Math.ceil(userDetailMediaThumbnails.currentItemIndex / 2) * (Math.round(DisplayInfo.width / 2));
                 var currentVisibleArea = viewableArea.height + viewableArea.y;
                 
                 // check if view port is at the bottom of the component height
@@ -143,10 +143,10 @@ Page {
                     
                     // check if there is another page available
                     // if so, load the data
-                    if ((userProfileMediaThumbnails.paginationNextMaxId != "") && (userProfileMediaThumbnails.paginationNextMaxId != 0)) {
-                        // console.log("# List bottom reached. Next pagination id is " + userProfileMediaThumbnails.paginationNextMaxId);
-                        UserRepository.getUserMedia(userProfilePage.userId, userProfileMediaThumbnails.paginationNextMaxId, userProfilePage);
-                        userProfileMediaThumbnails.paginationNextMaxId = 0;
+                    if ((userDetailMediaThumbnails.paginationNextMaxId != "") && (userDetailMediaThumbnails.paginationNextMaxId != 0)) {
+                        // console.log("# List bottom reached. Next pagination id is " + userDetailMediaThumbnails.paginationNextMaxId);
+                        UserRepository.getUserMedia(userDetailPage.userId, userDetailMediaThumbnails.paginationNextMaxId, userDetailPage);
+                        userDetailMediaThumbnails.paginationNextMaxId = 0;
                         
                         // show toast that new images are loading
                         userDetailToast.body = "Loading more images..";
@@ -174,30 +174,30 @@ Page {
         loadingIndicator.showLoader("Loading user data");
 
         // console.log("# Loading current user data");
-        UserRepository.getUserProfile(userProfilePage.userId, userProfilePage);
-        UserRepository.getUserMedia(userProfilePage.userId, 0, userProfilePage);
+        UserRepository.getUserProfile(userDetailPage.userId, userDetailPage);
+        UserRepository.getUserMedia(userDetailPage.userId, 0, userDetailPage);
     }
 
     // user profile data loaded and transformed
     // data is stored in "userData" variant of type InstagramUserData
-    onUserProfileDataLoaded: {
+    onUserDetailDataLoaded: {
         // hide loader and show content
         loadingIndicator.hideLoader();
-        userProfileContainer.visible = true;
+        userDetailContainer.visible = true;
 
         // user metadata (profile picture, full and user name)
-        userProfileHeader.userimage = userData.profilePicture;
-        userProfileHeader.username = "@" + userData.username;
-        userProfileHeader.userfullname = userData.fullName;
-        userProfileHeader.userwebsite = userData.website;
+        userDetailHeader.userimage = userData.profilePicture;
+        userDetailHeader.username = "@" + userData.username;
+        userDetailHeader.userfullname = userData.fullName;
+        userDetailHeader.userwebsite = userData.website;
 
-        userProfileFollowersCount.boldText = userData.numberOfFollowers;
-        userProfileFollowersCount.narrowText = "followers";
-        userProfileFollowingCount.boldText = userData.numberOfFollows;
-        userProfileFollowingCount.narrowText = "following";
+        userDetailFollowersCount.boldText = userData.numberOfFollowers;
+        userDetailFollowersCount.narrowText = "followers";
+        userDetailFollowingCount.boldText = userData.numberOfFollows;
+        userDetailFollowingCount.narrowText = "following";
 
-        userProfileFollowButton.userId = userData.userId;
-        userProfileFollowButton.username = userData.username;
+        userDetailFollowButton.userId = userData.userId;
+        userDetailFollowButton.username = userData.username;
     }
 
     // user media data loaded and transformed
@@ -206,19 +206,19 @@ Page {
         // console.log("# User media data loaded. Found " + mediaDataArray.length + " items");
 
         // check if the result pagination id is another one than we already have
-        if (userProfileMediaThumbnails.paginationNextMaxId != paginationId) {
+        if (userDetailMediaThumbnails.paginationNextMaxId != paginationId) {
             // set new pagination id to component
-            userProfileMediaThumbnails.paginationNextMaxId = paginationId;
+            userDetailMediaThumbnails.paginationNextMaxId = paginationId;
 
             // iterate through data objects
             for (var index in mediaDataArray) {
                 // add each object to the gallery list data model
                 // console.log("# Adding item to list with ID: " + mediaDataArray[index].mediaId);
-                userProfileMediaThumbnails.addToGallery(mediaDataArray[index]);
+                userDetailMediaThumbnails.addToGallery(mediaDataArray[index]);
             }
 
             // show gallery component
-            userProfileMediaThumbnails.visible = true;
+            userDetailMediaThumbnails.visible = true;
         }
     }
 

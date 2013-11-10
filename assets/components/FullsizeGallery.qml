@@ -113,9 +113,17 @@ Container {
                         verticalAlignment: VerticalAlignment.Center
                         horizontalAlignment: HorizontalAlignment.Center
 
+                        // set size, type and url
                         imageSize: Qt.thumbnailSize
                         mediaType: ListItemData.mediaData.mediaType
                         url: ListItemData.mediaData.mediaStandardImage
+
+                        // when image loading is done, set image description visibility to true
+                        onLoadProgressChanged: {
+                            if (loadProgress == 1) {
+                                mediaDetailImageDescription.visible = true;
+                            }
+                        }
                     }
 
                     // the image description
@@ -135,6 +143,10 @@ Container {
 
                         // show only one line of the caption
                         captionMultiline: false
+
+                        // set initial visibility to hidden
+                        // will be set visible when the image loading is done
+                        visible: false
 
                         // very faint transparency
                         opacity: 0.97
@@ -187,13 +199,13 @@ Container {
             ListScrollStateHandler {
                 id: scrollStateHandler
                 onAtBeginningChanged: {
-                    console.log("# onAtBeginningChanged");
+                    // console.log("# onAtBeginningChanged");
                     if (scrollStateHandler.atBeginning) {
                         thumbnailGalleryComponent.listTopReached();
                     }
                 }
                 onAtEndChanged: {
-                    console.log("# onAtEndChanged");
+                    // console.log("# onAtEndChanged");
                     if (scrollStateHandler.atEnd) {
                         thumbnailGalleryComponent.listBottomReached();
                     }
