@@ -21,7 +21,10 @@ import "../classes/authenticationhandler.js" as Authentication
 
 Page {
     id: mediaDetailPage
-
+    
+    // hide action bar by default
+    actionBarVisibility: ChromeVisibility.Hidden;
+     
     // property containing the image data
     // this is filled by the calling page
     // image data is of type InstagramMediaData()
@@ -139,6 +142,16 @@ Page {
                     }
                 }
             }
+            
+            // check if item is scrolled at all
+            // if so, then show the action bar
+            onViewableAreaChanged: {
+                if (viewableArea.y > 20) {
+                    mediaDetailPage.actionBarVisibility = ChromeVisibility.Default;
+                } else {
+                    mediaDetailPage.actionBarVisibility = ChromeVisibility.Hidden;
+                }
+            }            
         }
 
         LoadingIndicator {

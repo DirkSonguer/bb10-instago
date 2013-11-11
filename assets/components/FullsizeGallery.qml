@@ -76,13 +76,14 @@ Container {
 
         // associate the data model for the list view
         dataModel: thumbnailGalleryDataModel
+        
+        // define snap mode so that on the q series
+        // an image is always visible full screen
+        snapMode: SnapMode.LeadingEdge
 
         // define list layout as grid
-        layout: GridListLayout {
+        layout: StackListLayout {
             orientation: LayoutOrientation.TopToBottom
-            columnCount: 1
-            verticalCellSpacing: 1
-            horizontalCellSpacing: 1
         }
 
         // define component which will represent list item GUI appearence
@@ -117,13 +118,14 @@ Container {
                         imageSize: Qt.thumbnailSize
                         mediaType: ListItemData.mediaData.mediaType
                         url: ListItemData.mediaData.mediaStandardImage
-
+/*
                         // when image loading is done, set image description visibility to true
                         onLoadProgressChanged: {
                             if (loadProgress == 1) {
                                 mediaDetailImageDescription.visible = true;
                             }
                         }
+*/
                     }
 
                     // the image description

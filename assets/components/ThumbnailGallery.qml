@@ -98,6 +98,8 @@ Container {
                     // item positioning
                     verticalAlignment: VerticalAlignment.Fill
                     horizontalAlignment: HorizontalAlignment.Fill
+                    
+                    // item created time
                     property string itemCreatedTime: ListItemData.mediaData.createdTime
                     
                     // the actual thumbnail image
@@ -108,6 +110,7 @@ Container {
                         verticalAlignment: VerticalAlignment.Center
                         horizontalAlignment: HorizontalAlignment.Center
                         
+                        // set size, type and url
                         imageSize: Qt.thumbnailSize
                         mediaType: ListItemData.mediaData.mediaType
                         url: ListItemData.mediaData.mediaThumbnailUrl

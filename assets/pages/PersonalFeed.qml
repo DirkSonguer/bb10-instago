@@ -25,6 +25,9 @@ NavigationPane {
     Page {
         id: personalFeedPage
 
+        // actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
+        // actionBarVisibility: actionBarVisibility.Hidden
+
         // signal if personal feed data loading is complete
         signal personalFeedLoaded(variant mediaDataArray, string paginationId)
 
@@ -58,7 +61,7 @@ NavigationPane {
                         // console.log("# List bottom reached. Next pagination id is " + paginationNextMaxId);
                         UserRepository.getPersonalFeed(paginationNextMaxId, personalFeedPage);
                         paginationNextMaxId = 0;
-                        
+
                         // show toast that new images are loading
                         personalFeedToast.body = "Loading more images..";
                         personalFeedToast.show();
