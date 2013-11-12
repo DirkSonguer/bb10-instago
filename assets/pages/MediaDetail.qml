@@ -121,10 +121,11 @@ Page {
                     onVisibleChanged: {
                         mediaDetailCommentButton.active = visible;
                     }
-                    
-                    // add comment count 
+
+                    // add comment count
                     onCommentAdded: {
-                        mediaDetailCommentButton.count += 1;
+                        mediaDetailCommentButton.count = parseInt(mediaDetailCommentButton.count) + 1;
+                        mediaDetailCommentPreview.update();
                     }
                 }
 
@@ -174,7 +175,7 @@ Page {
                         // set initial visibility to false
                         visible: false
 
-                        onCommentPreviewClicked: {
+                        onClicked: {
                             if (Authentication.auth.isAuthenticated()) {
                             }
                         }
@@ -215,7 +216,7 @@ Page {
 
         // hide action bar if Q series device
         if (DisplayInfo.height < 900) {
-            console.log("# Display height is < 900, hiding action bar")
+            // console.log("# Display height is < 900, hiding action bar")
             actionBarVisibility:
             ChromeVisibility.Hidden;
         }
@@ -248,12 +249,14 @@ Page {
         }
 
         // if the image has comments, show them in the preview component
-        if (mediaData.commentPreviews.length > 0) {
-            mediaDetailCommentPreview.addToGallery(mediaData.commentPreviews);
+        if (mediaData.commentData.length > 0) {
+            mediaDetailCommentPreview.addToGallery(mediaData.commentData);
             mediaDetailCommentPreview.visible = true;
+            mediaDetailCommentPreview.mediaId = mediaData.mediaId;
         }
 
-        if (mediaData.locationName !== undefined) {
+        // if the image has a location, show it in the location map component
+        if (mediaData.locationName != "") {
             mediaDetailLocation.latitude = mediaData.locationLatitude;
             mediaDetailLocation.longitude = mediaData.locationLongitude;
             mediaDetailLocation.altitude = 1500;

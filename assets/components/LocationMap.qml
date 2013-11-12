@@ -96,7 +96,6 @@ Container {
             imageSource: "asset:///images/triangle_black_down.png"
             opacity: 0.8
             topMargin: 0
-            topPadding: 0
         }
     }
 

@@ -26,7 +26,7 @@ function InstagramMediaData() {
 	// number of likes and comments
 	this.numberOfLikes = "";
 	this.numberOfComments = "";
-	this.commentPreviews = "";
+	this.commentData = "";
 
 	// creation time
 	this.timestamp = "";

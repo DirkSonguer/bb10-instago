@@ -12,6 +12,10 @@ import bb.cascades 1.2
 // shared js files
 import "../global/globals.js" as Globals
 import "../global/copytext.js" as Copytext
+import "../instagramapi/media.js" as MediaRepository
+
+// import timer type
+import QtTimer 1.0
 
 // import image url loader component
 import WebImageView 1.0
@@ -25,8 +29,27 @@ Container {
     // added to the data model
     property int currentItemIndex: 0
 
+    // the media id is needed to update the comment data
+    property string mediaId
+
     // signal to show that component has been clicked
-    signal commentPreviewClicked()
+    signal clicked()
+
+    // signal if comment data loading is complete
+    signal mediaCommentsLoaded(variant commentDataArray)
+
+    // signal if comment data loading encountered an error
+    signal mediaCommentsError(variant errorData)
+
+    signal update()
+    onUpdate: {
+        // clear the list in case the list was reloaded
+        commentPreviewDataModel.clear();
+
+        // start the timer
+        // this basically waits a second and then reloads the comment list
+        commentPreviewTimer.start();
+    }
 
     // signal to clear the gallery contents
     signal clearGallery()
@@ -38,15 +61,18 @@ Container {
     // item is given as type InstagramCommentData
     signal addToGallery(variant item)
     onAddToGallery: {
-        // console.log("# Adding comment items " + item.length);
+        console.log("# Adding new comment items " + item.length);
 
         // iterate through data objects
         for (var index in item) {
+            if (index < 8) {
             commentPreviewComponent.currentItemIndex += 1;
             commentPreviewDataModel.insert({
                     "commentData": item[index],
                     "currentIndex": commentPreviewComponent.currentItemIndex
                 });
+                
+            }
         }
     }
 
@@ -90,7 +116,7 @@ Container {
                             verticalAlignment: VerticalAlignment.Center
                             horizontalAlignment: HorizontalAlignment.Left
 
-                            url: ListItemData.commentData.from["profile_picture"]
+                            url: ListItemData.commentData.userData.profilePicture
 
                             // set image size to maximum screen size
                             // this will be either 768x768 (Z10) or 720x720 (all others)
@@ -123,7 +149,7 @@ Container {
                         textStyle.base: SystemDefaults.TextStyles.BodyText
                         textStyle.fontWeight: FontWeight.W100
                         textStyle.textAlign: TextAlign.Left
-                        text: ListItemData.commentData["text"]
+                        text: ListItemData.commentData.text
                     }
                 }
             }
@@ -134,10 +160,16 @@ Container {
     gestureHandlers: [
         TapHandler {
             onTapped: {
-                commentPreviewComponent.commentPreviewClicked();
+                commentPreviewComponent.clicked();
             }
         }
     ]
+
+    // comment data was loaded successfully
+    // data is stored in "commentDataArray" variant as array of type InstagramCommentData
+    onMediaCommentsLoaded: {
+        commentPreviewComponent.addToGallery(commentDataArray);
+    }
 
     // attached objects
     attachedObjects: [
@@ -149,6 +181,19 @@ Container {
             // items are grouped by the view and transformators
             // no need to set a behaviour by the data model
             grouping: ItemGrouping.None
+        },
+        // timer component
+        // used to delay reload after commenting
+        Timer {
+            id: commentPreviewTimer
+            interval: 1000
+            singleShot: true
+            
+            // when triggered, reload the comment data
+            onTimeout: {
+                // load comments for given media item
+                MediaRepository.getComments(commentPreviewComponent.mediaId, commentPreviewComponent);
+            }
         }
     ]
 }

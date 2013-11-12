@@ -9,8 +9,10 @@
 Qt.include(dirPaths.assetPath + "global/globals.js");
 Qt.include(dirPaths.assetPath + "classes/texttransformator.js");
 Qt.include(dirPaths.assetPath + "classes/usertransformator.js");
+Qt.include(dirPaths.assetPath + "classes/commenttransformator.js");
 Qt.include(dirPaths.assetPath + "structures/mediadata.js");
 Qt.include(dirPaths.assetPath + "structures/userdata.js");
+Qt.include(dirPaths.assetPath + "structures/commentdata.js");
 
 // Class function that gets the prototype methods
 function MediaTransformator() {
@@ -144,7 +146,14 @@ MediaTransformator.prototype.getMediaDataFromObject = function(imageObject) {
 		mediaData.numberOfComments = tempCommentArray.length;
 	}
 	
-	mediaData.commentPreviews = imageObject.comments["data"];
+	// extract the preview comments
+	// this is stored as InstagramCommentData()
+	var commentTransformator = new CommentTransformator();
+	mediaData.commentData = new Array();
+    for (var index in imageObject.comments["data"]) {
+    	var tempCommentObject = commentTransformator.getCommentDataFromObject(imageObject.comments["data"][index]);
+    	mediaData.commentData.push(tempCommentObject);
+    }
 
 	// get and format date
 	mediaData.timestamp = imageObject.created_time;

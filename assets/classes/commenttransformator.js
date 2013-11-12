@@ -15,7 +15,6 @@ Qt.include(dirPaths.assetPath + "classes/usertransformator.js");
 // Class function that gets the prototype methods
 function CommentTransformator() {
 }
-
 // Extract all user data from a user object
 // The resulting media data is in the standard media format as
 // InstagramUserData()
