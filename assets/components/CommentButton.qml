@@ -19,24 +19,25 @@ import "../classes/authenticationhandler.js" as Authentication
 Container {
     id: commentButtonComponent
 
-    // signal if a comment has been added
-    signal commentAdded(string requestFeedback)
-
     // signal for external sources to press the button
     // programatically
     signal pressButton()
 
-    // the media id is needed to add / remove comments
-    property string mediaId
-
+    // signal that button has been clicked
+    signal clicked()
+    
     // number of comments the media item has
     property alias count: commentButton.boldText
+    
+    // flag that holds activity status
+    property bool active: false
 
     // layout definition
     layout: StackLayout {
         orientation: LayoutOrientation.LeftToRight
     }
-    // actual like button component
+    
+    // actual comment button component
     CustomButton {
         id: commentButton
 
@@ -61,11 +62,23 @@ Container {
     // this signal opens the comment logic
     onPressButton: {
         if (Authentication.auth.isAuthenticated()) {
+            commentButtonComponent.clicked();            
         } else {
             // show login message toast
             commentButtonToast.body = Copytext.instagoCommentNotLoggedIn;
             commentButtonToast.show();
         }
+    }
+    
+    onActiveChanged: {
+        if (commentButtonComponent.active) {
+            // light green color
+            commentButton.backgroundColor = Color.create(Globals.instagoConfirmedBackgroundColor);
+        } else {
+            // standard button color
+            commentButton.backgroundColor = Color.create(Globals.instagoCoverBackgroundColor);
+        }                        
+        
     }
 
     // attach components

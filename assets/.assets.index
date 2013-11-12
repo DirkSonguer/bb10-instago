@@ -1,5 +1,5 @@
 1
-60
+62
 classes/authenticationhandler.js
 classes/commenttransformator.js
 classes/locationtransformator.js
@@ -8,6 +8,7 @@ classes/networkhandler.js
 classes/texttransformator.js
 classes/usertransformator.js
 components/CommentButton.qml
+components/CommentInput.qml
 components/CommentPreview.qml
 components/CustomButton.qml
 components/FollowButton.qml
@@ -27,6 +28,7 @@ images/icons/icon_about.png
 images/icons/icon_bbworld.png
 images/icons/icon_close.png
 images/icons/icon_comments.png
+images/icons/icon_comments_dimmed.png
 images/icons/icon_home.png
 images/icons/icon_like.png
 images/icons/icon_news.png

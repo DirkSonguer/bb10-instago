@@ -99,6 +99,32 @@ Page {
                         layoutProperties: StackLayoutProperties {
                             spaceQuota: 1.0
                         }
+
+                        // show / hide comment input component on press
+                        onClicked: {
+                            mediaDetailCommentInput.visible = ! mediaDetailCommentInput.visible;
+                        }
+                    }
+                }
+
+                CommentInput {
+                    id: mediaDetailCommentInput
+
+                    // layout definition
+                    topMargin: 1
+
+                    // set initial visibility to false
+                    // will be set by comment button
+                    visible: false
+
+                    // change state of comment button if visibility of input has changed
+                    onVisibleChanged: {
+                        mediaDetailCommentButton.active = visible;
+                    }
+                    
+                    // add comment count 
+                    onCommentAdded: {
+                        mediaDetailCommentButton.count += 1;
                     }
                 }
 
