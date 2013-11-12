@@ -69,6 +69,8 @@ Container {
                 // show play button if video
                 if (instagramImageViewComponent.mediaType == "video") {
                     videoPlayButton.visible = true;
+                } else {
+                    videoPlayButton.visible = false;
                 }
             }
         }

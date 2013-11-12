@@ -1,5 +1,5 @@
 1
-58
+60
 classes/authenticationhandler.js
 classes/commenttransformator.js
 classes/locationtransformator.js
@@ -17,6 +17,7 @@ components/InfoMessage.qml
 components/InstagramImageView.qml
 components/LikeButton.qml
 components/LoadingIndicator.qml
+components/LocationMap.qml
 components/ThumbnailGallery.qml
 components/UserHeader.qml
 global/copytext.js
@@ -37,6 +38,7 @@ images/mask_profile_pictures_black.png
 images/splashscreens/instago_splash_720x1280.png
 images/splashscreens/instago_splash_720x720.png
 images/splashscreens/instago_splash_768x1280.png
+images/triangle_black_down.png
 instagramapi/location.js
 instagramapi/media.js
 instagramapi/profile.js

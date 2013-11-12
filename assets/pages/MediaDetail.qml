@@ -21,10 +21,7 @@ import "../classes/authenticationhandler.js" as Authentication
 
 Page {
     id: mediaDetailPage
-    
-    // hide action bar by default
-    actionBarVisibility: ChromeVisibility.Hidden;
-     
+
     // property containing the image data
     // this is filled by the calling page
     // image data is of type InstagramMediaData()
@@ -109,6 +106,8 @@ Page {
                 // this contains user profile image, name and image caption
                 ImageDescription {
                     id: mediaDetailImageDescription
+
+                    // layout definition
                     topMargin: 1
 
                     onClicked: {
@@ -119,9 +118,23 @@ Page {
                     }
                 }
 
+                // image location
+                LocationMap {
+                    id: mediaDetailLocation
+
+                    // layout definition
+                    topMargin: 1
+
+                    // set initial visibility to false
+                    // will be set true if the image has location data
+                    visible: false
+                }
+
                 // comment preview container
                 Container {
                     background: Color.create(Globals.instagoCoverBackgroundColor)
+
+                    // layout definition
                     topMargin: 1
 
                     // comment previews
@@ -142,16 +155,17 @@ Page {
                     }
                 }
             }
-            
-            // check if item is scrolled at all
-            // if so, then show the action bar
+
+            // check if Q series device and item is scrolled at all
+            // if so, then hide / show the action bar
             onViewableAreaChanged: {
-                if (viewableArea.y > 20) {
+                if (DisplayInfo.height < 900)
+                    if (viewableArea.y > 20) {
                     mediaDetailPage.actionBarVisibility = ChromeVisibility.Default;
                 } else {
                     mediaDetailPage.actionBarVisibility = ChromeVisibility.Hidden;
                 }
-            }            
+            }
         }
 
         LoadingIndicator {
@@ -172,6 +186,13 @@ Page {
     // the page waits for an external page to fill the mediaData property
     onCreationCompleted: {
         // console.log("# Creation of media detail page finished");
+
+        // hide action bar if Q series device
+        if (DisplayInfo.height < 900) {
+            console.log("# Display height is < 900, hiding action bar")
+            actionBarVisibility:
+            ChromeVisibility.Hidden;
+        }
 
         // show loader
         loadingIndicator.showLoader("Loading media data");
@@ -204,6 +225,14 @@ Page {
         if (mediaData.commentPreviews.length > 0) {
             mediaDetailCommentPreview.addToGallery(mediaData.commentPreviews);
             mediaDetailCommentPreview.visible = true;
+        }
+
+        if (mediaData.locationName !== undefined) {
+            mediaDetailLocation.latitude = mediaData.locationLatitude;
+            mediaDetailLocation.longitude = mediaData.locationLongitude;
+            mediaDetailLocation.altitude = 1500;
+            mediaDetailLocation.pinText = mediaData.locationName;
+            mediaDetailLocation.visible = true;
         }
     }
 
