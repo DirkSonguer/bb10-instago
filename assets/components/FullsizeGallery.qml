@@ -118,14 +118,13 @@ Container {
                         imageSize: Qt.thumbnailSize
                         mediaType: ListItemData.mediaData.mediaType
                         url: ListItemData.mediaData.mediaStandardImage
-/*
+
                         // when image loading is done, set image description visibility to true
                         onLoadProgressChanged: {
                             if (loadProgress == 1) {
                                 mediaDetailImageDescription.visible = true;
                             }
                         }
-*/
                     }
 
                     // the image description

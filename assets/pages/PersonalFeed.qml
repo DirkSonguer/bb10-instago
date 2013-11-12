@@ -25,9 +25,6 @@ NavigationPane {
     Page {
         id: personalFeedPage
 
-        // actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
-        // actionBarVisibility: actionBarVisibility.Hidden
-
         // signal if personal feed data loading is complete
         signal personalFeedLoaded(variant mediaDataArray, string paginationId)
 
