@@ -76,7 +76,7 @@ Container {
             likeButton.backgroundColor = Color.create(Globals.instagoConfirmedBackgroundColor);
         } else {
             // standard button color
-            likeButton.backgroundColor = Color.create(Globals.instagoCoverBackgroundColor);
+            likeButton.backgroundColor = Color.create(Globals.instagoDefaultBackgroundColor);
         }
     }
 

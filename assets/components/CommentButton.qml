@@ -76,7 +76,7 @@ Container {
             commentButton.backgroundColor = Color.create(Globals.instagoConfirmedBackgroundColor);
         } else {
             // standard button color
-            commentButton.backgroundColor = Color.create(Globals.instagoCoverBackgroundColor);
+            commentButton.backgroundColor = Color.create(Globals.instagoDefaultBackgroundColor);
         }                        
         
     }

@@ -61,20 +61,22 @@ Container {
     // item is given as type InstagramCommentData
     signal addToGallery(variant item)
     onAddToGallery: {
-        console.log("# Adding new comment items " + item.length);
+        // console.log("# Adding new comment items " + item.length);
 
         // iterate through data objects
         for (var index in item) {
-            if (index < 8) {
-            commentPreviewComponent.currentItemIndex += 1;
-            commentPreviewDataModel.insert({
-                    "commentData": item[index],
-                    "currentIndex": commentPreviewComponent.currentItemIndex
-                });
-                
+            if (index > (item.length - 9)) {
+                commentPreviewComponent.currentItemIndex += 1;
+                commentPreviewDataModel.insert({
+                        "commentData": item[index],
+                        "currentIndex": commentPreviewComponent.currentItemIndex
+                    });
             }
         }
     }
+
+    // background color definition
+    background: Color.create(Globals.instagoDefaultBackgroundColor)
 
     // list view containing the individual comment items
     ListView {
@@ -139,7 +141,7 @@ Container {
                             minHeight: 50
                             minWidth: 50
 
-                            imageSource: "asset:///images/mask_profile_pictures_black.png"
+                            imageSource: "asset:///images/mask_profile_pictures_default.png"
                         }
                     }
 
@@ -156,6 +158,27 @@ Container {
         ]
     }
 
+    // comment data was loaded successfully
+    // data is stored in "commentDataArray" variant as array of type InstagramCommentData
+    onMediaCommentsLoaded: {
+        commentPreviewComponent.addToGallery(commentDataArray);
+    }
+
+    // handle ui touch elements
+    onTouch: {
+        // user pressed description
+        if (event.touchType == TouchType.Down) {
+            commentPreviewComponent.background = Color.create(Globals.instagoHighlightBackgroundColor);
+            // imageDescriptionMask.imageSource = "asset:///images/mask_profile_pictures_highlight.png"
+        }
+
+        // user release description or is moving
+        if ((event.touchType == TouchType.Up) || (event.touchType == TouchType.Cancel)) {
+            commentPreviewComponent.background = Color.create(Globals.instagoDefaultBackgroundColor);
+            // imageDescriptionMask.imageSource = "asset:///images/mask_profile_pictures_default.png"
+        }
+    }
+
     // handle tap on comment preview component
     gestureHandlers: [
         TapHandler {
@@ -164,12 +187,6 @@ Container {
             }
         }
     ]
-
-    // comment data was loaded successfully
-    // data is stored in "commentDataArray" variant as array of type InstagramCommentData
-    onMediaCommentsLoaded: {
-        commentPreviewComponent.addToGallery(commentDataArray);
-    }
 
     // attached objects
     attachedObjects: [
@@ -188,7 +205,7 @@ Container {
             id: commentPreviewTimer
             interval: 1000
             singleShot: true
-            
+
             // when triggered, reload the comment data
             onTimeout: {
                 // load comments for given media item

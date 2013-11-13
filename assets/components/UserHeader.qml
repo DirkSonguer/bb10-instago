@@ -43,7 +43,7 @@ Container {
     rightPadding: 10
 
     // set background color
-    background: Color.create(Globals.instagoCoverBackgroundColor)
+    background: Color.create(Globals.instagoDefaultBackgroundColor)
 
     // standard width is full display width
     preferredWidth: DisplayInfo.width
@@ -85,7 +85,7 @@ Container {
             minHeight: 150
             minWidth: 150
 
-            imageSource: "asset:///images/mask_profile_pictures_black.png"
+            imageSource: "asset:///images/mask_profile_pictures_default.png"
         }
     }
 

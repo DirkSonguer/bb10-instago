@@ -15,6 +15,7 @@ var instagoLightTextColor = "#555555";
 var instagoHighlightedTextColor = "#2E5E86";
 var instagoLinkTextColor = "#0791FF";
 
-var instagoListItemBackgroundColor = "#DCDCDC";
-var instagoCoverBackgroundColor = "#222222";
+var instagoDefaultBackgroundColor = "#222222";
+var instagoHighlightBackgroundColor = "#303030";
 var instagoConfirmedBackgroundColor = "#3E9947";
+var instagoListItemBackgroundColor = "#DCDCDC";

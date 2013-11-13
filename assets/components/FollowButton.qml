@@ -83,7 +83,7 @@ Container {
         if ((relationshipData.outgoing_status === "none") && (relationshipData.target_user_is_private === false)) {
             // console.log("# User does not follow ID " + userData.userId + " (public user)");
             followButton.narrowText = Copytext.instagoFollowUser + followButtonComponent.username;
-            followButton.backgroundColor = Color.create(Globals.instagoCoverBackgroundColor);
+            followButton.backgroundColor = Color.create(Globals.instagoDefaultBackgroundColor);
             followButtonComponent.userRelationship = "none";
         }
 
@@ -99,7 +99,7 @@ Container {
         if ((relationshipData.outgoing_status === "none") && (relationshipData.target_user_is_private === true)) {
             // console.log("# User does not follow ID " + userData.userId + " (private user)");
             followButton.narrowText = Copytext.instagoFollowPrivateUser;
-            followButton.backgroundColor = Color.create(Globals.instagoCoverBackgroundColor);
+            followButton.backgroundColor = Color.create(Globals.instagoDefaultBackgroundColor);
             followButtonComponent.userRelationship = "private";
         }
 
@@ -149,7 +149,7 @@ Container {
         // user is followed and not private, so unfollow user
         if ((followButtonComponent.userRelationship == "follows") || (followButtonComponent.userRelationship == "requested")) {
             followButton.narrowText = Copytext.instagoFollowUser + followButtonComponent.username;
-            followButton.backgroundColor = Color.create(Globals.instagoCoverBackgroundColor);
+            followButton.backgroundColor = Color.create(Globals.instagoDefaultBackgroundColor);
             newRelationship = "none";
             RelationshipRepository.setRelationship(followButtonComponent.userId, "unfollow", followButtonComponent);
         }

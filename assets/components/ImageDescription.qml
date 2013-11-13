@@ -17,7 +17,7 @@ import WebImageView 1.0
 
 Container {
     id: imageDescriptionComponent
-    
+
     // signal that description has been clicked
     signal clicked()
 
@@ -30,7 +30,7 @@ Container {
 
     // property for the image caption
     property alias imagecaption: imageDescriptionCaption.text
-    
+
     property alias captionMultiline: imageDescriptionCaption.multiline
 
     // layout definition
@@ -45,7 +45,7 @@ Container {
     rightPadding: 10
 
     // set background color
-    background: Color.create(Globals.instagoCoverBackgroundColor)
+    background: Color.create(Globals.instagoDefaultBackgroundColor)
 
     // standard width is full display width
     preferredWidth: DisplayInfo.width
@@ -74,6 +74,8 @@ Container {
 
         // mask the profile image to make it round
         ImageView {
+            id: imageDescriptionMask
+
             // position and layout properties
             verticalAlignment: VerticalAlignment.Center
             horizontalAlignment: HorizontalAlignment.Left
@@ -84,7 +86,7 @@ Container {
             minHeight: 150
             minWidth: 150
 
-            imageSource: "asset:///images/mask_profile_pictures_black.png"
+            imageSource: "asset:///images/mask_profile_pictures_default.png"
         }
     }
 
@@ -119,7 +121,22 @@ Container {
             multiline: true
         }
     }
-    
+
+    // handle ui touch elements
+    onTouch: {
+        // user pressed description
+        if (event.touchType == TouchType.Down) {
+            imageDescriptionComponent.background = Color.create(Globals.instagoHighlightBackgroundColor);
+            imageDescriptionMask.imageSource = "asset:///images/mask_profile_pictures_highlight.png"
+        }
+
+        // user release description or is moving
+        if ((event.touchType == TouchType.Up) || (event.touchType == TouchType.Cancel)) {
+            imageDescriptionComponent.background = Color.create(Globals.instagoDefaultBackgroundColor);
+            imageDescriptionMask.imageSource = "asset:///images/mask_profile_pictures_default.png"
+        }
+    }
+
     // handle tap on custom button
     gestureHandlers: [
         TapHandler {

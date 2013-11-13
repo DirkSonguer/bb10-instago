@@ -129,7 +129,7 @@ Container {
                         rightPadding: 5
 
                         // color and transparency
-                        background: Color.create(Globals.instagoCoverBackgroundColor)
+                        background: Color.create(Globals.instagoDefaultBackgroundColor)
                         opacity: 0.8
 
                         // description text

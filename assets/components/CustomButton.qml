@@ -34,7 +34,7 @@ Container {
     rightPadding: 10
 
     // set initial background color
-    background: Color.create(Globals.instagoCoverBackgroundColor)
+    background: Color.create(Globals.instagoDefaultBackgroundColor)
 
     Container {
         id: customButtonContainer

@@ -90,13 +90,12 @@ TabbedPane {
         // check authentication state and load tab content accordingly
         onTriggered: {
             if (Authentication.auth.isAuthenticated()) {
-                console.log("# User logged in, loading user detail page");
-                //                profileComponent.source = "pages/UserProfile.qml"
-                //                var profilePage = profileComponent.createObject();
-                //                profilePage.userId = "self";
-                //                profileTab.setContent(profilePage);
+                profileComponent.source = "pages/UserDetail.qml"
+                var profilePage = profileComponent.createObject();
+                profilePage.userId = "self";
+                profileTab.setContent(profilePage);
             } else {
-                console.log("# User not logged in, loading login page");
+                // console.log("# User not logged in, loading login page");
                 profileComponent.source = "pages/UserLogin.qml"
                 var profilePage = profileComponent.createObject();
                 profileTab.setContent(profilePage);

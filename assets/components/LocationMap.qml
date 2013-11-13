@@ -28,7 +28,7 @@ Container {
     property alias pinText: locationMapPinText.text
 
     // set initial background color
-    background: Color.create(Globals.instagoCoverBackgroundColor)
+    background: Color.create(Globals.instagoDefaultBackgroundColor)
 
     layout: DockLayout {
     }

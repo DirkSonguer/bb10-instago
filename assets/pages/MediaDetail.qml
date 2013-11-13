@@ -81,13 +81,23 @@ Page {
                     LikeButton {
                         id: mediaDetailLikeButton
 
+                        // layout definition
+                        rightMargin: 1
+
                         // position and layout properties
                         layoutProperties: StackLayoutProperties {
                             spaceQuota: 1.0
                         }
 
-                        // layout definition
-                        rightMargin: 1
+                        // increase like count
+                        onLikeAdded: {
+                            mediaDetailLikeButton.count = parseInt(mediaDetailLikeButton.count) + 1;
+                        }
+
+                        // decrease like count
+                        onLikeRemoved: {
+                            mediaDetailLikeButton.count = parseInt(mediaDetailLikeButton.count) - 1;
+                        }
                     }
 
                     // comment button
@@ -126,6 +136,7 @@ Page {
                     onCommentAdded: {
                         mediaDetailCommentButton.count = parseInt(mediaDetailCommentButton.count) + 1;
                         mediaDetailCommentPreview.update();
+                        mediaDetailCommentButton.visible = true;
                     }
                 }
 
@@ -157,27 +168,22 @@ Page {
                     visible: false
                 }
 
-                // comment preview container
-                Container {
-                    background: Color.create(Globals.instagoCoverBackgroundColor)
+                // comment previews
+                CommentPreview {
+                    id: mediaDetailCommentPreview
 
                     // layout definition
                     topMargin: 1
 
-                    // comment previews
-                    CommentPreview {
-                        id: mediaDetailCommentPreview
+                    // set specific height for component
+                    // otherwise the height will be too great for some reason
+                    preferredHeight: 620
 
-                        // set specific height for component
-                        // otherwise the height will be too great for some reason
-                        preferredHeight: 620
+                    // set initial visibility to false
+                    visible: false
 
-                        // set initial visibility to false
-                        visible: false
-
-                        onClicked: {
-                            if (Authentication.auth.isAuthenticated()) {
-                            }
+                    onClicked: {
+                        if (Authentication.auth.isAuthenticated()) {
                         }
                     }
                 }
