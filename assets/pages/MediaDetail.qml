@@ -1,10 +1,10 @@
 // *************************************************** //
-// Image Detail Page
+// Media Detail Page
 //
-// The image detail page is shown when a specific
-// Instagram image is displayed.
+// The media detail page is shown when a specific
+// Instagram media item is displayed.
 // The page has a number of features that can be
-// applied to the image as well as the user that
+// applied to the media item as well as the user that
 // uploaded it.
 // *************************************************** //
 
@@ -22,7 +22,7 @@ import "../classes/authenticationhandler.js" as Authentication
 Page {
     id: mediaDetailPage
 
-    // property containing the image data
+    // property containing the media data
     // this is filled by the calling page
     // image data is of type InstagramMediaData()
     property variant mediaData
@@ -98,6 +98,13 @@ Page {
                         onLikeRemoved: {
                             mediaDetailLikeButton.count = parseInt(mediaDetailLikeButton.count) - 1;
                         }
+
+                        onLongPress: {
+                            // console.log("# Like button long pressed");
+                            var mediaLikesPage = mediaLikesComponent.createObject();
+                            mediaLikesPage.mediaData = mediaDetailPage.mediaData;
+                            navigationPane.push(mediaLikesPage);
+                        }
                     }
 
                     // comment button
@@ -149,7 +156,7 @@ Page {
                     topMargin: 1
 
                     onClicked: {
-                        // console.log("# Item clicked: " + mediaData.mediaId);
+                        // console.log("# Item clicked: " + mediaData.userData.userId);
                         var userDetailPage = userDetailComponent.createObject();
                         userDetailPage.userId = mediaData.userData.userId;
                         navigationPane.push(userDetailPage);
@@ -273,11 +280,17 @@ Page {
 
     // attach components
     attachedObjects: [
-        // detail image page
-        // will be called if user clicks on image gallery item
+        // user detail page
+        // will be called if user clicks on user description
         ComponentDefinition {
             id: userDetailComponent
             source: "UserDetail.qml"
+        },
+        // user gallery page
+        // will be called if user long presses on like button
+        ComponentDefinition {
+            id: mediaLikesComponent
+            source: "MediaLikes.qml"
         }
     ]
 }

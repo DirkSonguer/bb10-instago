@@ -38,7 +38,7 @@ NavigationPane {
             layout: DockLayout {
             }
 
-            ThumbnailGallery {
+            ImageThumbnailGallery {
                 id: popularMediaThumbnails
                 
                 // gallery sorted by index 

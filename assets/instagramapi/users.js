@@ -18,15 +18,19 @@ Qt.include(dirPaths.assetPath + "structures/userdata.js");
 // Second parameter is the id of the calling page, which will receive the
 // userDetailDataLoaded() signal
 function getUserProfile(userId, callingPage) {
-	// console.log("# Loading user profile for user " + userId);
+	console.log("# Loading user profile for user " + userId);
 
 	var req = new XMLHttpRequest();
 	req.onreadystatechange = function() {
+		console.log("# Loading ready state loaded");
+
 		// this handles the result for each ready state
 		var jsonObject = network.handleHttpResult(req);
 
 		// jsonObject contains either false or the http result as object
 		if (jsonObject) {
+			console.log("# JSON object found");
+
 			// prepare transformator and return object
 			var userTransformator = new UserTransformator();
 			var userItem = new InstagramUserData();
@@ -34,9 +38,10 @@ function getUserProfile(userId, callingPage) {
 			// get user object and store it into return object
 			userItem = userTransformator.getUserDataFromObject(jsonObject.data);
 
-			// console.log("# Done loading user profile");
+			console.log("# Done loading user profile");
 			callingPage.userDetailDataLoaded(userItem);
 		} else {
+			console.log("# Could not handle network result");
 			// normally there is no need for error handling here the normal
 			// user page will execute getRelationship, which will handle the
 			// error states however this method is also used for loading the
@@ -45,7 +50,9 @@ function getUserProfile(userId, callingPage) {
 			// and act accordingly
 			// found error will be handed over to the calling page
 			var instagramUserdata = auth.getStoredInstagramData();
-			if (((network.requestIsFinished) && (network.errorData.errorCode != "")) && auth.isAuthenticated() && (instagramUserdata["id"] == userId)) {
+			if (((network.requestIsFinished) && (network.errorData.errorCode != ""))
+					&& auth.isAuthenticated()
+					&& (instagramUserdata["id"] == userId)) {
 				// console.log("# Error found with code " +
 				// network.errorData.errorCode + " and message " +
 				// network.errorData.errorMessage);
@@ -59,11 +66,15 @@ function getUserProfile(userId, callingPage) {
 	if (auth.isAuthenticated()) {
 		// we need the auth token for users that are private
 		var instagramUserdata = auth.getStoredInstagramData();
-		url = instagramkeys.instagramAPIUrl + "/v1/users/" + userId + "?access_token=" + instagramUserdata["access_token"];
+		url = instagramkeys.instagramAPIUrl + "/v1/users/" + userId
+				+ "?access_token=" + instagramUserdata["access_token"];
 	} else {
 		// calls with the client id can only show public users
-		url = instagramkeys.instagramAPIUrl + "/v1/users/" + userId + "?client_id=" + instagramkeys.instagramClientId;
+		url = instagramkeys.instagramAPIUrl + "/v1/users/" + userId
+				+ "?client_id=" + instagramkeys.instagramClientId;
 	}
+
+	console.log("# Loading url " + url);
 
 	req.open("GET", url, true);
 	req.send();
@@ -92,7 +103,8 @@ function getUserMedia(userId, paginationId, callingPage) {
 			for ( var index in jsonObject.data) {
 				// get image object and store it into return object
 				var mediaItem = new InstagramMediaData();
-				mediaItem = mediaTransformator.getMediaDataFromObject(jsonObject.data[index]);
+				mediaItem = mediaTransformator
+						.getMediaDataFromObject(jsonObject.data[index]);
 				mediaDataArray[index] = mediaItem;
 			}
 
@@ -108,7 +120,8 @@ function getUserMedia(userId, paginationId, callingPage) {
 			// either the request is not done yet or an error occured
 			// check for both and act accordingly
 			// found error will be handed over to the calling page
-			if ((network.requestIsFinished) && (network.errorData.errorCode != "")) {
+			if ((network.requestIsFinished)
+					&& (network.errorData.errorCode != "")) {
 				// console.log("# Error found with code " +
 				// network.errorData.errorCode + " and message " +
 				// network.errorData.errorMessage);
@@ -120,7 +133,8 @@ function getUserMedia(userId, paginationId, callingPage) {
 
 	// only authenticated users can request media item data for a user
 	var instagramUserdata = auth.getStoredInstagramData();
-	var url = instagramkeys.instagramAPIUrl + "/v1/users/" + userId + "/media/recent?access_token=" + instagramUserdata["access_token"];
+	var url = instagramkeys.instagramAPIUrl + "/v1/users/" + userId
+			+ "/media/recent?access_token=" + instagramUserdata["access_token"];
 
 	// if a pagination id was given, add it to the request
 	if (paginationId !== 0) {
@@ -169,7 +183,9 @@ function getUserIdByName(userName, callingPage) {
 			// and act accordingly
 			// found error will be handed over to the calling page
 			var instagramUserdata = auth.getStoredInstagramData();
-			if (((network.requestIsFinished) && (network.errorData.errorCode != "")) && auth.isAuthenticated() && (instagramUserdata["id"] == userId)) {
+			if (((network.requestIsFinished) && (network.errorData.errorCode != ""))
+					&& auth.isAuthenticated()
+					&& (instagramUserdata["id"] == userId)) {
 				// console.log("# Error found with code " +
 				// network.errorData.errorCode + " and message " +
 				// network.errorData.errorMessage);
@@ -181,7 +197,8 @@ function getUserIdByName(userName, callingPage) {
 
 	// only authenticated users can request the user id / do a user search
 	var instagramUserdata = auth.getStoredInstagramData();
-	var url = instagramkeys.instagramAPIUrl + "/v1/users/search?q=" + userName + "&count=1&access_token=" + instagramUserdata["access_token"];
+	var url = instagramkeys.instagramAPIUrl + "/v1/users/search?q=" + userName
+			+ "&count=1&access_token=" + instagramUserdata["access_token"];
 
 	req.open("GET", url, true);
 	req.send();
@@ -198,7 +215,8 @@ function logoutUser() {
 	req.onreadystatechange = function() {
 		// check if the server response is actually finished
 		if (req.readyState === XMLHttpRequest.DONE) {
-			// console.log("# Logout done, status " + req.status + " with text " + req.responseText);
+			// console.log("# Logout done, status " + req.status + " with text "
+			// + req.responseText);
 		}
 	};
 
@@ -230,7 +248,8 @@ function getPersonalFeed(paginationId, callingPage) {
 			for ( var index in jsonObject.data) {
 				// get image object and store it into return object
 				var mediaItem = new InstagramMediaData();
-				mediaItem = mediaTransformator.getMediaDataFromObject(jsonObject.data[index]);
+				mediaItem = mediaTransformator
+						.getMediaDataFromObject(jsonObject.data[index]);
 				mediaDataArray[index] = mediaItem;
 			}
 
@@ -246,7 +265,8 @@ function getPersonalFeed(paginationId, callingPage) {
 			// either the request is not done yet or an error occured
 			// check for both and act accordingly
 			// found error will be handed over to the calling page
-			if ((network.requestIsFinished) && (network.errorData.errorCode != "")) {
+			if ((network.requestIsFinished)
+					&& (network.errorData.errorCode != "")) {
 				// console.log("# Error found with code " +
 				// network.errorData.errorCode + " and message " +
 				// network.errorData.errorMessage);
@@ -257,7 +277,9 @@ function getPersonalFeed(paginationId, callingPage) {
 	};
 
 	var instagramUserdata = auth.getStoredInstagramData();
-	var url = instagramkeys.instagramAPIUrl + "/v1/users/self/feed?access_token=" + instagramUserdata["access_token"];
+	var url = instagramkeys.instagramAPIUrl
+			+ "/v1/users/self/feed?access_token="
+			+ instagramUserdata["access_token"];
 
 	// if a pagination id was given, add it to the request
 	if (paginationId !== 0) {
@@ -273,7 +295,8 @@ function getPersonalFeed(paginationId, callingPage) {
 // Second parameter is the id of the calling page, which will receive the
 // onUserFavoritesDataLoaded() signal
 function getUserFavorites(paginationId, callingPage) {
-	// console.log("# Loading favorite media data for pagination ID " + paginationId + " on page " + callingPage);
+	// console.log("# Loading favorite media data for pagination ID " +
+	// paginationId + " on page " + callingPage);
 
 	var req = new XMLHttpRequest();
 	req.onreadystatechange = function() {
@@ -290,7 +313,8 @@ function getUserFavorites(paginationId, callingPage) {
 			for ( var index in jsonObject.data) {
 				// get image object and store it into return object
 				var mediaItem = new InstagramMediaData();
-				mediaItem = mediaTransformator.getMediaDataFromObject(jsonObject.data[index]);
+				mediaItem = mediaTransformator
+						.getMediaDataFromObject(jsonObject.data[index]);
 				mediaDataArray[index] = mediaItem;
 			}
 
@@ -306,7 +330,8 @@ function getUserFavorites(paginationId, callingPage) {
 			// either the request is not done yet or an error occured
 			// check for both and act accordingly
 			// found error will be handed over to the calling page
-			if ((network.requestIsFinished) && (network.errorData.errorCode != "")) {
+			if ((network.requestIsFinished)
+					&& (network.errorData.errorCode != "")) {
 				// console.log("# Error found with code " +
 				// network.errorData.errorCode + " and message " +
 				// network.errorData.errorMessage);
@@ -318,7 +343,9 @@ function getUserFavorites(paginationId, callingPage) {
 
 	// only authenticated users can request media item data for a user
 	var instagramUserdata = auth.getStoredInstagramData();
-    var url = instagramkeys.instagramAPIUrl + "/v1/users/self/media/liked?access_token=" + instagramUserdata["access_token"];
+	var url = instagramkeys.instagramAPIUrl
+			+ "/v1/users/self/media/liked?access_token="
+			+ instagramUserdata["access_token"];
 
 	// if a pagination id was given, add it to the request
 	if (paginationId !== 0) {

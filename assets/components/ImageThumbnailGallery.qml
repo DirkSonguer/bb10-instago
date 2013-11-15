@@ -1,5 +1,5 @@
 // *************************************************** //
-// Thumbnail Gallery Component
+// Image Thumbnail Gallery Component
 //
 // This component shows a gallery of thumbnails with an
 // optional text field
@@ -14,7 +14,7 @@ import "../global/globals.js" as Globals
 import "../global/copytext.js" as Copytext
 
 Container {
-    id: thumbnailGalleryComponent
+    id: imageThumbnailGalleryComponent
 
     // signal if gallery is scrolled to start or end
     signal listBottomReached()
@@ -33,12 +33,12 @@ Container {
 
     // properties to define how the list should be sorted
     property string listSortingKey: "timestamp"
-    property alias listSortAscending: thumbnailGalleryDataModel.sortedAscending
+    property alias listSortAscending: imageThumbnailGalleryDataModel.sortedAscending
 
     // signal to clear the gallery contents
     signal clearGallery()
     onClearGallery: {
-        thumbnailGalleryDataModel.clear();
+        imageThumbnailGalleryDataModel.clear();
     }
 
     // signal to add a new item
@@ -46,11 +46,11 @@ Container {
     signal addToGallery(variant item)
     onAddToGallery: {
         // console.log("# Adding item with ID " + item.mediaId + " of type " + item.mediaType + " to thumbnail list data model");
-        thumbnailGalleryComponent.currentItemIndex += 1;
-        thumbnailGalleryDataModel.insert({
+        imageThumbnailGalleryComponent.currentItemIndex += 1;
+        imageThumbnailGalleryDataModel.insert({
                 "mediaData": item,
                 "timestamp": item.timestamp,
-                "currentIndex": thumbnailGalleryComponent.currentItemIndex
+                "currentIndex": imageThumbnailGalleryComponent.currentItemIndex
             });
     }
 
@@ -69,10 +69,10 @@ Container {
 
     // list of Instagram popular media
     ListView {
-        id: thumbnailGallery
+        id: imageThumbnailGallery
 
         // associate the data model for the list view
-        dataModel: thumbnailGalleryDataModel
+        dataModel: imageThumbnailGalleryDataModel
 
         // define list layout as grid
         layout: GridListLayout {
@@ -166,10 +166,10 @@ Container {
 
         // add action for tap on item
         onTriggered: {
-            var currentItemData = thumbnailGalleryDataModel.data(indexPath);
+            var currentItemData = imageThumbnailGalleryDataModel.data(indexPath);
 
             // send item clicked event
-            thumbnailGalleryComponent.itemClicked(currentItemData.mediaData);
+            imageThumbnailGalleryComponent.itemClicked(currentItemData.mediaData);
         }
 
         // add action for loading additional data after scrolling to bottom
@@ -179,19 +179,19 @@ Container {
                 onAtBeginningChanged: {
                     // console.log("# onAtBeginningChanged");
                     if (scrollStateHandler.atBeginning) {
-                        thumbnailGalleryComponent.listTopReached();
+                        imageThumbnailGalleryComponent.listTopReached();
                     }
                 }
                 onAtEndChanged: {
                     // console.log("# onAtEndChanged");
                     if (scrollStateHandler.atEnd) {
-                        thumbnailGalleryComponent.listBottomReached();
+                        imageThumbnailGalleryComponent.listBottomReached();
                     }
                 }
                 onScrollingChanged: {
                     // console.log("# List is scrolling: " + scrollStateHandler.toDebugString());
                     if (! scrollStateHandler.atBeginning) {
-                        thumbnailGalleryComponent.listIsScrolling();
+                        imageThumbnailGalleryComponent.listIsScrolling();
                     }
                 }
             }
@@ -202,7 +202,7 @@ Container {
     attachedObjects: [
         // this will be the data model for the popular media list view
         GroupDataModel {
-            id: thumbnailGalleryDataModel
+            id: imageThumbnailGalleryDataModel
             sortedAscending: false
             sortingKeys: [ listSortingKey ]
 

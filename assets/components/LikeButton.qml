@@ -28,6 +28,9 @@ Container {
     // signal for external sources to press the button
     // programatically
     signal pressButton()
+    
+    // signal that button was long pressed
+    signal longPress()
 
     // flag to indicate if user has liked the media item
     // this can be set from either inside this component
@@ -128,6 +131,15 @@ Container {
             likeButtonToast.show();
         }
     }
+
+    // handle tap on custom button
+    gestureHandlers: [
+        LongPressHandler {
+            onLongPressed: {
+                likeButtonComponent.longPress();
+            }
+        }
+    ]
 
     // attach components
     attachedObjects: [

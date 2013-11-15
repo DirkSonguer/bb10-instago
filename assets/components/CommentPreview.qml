@@ -120,8 +120,7 @@ Container {
 
                             url: ListItemData.commentData.userData.profilePicture
 
-                            // set image size to maximum screen size
-                            // this will be either 768x768 (Z10) or 720x720 (all others)
+                            // set image size to small profile icons
                             preferredHeight: 50
                             preferredWidth: 50
                             minHeight: 50
@@ -172,7 +171,7 @@ Container {
             // imageDescriptionMask.imageSource = "asset:///images/mask_profile_pictures_highlight.png"
         }
 
-        // user release description or is moving
+        // user released description or is moving
         if ((event.touchType == TouchType.Up) || (event.touchType == TouchType.Cancel)) {
             commentPreviewComponent.background = Color.create(Globals.instagoDefaultBackgroundColor);
             // imageDescriptionMask.imageSource = "asset:///images/mask_profile_pictures_default.png"

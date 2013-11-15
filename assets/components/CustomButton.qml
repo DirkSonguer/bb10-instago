@@ -26,6 +26,8 @@ Container {
     property alias iconSource: customButtonIcon.imageSource
     property alias boldText: customButtonBoldLabel.text
     property alias narrowText: customButtonNarrowLabel.text
+    
+    property variant componentBackground
 
     // layout definition
     topPadding: 30
@@ -104,7 +106,23 @@ Container {
             }
         }
     }
-
+    
+    // handle ui touch elements
+    onTouch: {
+        // user pressed
+        if (event.touchType == TouchType.Down) {
+            // cache current color and set highlight
+            componentBackground = customButtonComponent.background;
+            customButtonComponent.background = Color.create(Globals.instagoHighlightBackgroundColor);
+        }
+        
+        // user released or is moving
+        if ((event.touchType == TouchType.Up) || (event.touchType == TouchType.Cancel)) {
+            // set background to cached color
+            customButtonComponent.background = componentBackground;
+        }
+    }
+    
     // handle tap on custom button
     gestureHandlers: [
         TapHandler {

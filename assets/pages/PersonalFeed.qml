@@ -37,7 +37,7 @@ NavigationPane {
             layout: DockLayout {
             }
 
-            FullsizeGallery {
+            ImageFullsizeGallery {
                 id: personalFeedThumbnails
 
                 // gallery sorted by index

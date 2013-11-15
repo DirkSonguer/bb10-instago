@@ -107,7 +107,7 @@ Page {
                     }
                 }
 
-                ThumbnailGallery {
+                ImageThumbnailGallery {
                     id: userDetailMediaThumbnails
 
                     // gallery sorted by index
@@ -173,7 +173,7 @@ Page {
         // show loader
         loadingIndicator.showLoader("Loading user data");
 
-        // console.log("# Loading current user data");
+        console.log("# Loading current user data for user " + userDetailPage.userId);
         UserRepository.getUserProfile(userDetailPage.userId, userDetailPage);
         UserRepository.getUserMedia(userDetailPage.userId, 0, userDetailPage);
     }
@@ -181,6 +181,8 @@ Page {
     // user profile data loaded and transformed
     // data is stored in "userData" variant of type InstagramUserData
     onUserDetailDataLoaded: {
+        console.log("# User detail data loaded for user " + userData.username);
+
         // hide loader and show content
         loadingIndicator.hideLoader();
         userDetailContainer.visible = true;
@@ -199,11 +201,18 @@ Page {
         userDetailFollowButton.userId = userData.userId;
         userDetailFollowButton.username = userData.username;
     }
+    
+    onUserDetailDataError: {
+        console.log("# User detail data could not be loaded. Error: " + errorData.errorMessage);
+
+        // show error message
+        loadingIndicator.showLoader(errorData.errorMessage, "Error " + errorData.errorCode);        
+    }
 
     // user media data loaded and transformed
     // data is stored in "mediaDataArray" variant as array of type InstagramMediaData
     onUserMediaDataLoaded: {
-        // console.log("# User media data loaded. Found " + mediaDataArray.length + " items");
+        console.log("# User media data loaded. Found " + mediaDataArray.length + " items");
 
         // check if the result pagination id is another one than we already have
         if (userDetailMediaThumbnails.paginationNextMaxId != paginationId) {

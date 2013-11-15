@@ -17,7 +17,7 @@ import "../global/copytext.js" as Copytext
 import WebImageView 1.0
 
 Container {
-    id: thumbnailGalleryComponent
+    id: imageFullsizeGalleryComponent
 
     // signal if gallery is scrolled to start or end
     signal listBottomReached()
@@ -36,12 +36,12 @@ Container {
 
     // properties to define how the list should be sorted
     property string listSortingKey: "timestamp"
-    property alias listSortAscending: thumbnailGalleryDataModel.sortedAscending
+    property alias listSortAscending: imageFullsizeGalleryDataModel.sortedAscending
 
     // signal to clear the gallery contents
     signal clearGallery()
     onClearGallery: {
-        thumbnailGalleryDataModel.clear();
+        imageFullsizeGalleryDataModel.clear();
     }
 
     // signal to add a new item
@@ -49,11 +49,11 @@ Container {
     signal addToGallery(variant item)
     onAddToGallery: {
         // console.log("# Adding item with ID " + item.mediaId + " of type " + item.mediaType + " to thumbnail list data model");
-        thumbnailGalleryComponent.currentItemIndex += 1;
-        thumbnailGalleryDataModel.insert({
+        imageFullsizeGalleryComponent.currentItemIndex += 1;
+        imageFullsizeGalleryDataModel.insert({
                 "mediaData": item,
                 "timestamp": item.timestamp,
-                "currentIndex": thumbnailGalleryComponent.currentItemIndex
+                "currentIndex": imageFullsizeGalleryComponent.currentItemIndex
             });
     }
 
@@ -72,10 +72,10 @@ Container {
 
     // list of Instagram popular media
     ListView {
-        id: thumbnailGallery
+        id: imageFullsizeGallery
 
         // associate the data model for the list view
-        dataModel: thumbnailGalleryDataModel
+        dataModel: imageFullsizeGalleryDataModel
         
         // define snap mode so that on the q series
         // an image is always visible full screen
@@ -102,7 +102,7 @@ Container {
                     // item positioning
                     verticalAlignment: VerticalAlignment.Fill
                     horizontalAlignment: HorizontalAlignment.Fill
-
+                    
                     // item created time
                     property string itemCreatedTime: ListItemData.mediaData.createdTime
 
@@ -171,16 +171,16 @@ Container {
                     ListItem.onActivationChanged: {
                         if (active) {
                             // set opacity to transparent, image wil lfade into the background
-                            itemImage.opacity = 0.75
+                            itemImage.opacity = 0.5
 
                             // set size so that image gets smaller on press
-                            itemImage.imageSize = Qt.thumbnailSize - 20
+                            // itemImage.imageSize = Qt.thumbnailSize - 20
                         } else {
                             // reset opacity to normal
                             itemImage.opacity = 1.0
 
                             // set size so that image resets to normal on release
-                            itemImage.imageSize = Qt.thumbnailSize
+                            // itemImage.imageSize = Qt.thumbnailSize
                         }
                     }
                 }
@@ -189,10 +189,10 @@ Container {
 
         // add action for tap on item
         onTriggered: {
-            var currentItemData = thumbnailGalleryDataModel.data(indexPath);
+            var currentItemData = imageFullsizeGalleryDataModel.data(indexPath);
 
             // send item clicked event
-            thumbnailGalleryComponent.itemClicked(currentItemData.mediaData);
+            imageFullsizeGalleryComponent.itemClicked(currentItemData.mediaData);
         }
 
         // add action for loading additional data after scrolling to bottom
@@ -202,19 +202,19 @@ Container {
                 onAtBeginningChanged: {
                     // console.log("# onAtBeginningChanged");
                     if (scrollStateHandler.atBeginning) {
-                        thumbnailGalleryComponent.listTopReached();
+                        imageFullsizeGalleryComponent.listTopReached();
                     }
                 }
                 onAtEndChanged: {
                     // console.log("# onAtEndChanged");
                     if (scrollStateHandler.atEnd) {
-                        thumbnailGalleryComponent.listBottomReached();
+                        imageFullsizeGalleryComponent.listBottomReached();
                     }
                 }
                 onScrollingChanged: {
                     // console.log("# List is scrolling: " + scrollStateHandler.toDebugString());
                     if (! scrollStateHandler.atBeginning) {
-                        thumbnailGalleryComponent.listIsScrolling();
+                        imageFullsizeGalleryComponent.listIsScrolling();
                     }
                 }
             }
@@ -225,7 +225,7 @@ Container {
     attachedObjects: [
         // this will be the data model for the popular media list view
         GroupDataModel {
-            id: thumbnailGalleryDataModel
+            id: imageFullsizeGalleryDataModel
             sortedAscending: false
             sortingKeys: [ listSortingKey ]
 
