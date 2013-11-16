@@ -17,7 +17,7 @@ components/InstagramImageView.qml
 components/LikeButton.qml
 components/LoadingIndicator.qml
 components/LocationMap.qml
-components/MediaComments.qml
+components/MediaCommentList.qml
 components/MediaDescription.qml
 components/MediaFullsizeGallery.qml
 components/MediaThumbnailGallery.qml

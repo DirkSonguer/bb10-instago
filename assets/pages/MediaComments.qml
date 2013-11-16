@@ -35,6 +35,22 @@ Page {
         // layout definition
         layout: DockLayout {
         }
+        
+        // user gallery
+        MediaCommentList {
+            id: mediaCommentsList
+            
+            // gallery sorted by index
+            listSortingKey: "currentIndex"
+            listSortAscending: true
+            
+            onItemClicked: {
+                // console.log("# Item clicked: " + userData.userId);
+                // var userDetailPage = userDetailComponent.createObject();
+                // userDetailPage.userData = userData;
+                // navigationPane.push(userDetailPage);
+            }
+        }        
 
         LoadingIndicator {
             id: loadingIndicator
@@ -68,7 +84,7 @@ Page {
 
         // iterate through data objects
         for (var index in commentDataArray) {
-            // userGalleryThumbnails.addToGallery(commentDataArray[index]);
+            mediaCommentsList.addToList(commentDataArray[index]);
         }
 
         // hide loader
