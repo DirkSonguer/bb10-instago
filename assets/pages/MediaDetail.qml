@@ -121,13 +121,13 @@ Page {
                         onClicked: {
                             mediaDetailCommentInput.visible = ! mediaDetailCommentInput.visible;
                         }
-                        
+
                         onLongPress: {
                             // console.log("# Like button long pressed");
                             var mediaCommentsPage = mediaCommentsComponent.createObject();
                             mediaCommentsPage.mediaData = mediaDetailPage.mediaData;
                             navigationPane.push(mediaCommentsPage);
-                        }                        
+                        }
                     }
                 }
 
@@ -198,6 +198,10 @@ Page {
 
                     onClicked: {
                         if (Authentication.auth.isAuthenticated()) {
+                            // console.log("# Comment preview clicked");
+                            var mediaLikesPage = mediaLikesComponent.createObject();
+                            mediaLikesPage.mediaData = mediaDetailPage.mediaData;
+                            navigationPane.push(mediaLikesPage);
                         }
                     }
                 }

@@ -22,7 +22,7 @@ Container {
     signal hideLoader()
 
     // flag to show if the loader is currently active
-    property alias loaderActive: loaderActivityIndicator.visible
+    property alias loaderActive: loadingActivityIndicator.visible
 
     // layout orientation
     layout: StackLayout {
