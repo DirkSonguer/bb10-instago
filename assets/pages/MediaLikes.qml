@@ -53,8 +53,9 @@ Page {
                 id: userGalleryThumbnails
 
                 // gallery sorted by index
+                // newest likes on top
                 listSortingKey: "currentIndex"
-                listSortAscending: true
+                listSortAscending: false
 
                 onItemClicked: {
                     // console.log("# Item clicked: " + userData.userId);

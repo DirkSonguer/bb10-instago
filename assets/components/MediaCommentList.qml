@@ -117,7 +117,7 @@ Container {
 
         // add action for tap on item
         onTriggered: {
-            var currentItemData = userThumbnailGalleryDataModel.data(indexPath);
+            var currentItemData = mediaCommentListDataModel.data(indexPath);
             
             // send item clicked event
             mediaCommentListComponent.itemClicked(currentItemData.commentData);

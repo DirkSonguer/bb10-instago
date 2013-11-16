@@ -16,6 +16,9 @@ import "../global/globals.js" as Globals
 import "../global/copytext.js" as Copytext
 import "../instagramapi/media.js" as MediaRepository
 
+// import timer type
+import QtTimer 1.0
+
 Page {
     id: mediaCommentsPage
 
@@ -42,12 +45,35 @@ Page {
             image: mediaData.mediaStandardImage
         }
 
+        // comment input container
+        CommentInput {
+            id: mediaCommentsInput
+
+            // layout definition
+            bottomMargin: 10
+            topMargin: 1
+
+            // add comment count
+            onCommentAdded: {
+                // show loader
+                loadingIndicator.showLoader("Loading comments");
+
+                // clear list
+                mediaCommentsList.clearList()
+
+                // start the timer
+                // this basically waits a second and then reloads the comment list
+                mediaCommentsTimer.start();
+            }
+        }
+
         // content container
         Container {
             // layout orientation
             layout: DockLayout {
             }
 
+            // layout definition
             topMargin: 1
 
             // user gallery
@@ -55,14 +81,22 @@ Page {
                 id: mediaCommentsList
 
                 // gallery sorted by index
+                // newest comments on top
                 listSortingKey: "currentIndex"
-                listSortAscending: true
+                listSortAscending: false
+
+                onListIsScrolling: {
+                    mediaCommentsInput.visible = false;
+                }
+
+                onListTopReached: {
+                    mediaCommentsInput.visible = true;
+                }
 
                 onItemClicked: {
                     // console.log("# Item clicked: " + userData.userId);
-                    // var userDetailPage = userDetailComponent.createObject();
-                    // userDetailPage.userData = userData;
-                    // navigationPane.push(userDetailPage);
+                    mediaCommentsInput.visible = true;
+                    mediaCommentsInput.text = "@" + commentData.userData.username;
                 }
             }
 
@@ -83,7 +117,7 @@ Page {
     // media data has changed
     // load the user comment content as soon as a media data item is given
     onMediaDataChanged: {
-        console.log("# Media data item given with ID " + mediaData.mediaId);
+        // console.log("# Media data item given with ID " + mediaData.mediaId);
 
         // show loader
         loadingIndicator.showLoader("Loading comments");
@@ -95,7 +129,7 @@ Page {
     // comment data was loaded successfully
     // data is stored in "commentDataArray" variant as array of type InstagramCommentData
     onMediaCommentsLoaded: {
-        console.log("# List of comments for media item. Found " + commentDataArray.length + " items");
+        // console.log("# List of comments for media item. Found " + commentDataArray.length + " items");
 
         // iterate through data objects
         for (var index in commentDataArray) {
@@ -113,6 +147,19 @@ Page {
         ComponentDefinition {
             id: userDetailComponent
             source: "UserDetail.qml"
+        },
+        // timer component
+        // used to delay reload after commenting
+        Timer {
+            id: mediaCommentsTimer
+            interval: 1000
+            singleShot: true
+
+            // when triggered, reload the comment data
+            onTimeout: {
+                // load comments for given media item
+                MediaRepository.getComments(mediaData.mediaId, mediaCommentsPage);
+            }
         }
     ]
 }

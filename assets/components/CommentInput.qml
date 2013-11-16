@@ -23,6 +23,9 @@ Container {
 
     // the media id is needed to add / remove comments
     property string mediaId
+    
+    // make input field accessible by external components
+    property alias text: mediaCommentInput.text
 
     // layout orientation
     layout: StackLayout {
