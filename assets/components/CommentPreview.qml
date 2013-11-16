@@ -94,7 +94,7 @@ Container {
                 Container {
                     id: commentListItem
 
-                    // layout definition
+                    // layout orientation
                     layout: StackLayout {
                         orientation: LayoutOrientation.LeftToRight
                     }
@@ -105,7 +105,7 @@ Container {
                     rightPadding: 10
 
                     Container {
-                        // layout definition
+                        // layout orientation
                         layout: DockLayout {
                         }
 

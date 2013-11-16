@@ -1,9 +1,9 @@
 // *************************************************** //
 // Comment Button Component
 //
-// This component acts as the comment button. It shows the
-// current number of comments as well as provides the
-// functionality to comment a media item.
+// This component acts as the comment button. It shows
+// the current number of comments as well as provides
+// the functionality to comment a media item.
 // *************************************************** //
 
 // import blackberry components
@@ -35,12 +35,13 @@ Container {
     // flag that holds activity status
     property bool active: false
 
-    // layout definition
+    // layout orientation
     layout: StackLayout {
         orientation: LayoutOrientation.LeftToRight
     }
     
     // actual comment button component
+    // based on the custom button component
     CustomButton {
         id: commentButton
 
@@ -73,6 +74,8 @@ Container {
         }
     }
     
+    // active flag changed
+    // adapt color to show button state
     onActiveChanged: {
         if (commentButtonComponent.active) {
             // light green color

@@ -63,7 +63,7 @@ Container {
         Qt.thumbnailSize = DisplayInfo.width;
     }
 
-    // layout definition
+    // layout orientation
     layout: DockLayout {
     }
 
@@ -74,7 +74,7 @@ Container {
         // associate the data model for the list view
         dataModel: mediaCommentListDataModel
 
-        // define list layout as grid
+        // layout orientation
         layout: StackListLayout {
             orientation: LayoutOrientation.TopToBottom
         }
@@ -88,7 +88,7 @@ Container {
                 Container {
                     id: imageGalleryItem
 
-                    // layout definition
+                    // layout orientation
                     layout: DockLayout {
                     }
 

@@ -19,7 +19,7 @@ Page {
     // id: aboutSheet
     
     Container {
-        // layout definition
+        // layout orientation
         layout: DockLayout {
         }
         

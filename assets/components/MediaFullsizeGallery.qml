@@ -66,7 +66,7 @@ Container {
         Qt.thumbnailSize = DisplayInfo.width;
     }
 
-    // layout definition
+    // layout orientation
     layout: DockLayout {
     }
 
@@ -81,7 +81,7 @@ Container {
         // an image is always visible full screen
         snapMode: SnapMode.LeadingEdge
 
-        // define list layout as grid
+        // layout orientation
         layout: StackListLayout {
             orientation: LayoutOrientation.TopToBottom
         }
@@ -95,7 +95,7 @@ Container {
                 Container {
                     id: imageGalleryItem
 
-                    // layout definition
+                    // layout orientation
                     layout: DockLayout {
                     }
 

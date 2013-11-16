@@ -63,7 +63,7 @@ Container {
         Qt.thumbnailSize = Math.round(DisplayInfo.width / 2);
     }
 
-    // layout definition
+    // layout orientation
     layout: DockLayout {
     }
 
@@ -74,7 +74,7 @@ Container {
         // associate the data model for the list view
         dataModel: mediaThumbnailGalleryDataModel
 
-        // define list layout as grid
+        // layout orientation
         layout: GridListLayout {
             orientation: LayoutOrientation.TopToBottom
             columnCount: 2
@@ -91,7 +91,7 @@ Container {
                 Container {
                     id: imageGalleryItem
 
-                    // layout definition
+                    // layout orientation
                     layout: DockLayout {
                     }
 

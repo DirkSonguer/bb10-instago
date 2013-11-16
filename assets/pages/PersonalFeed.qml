@@ -33,7 +33,7 @@ NavigationPane {
 
         // main content container
         Container {
-            // layout definition
+            // layout orientation
             layout: DockLayout {
             }
 

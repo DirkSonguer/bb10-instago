@@ -30,6 +30,7 @@ Container {
     // set initial background color
     background: Color.create(Globals.instagoDefaultBackgroundColor)
 
+    // layout orientation
     layout: DockLayout {
     }
 
@@ -65,7 +66,7 @@ Container {
         Container {
             id: locationMapPinLabel
 
-            // layout definition
+            // layout orientation
             layout: StackLayout {
                 orientation: LayoutOrientation.TopToBottom
             }

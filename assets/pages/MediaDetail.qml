@@ -29,7 +29,7 @@ Page {
 
     // main content container
     Container {
-        // layout definition
+        // layout orientation
         layout: DockLayout {
         }
 
@@ -48,7 +48,7 @@ Page {
                 // set initial visibility to false
                 visible: false
 
-                // layout definition
+                // layout orientation
                 layout: StackLayout {
                     orientation: LayoutOrientation.TopToBottom
                 }
@@ -68,7 +68,7 @@ Page {
 
                 // the like and comment button
                 Container {
-                    // layout definition
+                    // layout orientation
                     layout: StackLayout {
                         orientation: LayoutOrientation.LeftToRight
                     }

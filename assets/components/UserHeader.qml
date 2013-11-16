@@ -31,7 +31,7 @@ Container {
     // property for the user website
     property alias userwebsite: userHeaderWebsite.text
 
-    // layout definition
+    // layout orientation
     layout: StackLayout {
         orientation: LayoutOrientation.LeftToRight
     }
@@ -50,7 +50,7 @@ Container {
 
     // profile image container
     Container {
-        // layout definition
+        // layout orientation
         layout: DockLayout {
         }
         
@@ -94,7 +94,7 @@ Container {
         // layout definition
         leftMargin: 40
 
-        // layout definition
+        // layout orientation
         layout: StackLayout {
             orientation: LayoutOrientation.TopToBottom
         }

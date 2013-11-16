@@ -38,7 +38,7 @@ Container {
     // item actually has, can be "image" or "video"
     property string mediaType
 
-    // layout definition
+    // layout orientation
     layout: DockLayout {
     }
 

@@ -45,6 +45,7 @@ Page {
 
     // content container
     Container {
+        // layout orientation
         layout: DockLayout {
         }
 
@@ -59,6 +60,7 @@ Page {
             Container {
                 id: userDetailContainer
 
+                // layout orientation
                 layout: StackLayout {
                     orientation: LayoutOrientation.TopToBottom
                 }
@@ -98,7 +100,7 @@ Page {
                 Container {
                     id: userDetailFollowerAndFollowingCount
                     
-                    // layout definition
+                    // layout orientation
                     layout: StackLayout {
                         orientation: LayoutOrientation.LeftToRight
                     }

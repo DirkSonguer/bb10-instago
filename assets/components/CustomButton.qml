@@ -41,6 +41,7 @@ Container {
     Container {
         id: customButtonContainer
         
+        // layout orientation
         layout: StackLayout {
             orientation: LayoutOrientation.LeftToRight
         }

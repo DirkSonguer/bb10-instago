@@ -24,7 +24,7 @@ Page {
     property bool authenticationDone: false
 
     Container {
-        // layout definition
+        // layout orientation
         layout: DockLayout {
         }
 

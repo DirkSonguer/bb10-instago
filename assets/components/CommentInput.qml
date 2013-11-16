@@ -14,7 +14,6 @@ import bb.system 1.2
 import "../global/globals.js" as Globals
 import "../global/copytext.js" as Copytext
 import "../instagramapi/media.js" as MediaRepository
-import "../classes/authenticationhandler.js" as Authentication
 
 Container {
     id: commentInputComponent
@@ -25,11 +24,12 @@ Container {
     // the media id is needed to add / remove comments
     property string mediaId
 
-    // layout definition
+    // layout orientation
     layout: StackLayout {
         orientation: LayoutOrientation.LeftToRight
     }
 
+    // layout definition
     topPadding: 15
     rightPadding: 5
     leftPadding: 5

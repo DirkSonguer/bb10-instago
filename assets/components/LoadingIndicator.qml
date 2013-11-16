@@ -24,7 +24,7 @@ Container {
     // flag to show if the loader is currently active
     property alias loaderActive: loaderActivityIndicator.visible
 
-    // layout definition
+    // layout orientation
     layout: StackLayout {
         orientation: LayoutOrientation.TopToBottom
     }

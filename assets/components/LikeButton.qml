@@ -43,12 +43,13 @@ Container {
     // number of likes the media item has
     property alias count: likeButton.boldText
 
-    // layout definition
+    // layout orientation
     layout: StackLayout {
         orientation: LayoutOrientation.LeftToRight
     }
 
     // actual like button component
+    // based on the custom button component
     CustomButton {
         id: likeButton
 
@@ -91,7 +92,7 @@ Container {
             likeButtonComponent.userHasLiked = false;
 
             // show the message toast
-            // this will contain either the error message
+            // this will contain either the error or success message
             likeButtonToast.body = requestFeedback;
             likeButtonToast.show();
         }
@@ -118,9 +119,11 @@ Container {
         // authenticated
         if (Authentication.auth.isAuthenticated()) {
             if (! likeButtonComponent.userHasLiked) {
+                // not liked yet, add like
                 likeButtonComponent.userHasLiked = true;
                 MediaRepository.addLike(likeButtonComponent.mediaId, likeButtonComponent);
             } else {
+                // already liked,remove like
                 likeButtonComponent.userHasLiked = false;
                 MediaRepository.removeLike(likeButtonComponent.mediaId, likeButtonComponent);
             }

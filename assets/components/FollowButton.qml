@@ -37,7 +37,7 @@ Container {
     // storage for user relationship after it has been loaded
     property string userRelationship
 
-    // layout definition
+    // layout orientation
     layout: StackLayout {
         orientation: LayoutOrientation.LeftToRight
     }

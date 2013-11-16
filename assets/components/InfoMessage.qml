@@ -25,7 +25,7 @@ Container {
     // this can be used by the using page
     signal messageClicked();
     
-    // layout definition
+    // layout orientation
     layout: StackLayout {
         orientation: LayoutOrientation.TopToBottom
     }
