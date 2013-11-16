@@ -1,8 +1,8 @@
 // *************************************************** //
-// Image Thumbnail Gallery Component
+// Media Thumbnail Gallery Component
 //
 // This component shows a gallery of thumbnails with an
-// optional text field
+// optional text field.
 // This component accepts data of type InstagramMediaData
 // *************************************************** //
 

@@ -1,8 +1,10 @@
 // *************************************************** //
-// Image Description Component
+// User Header Component
 //
-// This component shows the user profile image name and
-// the image caption text
+// This component shows user metadata in a header
+// component. It's used for the user detai pages.
+// It also handles opening the browser if clicked on
+// the user website information.
 // *************************************************** //
 
 // import blackberry components
@@ -167,7 +169,9 @@ Container {
                 if (auto_trigger) {
                     trigger("bb.action.OPEN");
                 }
-                auto_trigger = true; // allow re-arming to auto-trigger
+                
+                // allow re-arming to auto-trigger
+                auto_trigger = true;
             }
         }
     ]

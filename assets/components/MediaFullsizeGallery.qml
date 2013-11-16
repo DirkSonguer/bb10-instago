@@ -1,8 +1,8 @@
 // *************************************************** //
-// Thumbnail Gallery Component
+// Media Fullsize Gallery Component
 //
-// This component shows a gallery of thumbnails with an
-// optional text field
+// This component shows a fullsize gallery of media items
+// with an optional text field.
 // This component accepts data of type InstagramMediaData
 // *************************************************** //
 

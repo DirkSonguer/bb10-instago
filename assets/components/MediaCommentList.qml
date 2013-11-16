@@ -1,9 +1,8 @@
 // *************************************************** //
-// User Thumbnail Gallery Component
+// Media Comment List Component
 //
-// This component shows a gallery of thumbnails with an
-// optional text field
-// This component accepts data of type InstagramMediaData
+// This component shows a list of comments for a given
+// media item.
 // *************************************************** //
 
 // import blackberry components
@@ -55,7 +54,7 @@ Container {
     }
 
     // signal if item was clicked
-    signal itemClicked(variant userData)
+    signal itemClicked(variant commentData)
 
     // this is a workaround to make the signals visible inside the listview item scope
     // see here for details: http://supportforums.blackberry.com/t5/Cascades-Development/QML-Accessing-variables-defined-outside-a-list-component-from/m-p/1786265#M641
@@ -113,19 +112,15 @@ Container {
                         captionMultiline: true
                     }
                 }
-
-                // tap handling
-                // if item is tapped, change opacity
-                ListItem.onActivationChanged: {
-                    if (active) {
-                    } else {
-                    }
-                }
             }
         ]
 
         // add action for tap on item
         onTriggered: {
+            var currentItemData = userThumbnailGalleryDataModel.data(indexPath);
+            
+            // send item clicked event
+            mediaCommentListComponent.itemClicked(currentItemData.commentData);
         }
 
         // add action for loading additional data after scrolling to bottom

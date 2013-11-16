@@ -31,7 +31,7 @@ Container {
 
     // loading indicator
     ActivityIndicator {
-        id: loaderActivityIndicator
+        id: loadingActivityIndicator
 
         // layout definition
         horizontalAlignment: HorizontalAlignment.Center
@@ -43,7 +43,7 @@ Container {
 
     // the actual message text
     Label {
-        id: loaderMessage
+        id: loadingMessage
 
         // text style definition
         textStyle.fontSize: FontSize.PointValue
@@ -59,20 +59,20 @@ Container {
     // show the loader with the given message
     onShowLoader: {
         // activity indicator active on page creation
-        loaderActivityIndicator.running = true;
-        loaderActivityIndicator.visible = true;
+        loadingActivityIndicator.running = true;
+        loadingActivityIndicator.visible = true;
 
         // only show message component if a message was given
         if (message) {
-            loaderMessage.text = message;
-            loaderMessage.visible = true;
+            loadingMessage.text = message;
+            loadingMessage.visible = true;
         }
     }
 
     // hide loader and message
     onHideLoader: {
-        loaderActivityIndicator.running = false;
-        loaderActivityIndicator.visible = false;
-        loaderMessage.visible = false;
+        loadingActivityIndicator.running = false;
+        loadingActivityIndicator.visible = false;
+        loadingMessage.visible = false;
     }
 }

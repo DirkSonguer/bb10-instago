@@ -1,8 +1,8 @@
 // *************************************************** //
-// Image Description Component
+// Media Description Component
 //
 // This component shows the user profile image name and
-// the image caption text
+// the media caption text
 // *************************************************** //
 
 // import blackberry components
@@ -21,8 +21,7 @@ Container {
     // signal that description has been clicked
     signal clicked()
 
-    // property for the use rprofile image
-    // given as url
+    // property for the user profile image given as url
     property alias userimage: mediaDescriptionProfileImage.url
 
     // property for the user name
@@ -31,6 +30,8 @@ Container {
     // property for the image caption
     property alias imagecaption: mediaDescriptionCaption.text
 
+    // flag if caption should be shown completely (multiline) or
+    // just as one line (false)
     property alias captionMultiline: mediaDescriptionCaption.multiline
 
     // layout orientation

@@ -38,18 +38,21 @@ Container {
     // map position needs to be set by the using component
     MapView {
         id: locationMapView
+        
+        // layout definition
         preferredWidth: DisplayInfo.width
         preferredHeight: 250
     }
 
     // container that blocks touch events on the map
     Container {
+        // layout definition
         preferredWidth: DisplayInfo.width
         preferredHeight: 250
     }
 
     // this contains the pin information
-    // its only visible if the pinText propoerty is filled by the component
+    // its only visible if the pinText property is filled by the component
     Container {
         id: locationMapPinContainer
 
