@@ -26,6 +26,9 @@ Container {
     // signal that button has been clicked
     signal clicked()
     
+    // signal that button was long pressed
+    signal longPress()
+        
     // number of comments the media item has
     property alias count: commentButton.boldText
     
@@ -80,6 +83,15 @@ Container {
         }                        
         
     }
+    
+    // handle tap on comment button
+    gestureHandlers: [
+        LongPressHandler {
+            onLongPressed: {
+                commentButtonComponent.longPress();
+            }
+        }
+    ]
 
     // attach components
     attachedObjects: [

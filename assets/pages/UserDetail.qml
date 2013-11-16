@@ -84,6 +84,7 @@ Page {
                             // hide loader and show content
                             loadingIndicator.hideLoader();
                             userDetailContainer.visible = true;
+                            userDetailUserPrivateIcon.visible = true;
 
                             // fill in blank data
                             userDetailHeader.userimage = userDetailPage.userData.profilePicture;
@@ -95,10 +96,16 @@ Page {
 
                 // the like and comment button
                 Container {
+                    id: userDetailFollowerAndFollowingCount
+                    
                     // layout definition
                     layout: StackLayout {
                         orientation: LayoutOrientation.LeftToRight
                     }
+                    
+                    // set initial visibiity to false
+                    // will be set once data is loaded
+                    visible: false
 
                     // layout definition
                     topMargin: 1
@@ -125,7 +132,7 @@ Page {
                     }
                 }
 
-                ImageThumbnailGallery {
+                MediaThumbnailGallery {
                     id: userDetailMediaThumbnails
 
                     // gallery sorted by index
@@ -173,6 +180,21 @@ Page {
                 }
             }
         }
+        
+        // icon if user is private
+        ImageView {
+            id: userDetailUserPrivateIcon
+            
+            // position and layout properties
+            verticalAlignment: VerticalAlignment.Center
+            horizontalAlignment: HorizontalAlignment.Center
+            
+            // set initial visibility to false
+            // will be set true if user is private
+            visible: false
+            
+            imageSource: "asset:///images/icons/icon_lock_dimmed.png"
+        }        
 
         LoadingIndicator {
             id: loadingIndicator
@@ -216,6 +238,7 @@ Page {
         userDetailHeader.userwebsite = userData.website;
 
         // followers and following count
+        userDetailFollowerAndFollowingCount.visible = true;
         userDetailFollowersCount.boldText = userData.numberOfFollowers;
         userDetailFollowersCount.narrowText = "followers";
         userDetailFollowingCount.boldText = userData.numberOfFollows;

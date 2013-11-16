@@ -17,7 +17,7 @@ import "../global/copytext.js" as Copytext
 import WebImageView 1.0
 
 Container {
-    id: imageFullsizeGalleryComponent
+    id: mediaFullsizeGalleryComponent
 
     // signal if gallery is scrolled to start or end
     signal listBottomReached()
@@ -36,12 +36,12 @@ Container {
 
     // properties to define how the list should be sorted
     property string listSortingKey: "timestamp"
-    property alias listSortAscending: imageFullsizeGalleryDataModel.sortedAscending
+    property alias listSortAscending: mediaFullsizeGalleryDataModel.sortedAscending
 
     // signal to clear the gallery contents
     signal clearGallery()
     onClearGallery: {
-        imageFullsizeGalleryDataModel.clear();
+        mediaFullsizeGalleryDataModel.clear();
     }
 
     // signal to add a new item
@@ -49,11 +49,11 @@ Container {
     signal addToGallery(variant item)
     onAddToGallery: {
         // console.log("# Adding item with ID " + item.mediaId + " of type " + item.mediaType + " to thumbnail list data model");
-        imageFullsizeGalleryComponent.currentItemIndex += 1;
-        imageFullsizeGalleryDataModel.insert({
+        mediaFullsizeGalleryComponent.currentItemIndex += 1;
+        mediaFullsizeGalleryDataModel.insert({
                 "mediaData": item,
                 "timestamp": item.timestamp,
-                "currentIndex": imageFullsizeGalleryComponent.currentItemIndex
+                "currentIndex": mediaFullsizeGalleryComponent.currentItemIndex
             });
     }
 
@@ -72,10 +72,10 @@ Container {
 
     // list of Instagram popular media
     ListView {
-        id: imageFullsizeGallery
+        id: mediaFullsizeGallery
 
         // associate the data model for the list view
-        dataModel: imageFullsizeGalleryDataModel
+        dataModel: mediaFullsizeGalleryDataModel
         
         // define snap mode so that on the q series
         // an image is always visible full screen
@@ -122,15 +122,15 @@ Container {
                         // when image loading is done, set image description visibility to true
                         onLoadProgressChanged: {
                             if (loadProgress == 1) {
-                                mediaDetailImageDescription.visible = true;
+                                mediaDetailMediaDescription.visible = true;
                             }
                         }
                     }
 
                     // the image description
                     // this contains user profile image, name and image caption
-                    ImageDescription {
-                        id: mediaDetailImageDescription
+                    MediaDescription {
+                        id: mediaDetailMediaDescription
 
                         // layout definition
                         verticalAlignment: VerticalAlignment.Bottom
@@ -189,10 +189,10 @@ Container {
 
         // add action for tap on item
         onTriggered: {
-            var currentItemData = imageFullsizeGalleryDataModel.data(indexPath);
+            var currentItemData = mediaFullsizeGalleryDataModel.data(indexPath);
 
             // send item clicked event
-            imageFullsizeGalleryComponent.itemClicked(currentItemData.mediaData);
+            mediaFullsizeGalleryComponent.itemClicked(currentItemData.mediaData);
         }
 
         // add action for loading additional data after scrolling to bottom
@@ -202,19 +202,19 @@ Container {
                 onAtBeginningChanged: {
                     // console.log("# onAtBeginningChanged");
                     if (scrollStateHandler.atBeginning) {
-                        imageFullsizeGalleryComponent.listTopReached();
+                        mediaFullsizeGalleryComponent.listTopReached();
                     }
                 }
                 onAtEndChanged: {
                     // console.log("# onAtEndChanged");
                     if (scrollStateHandler.atEnd) {
-                        imageFullsizeGalleryComponent.listBottomReached();
+                        mediaFullsizeGalleryComponent.listBottomReached();
                     }
                 }
                 onScrollingChanged: {
                     // console.log("# List is scrolling: " + scrollStateHandler.toDebugString());
                     if (! scrollStateHandler.atBeginning) {
-                        imageFullsizeGalleryComponent.listIsScrolling();
+                        mediaFullsizeGalleryComponent.listIsScrolling();
                     }
                 }
             }
@@ -225,7 +225,7 @@ Container {
     attachedObjects: [
         // this will be the data model for the popular media list view
         GroupDataModel {
-            id: imageFullsizeGalleryDataModel
+            id: mediaFullsizeGalleryDataModel
             sortedAscending: false
             sortingKeys: [ listSortingKey ]
 

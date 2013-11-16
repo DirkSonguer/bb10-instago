@@ -121,6 +121,13 @@ Page {
                         onClicked: {
                             mediaDetailCommentInput.visible = ! mediaDetailCommentInput.visible;
                         }
+                        
+                        onLongPress: {
+                            // console.log("# Like button long pressed");
+                            var mediaCommentsPage = mediaCommentsComponent.createObject();
+                            mediaCommentsPage.mediaData = mediaDetailPage.mediaData;
+                            navigationPane.push(mediaCommentsPage);
+                        }                        
                     }
                 }
 
@@ -149,8 +156,8 @@ Page {
 
                 // the image description
                 // this contains user profile image, name and image caption
-                ImageDescription {
-                    id: mediaDetailImageDescription
+                MediaDescription {
+                    id: mediaDetailMediaDescription
 
                     // layout definition
                     topMargin: 1
@@ -158,7 +165,7 @@ Page {
                     onClicked: {
                         // console.log("# Item clicked: " + mediaData.userData.userId);
                         var userDetailPage = userDetailComponent.createObject();
-                        userDetailPage.userId = mediaData.userData.userId;
+                        userDetailPage.userData = mediaData.userData;
                         navigationPane.push(userDetailPage);
                     }
                 }
@@ -249,9 +256,9 @@ Page {
         mediaDetailImage.url = mediaData.mediaStandardImage;
 
         // image description (profile picture, name and image description)
-        mediaDetailImageDescription.userimage = mediaData.userData.profilePicture;
-        mediaDetailImageDescription.username = mediaData.userData.username;
-        mediaDetailImageDescription.imagecaption = mediaData.caption;
+        mediaDetailMediaDescription.userimage = mediaData.userData.profilePicture;
+        mediaDetailMediaDescription.username = mediaData.userData.username;
+        mediaDetailMediaDescription.imagecaption = mediaData.caption;
 
         // likes + comments
         mediaDetailLikeButton.count = mediaData.numberOfLikes;
@@ -286,7 +293,13 @@ Page {
             id: userDetailComponent
             source: "UserDetail.qml"
         },
-        // user gallery page
+        // media comments page
+        // will be called if user long presses on comment button
+        ComponentDefinition {
+            id: mediaCommentsComponent
+            source: "MediaComments.qml"
+        },
+        // media likes page
         // will be called if user long presses on like button
         ComponentDefinition {
             id: mediaLikesComponent

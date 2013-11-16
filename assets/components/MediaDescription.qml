@@ -16,22 +16,22 @@ import "../global/copytext.js" as Copytext
 import WebImageView 1.0
 
 Container {
-    id: imageDescriptionComponent
+    id: mediaDescriptionComponent
 
     // signal that description has been clicked
     signal clicked()
 
     // property for the use rprofile image
     // given as url
-    property alias userimage: imageDescriptionProfileImage.url
+    property alias userimage: mediaDescriptionProfileImage.url
 
     // property for the user name
-    property alias username: imageDescriptionUsername.text
+    property alias username: mediaDescriptionUsername.text
 
     // property for the image caption
-    property alias imagecaption: imageDescriptionCaption.text
+    property alias imagecaption: mediaDescriptionCaption.text
 
-    property alias captionMultiline: imageDescriptionCaption.multiline
+    property alias captionMultiline: mediaDescriptionCaption.multiline
 
     // layout definition
     layout: StackLayout {
@@ -59,7 +59,7 @@ Container {
         // profile image
         // this is a web image view provided by WebViewImage
         WebImageView {
-            id: imageDescriptionProfileImage
+            id: mediaDescriptionProfileImage
 
             // align the image in the center
             verticalAlignment: VerticalAlignment.Center
@@ -74,7 +74,7 @@ Container {
 
         // mask the profile image to make it round
         ImageView {
-            id: imageDescriptionMask
+            id: mediaDescriptionMask
 
             // position and layout properties
             verticalAlignment: VerticalAlignment.Center
@@ -102,7 +102,7 @@ Container {
 
         // user name label
         Label {
-            id: imageDescriptionUsername
+            id: mediaDescriptionUsername
 
             // layout definition
             textStyle.base: SystemDefaults.TextStyles.TitleText
@@ -112,7 +112,7 @@ Container {
 
         // image caption label
         Label {
-            id: imageDescriptionCaption
+            id: mediaDescriptionCaption
 
             // layout definition
             textStyle.base: SystemDefaults.TextStyles.BodyText
@@ -126,14 +126,14 @@ Container {
     onTouch: {
         // user pressed description
         if (event.touchType == TouchType.Down) {
-            imageDescriptionComponent.background = Color.create(Globals.instagoHighlightBackgroundColor);
-            imageDescriptionMask.imageSource = "asset:///images/mask_profile_pictures_highlight.png"
+            mediaDescriptionComponent.background = Color.create(Globals.instagoHighlightBackgroundColor);
+            mediaDescriptionMask.imageSource = "asset:///images/mask_profile_pictures_highlight.png"
         }
 
         // user release description or is moving
         if ((event.touchType == TouchType.Up) || (event.touchType == TouchType.Cancel)) {
-            imageDescriptionComponent.background = Color.create(Globals.instagoDefaultBackgroundColor);
-            imageDescriptionMask.imageSource = "asset:///images/mask_profile_pictures_default.png"
+            mediaDescriptionComponent.background = Color.create(Globals.instagoDefaultBackgroundColor);
+            mediaDescriptionMask.imageSource = "asset:///images/mask_profile_pictures_default.png"
         }
     }
 
@@ -141,7 +141,7 @@ Container {
     gestureHandlers: [
         TapHandler {
             onTapped: {
-                imageDescriptionComponent.clicked();
+                mediaDescriptionComponent.clicked();
             }
         }
     ]

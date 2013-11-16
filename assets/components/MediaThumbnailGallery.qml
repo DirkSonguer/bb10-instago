@@ -14,7 +14,7 @@ import "../global/globals.js" as Globals
 import "../global/copytext.js" as Copytext
 
 Container {
-    id: imageThumbnailGalleryComponent
+    id: mediaThumbnailGalleryComponent
 
     // signal if gallery is scrolled to start or end
     signal listBottomReached()
@@ -33,12 +33,12 @@ Container {
 
     // properties to define how the list should be sorted
     property string listSortingKey: "timestamp"
-    property alias listSortAscending: imageThumbnailGalleryDataModel.sortedAscending
+    property alias listSortAscending: mediaThumbnailGalleryDataModel.sortedAscending
 
     // signal to clear the gallery contents
     signal clearGallery()
     onClearGallery: {
-        imageThumbnailGalleryDataModel.clear();
+        mediaThumbnailGalleryDataModel.clear();
     }
 
     // signal to add a new item
@@ -46,11 +46,11 @@ Container {
     signal addToGallery(variant item)
     onAddToGallery: {
         // console.log("# Adding item with ID " + item.mediaId + " of type " + item.mediaType + " to thumbnail list data model");
-        imageThumbnailGalleryComponent.currentItemIndex += 1;
-        imageThumbnailGalleryDataModel.insert({
+        mediaThumbnailGalleryComponent.currentItemIndex += 1;
+        mediaThumbnailGalleryDataModel.insert({
                 "mediaData": item,
                 "timestamp": item.timestamp,
-                "currentIndex": imageThumbnailGalleryComponent.currentItemIndex
+                "currentIndex": mediaThumbnailGalleryComponent.currentItemIndex
             });
     }
 
@@ -69,10 +69,10 @@ Container {
 
     // list of Instagram popular media
     ListView {
-        id: imageThumbnailGallery
+        id: mediaThumbnailGallery
 
         // associate the data model for the list view
-        dataModel: imageThumbnailGalleryDataModel
+        dataModel: mediaThumbnailGalleryDataModel
 
         // define list layout as grid
         layout: GridListLayout {
@@ -166,10 +166,10 @@ Container {
 
         // add action for tap on item
         onTriggered: {
-            var currentItemData = imageThumbnailGalleryDataModel.data(indexPath);
+            var currentItemData = mediaThumbnailGalleryDataModel.data(indexPath);
 
             // send item clicked event
-            imageThumbnailGalleryComponent.itemClicked(currentItemData.mediaData);
+            mediaThumbnailGalleryComponent.itemClicked(currentItemData.mediaData);
         }
 
         // add action for loading additional data after scrolling to bottom
@@ -179,19 +179,19 @@ Container {
                 onAtBeginningChanged: {
                     // console.log("# onAtBeginningChanged");
                     if (scrollStateHandler.atBeginning) {
-                        imageThumbnailGalleryComponent.listTopReached();
+                        mediaThumbnailGalleryComponent.listTopReached();
                     }
                 }
                 onAtEndChanged: {
                     // console.log("# onAtEndChanged");
                     if (scrollStateHandler.atEnd) {
-                        imageThumbnailGalleryComponent.listBottomReached();
+                        mediaThumbnailGalleryComponent.listBottomReached();
                     }
                 }
                 onScrollingChanged: {
                     // console.log("# List is scrolling: " + scrollStateHandler.toDebugString());
                     if (! scrollStateHandler.atBeginning) {
-                        imageThumbnailGalleryComponent.listIsScrolling();
+                        mediaThumbnailGalleryComponent.listIsScrolling();
                     }
                 }
             }
@@ -202,7 +202,7 @@ Container {
     attachedObjects: [
         // this will be the data model for the popular media list view
         GroupDataModel {
-            id: imageThumbnailGalleryDataModel
+            id: mediaThumbnailGalleryDataModel
             sortedAscending: false
             sortingKeys: [ listSortingKey ]
 

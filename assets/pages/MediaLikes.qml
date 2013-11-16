@@ -47,7 +47,7 @@ Page {
             onItemClicked: {
                 // console.log("# Item clicked: " + userData.userId);
                 var userDetailPage = userDetailComponent.createObject();
-                userDetailPage.userId = userData.userId;
+                userDetailPage.userData = userData;
                 navigationPane.push(userDetailPage);
             }
         }
@@ -80,7 +80,7 @@ Page {
     // media likes loaded and transformed
     // data is stored in "userDataArray" variant as array of type InstagramUserData
     onMediaLikesLoaded: {
-        // console.log("# List of user that liked image loaded. Found " + userDataArray.length + " items");
+        // console.log("# List of users that liked image loaded. Found " + userDataArray.length + " items");
 
         // iterate through data objects
         for (var index in userDataArray) {

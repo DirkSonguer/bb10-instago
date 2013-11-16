@@ -132,7 +132,7 @@ Container {
         }
     }
 
-    // handle tap on custom button
+    // handle tap on like button
     gestureHandlers: [
         LongPressHandler {
             onLongPressed: {
