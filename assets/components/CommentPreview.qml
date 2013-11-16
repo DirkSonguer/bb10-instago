@@ -1,9 +1,10 @@
 // *************************************************** //
-// Thumbnail Gallery Component
+// Comment Preview Component
 //
-// This component shows a gallery of thumbnails with an
-// optional text field
-// This component accepts data of type InstagramMediaData
+// This component shows a list of comment previews with
+// user and comment message
+// This component accepts an array of data of type
+// InstagramCommentData
 // *************************************************** //
 
 // import blackberry components
@@ -41,6 +42,7 @@ Container {
     // signal if comment data loading encountered an error
     signal mediaCommentsError(variant errorData)
 
+    // update data
     signal update()
     onUpdate: {
         // clear the list in case the list was reloaded
@@ -52,15 +54,15 @@ Container {
     }
 
     // signal to clear the gallery contents
-    signal clearGallery()
-    onClearGallery: {
+    signal clearList()
+    onClearList: {
         commentPreviewDataModel.clear();
     }
 
     // signal to add a new item
     // item is given as type InstagramCommentData
-    signal addToGallery(variant item)
-    onAddToGallery: {
+    signal addToList(variant item)
+    onAddToList: {
         // console.log("# Adding new comment items " + item.length);
 
         // iterate through data objects
@@ -112,7 +114,7 @@ Container {
                         // profile image
                         // this is a web image view provided by WebViewImage
                         WebImageView {
-                            id: imageDescriptionProfileImage
+                            id: commentPreviewProfileImage
 
                             // align the image in the center
                             verticalAlignment: VerticalAlignment.Center
@@ -129,6 +131,8 @@ Container {
 
                         // mask the profile image to make it round
                         ImageView {
+                            id: commentPreviewProfileMask
+
                             // position and layout properties
                             verticalAlignment: VerticalAlignment.Center
                             horizontalAlignment: HorizontalAlignment.Left
@@ -160,7 +164,7 @@ Container {
     // comment data was loaded successfully
     // data is stored in "commentDataArray" variant as array of type InstagramCommentData
     onMediaCommentsLoaded: {
-        commentPreviewComponent.addToGallery(commentDataArray);
+        commentPreviewComponent.addToList(commentDataArray);
     }
 
     // handle ui touch elements
@@ -168,13 +172,11 @@ Container {
         // user pressed description
         if (event.touchType == TouchType.Down) {
             commentPreviewComponent.background = Color.create(Globals.instagoHighlightBackgroundColor);
-            // imageDescriptionMask.imageSource = "asset:///images/mask_profile_pictures_highlight.png"
         }
 
         // user released description or is moving
         if ((event.touchType == TouchType.Up) || (event.touchType == TouchType.Cancel)) {
             commentPreviewComponent.background = Color.create(Globals.instagoDefaultBackgroundColor);
-            // imageDescriptionMask.imageSource = "asset:///images/mask_profile_pictures_default.png"
         }
     }
 

@@ -27,6 +27,7 @@ Container {
     // property containing the image url
     property alias url: instagramImage.url
     
+    // property to hold the loading progress
     property alias loadProgress: instagramImage.loading
 
     // property that defines the size of the image
@@ -58,6 +59,7 @@ Container {
         minWidth: instagramImageViewComponent.imageSize
 
         // set initial visibility to false
+        // will be set true once the image has been loaded
         visible: false
 
         // change loader with image if loading is complete

@@ -1,9 +1,10 @@
 // *************************************************** //
-// Like Button Component
+// Follow Button Component
 //
-// This component acts as the like button. It shows the
-// current number of likes as well as provides the
-// functionality to like / unlike a media item.
+// This component acts as the follow button. It shows the
+// current relationship state of the active user and the
+// given one. It also provides the state as external
+// property.
 // *************************************************** //
 
 // import blackberry components
@@ -71,15 +72,17 @@ Container {
     // user id is set
     // get the relationship with the given user
     onUserIdChanged: {
-        console.log("# Getting relationship status for user " + followButtonComponent.userId);
+        // console.log("# Getting relationship status for user " + followButtonComponent.userId);
 
         if (Authentication.auth.isAuthenticated()) {
             RelationshipRepository.getRelationship(followButtonComponent.userId, followButtonComponent);
         }
     }
 
+    // relationship loaded
+    // extract data and set relationship state accordingly
     onUserRelationshipLoaded: {
-        console.log("# User relationship loaded for user " + followButtonComponent.userId);
+        // console.log("# User relationship loaded for user " + followButtonComponent.userId);
 
         // check if user is not followed and not private
         if ((relationshipData.outgoing_status === "none") && (relationshipData.target_user_is_private === false)) {
@@ -123,12 +126,15 @@ Container {
 
         followButton.visible = true;
     }
-    
+
+    // username added
+    // show name on button
     onUsernameChanged: {
         followButton.narrowText += followButtonComponent.username;
     }
 
     onUserRelationshipSet: {
+        // TODO: Add approve and ignore states
         // approve successfull
         //        if (relationship == "approve") {
 

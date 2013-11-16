@@ -254,6 +254,7 @@ Page {
         // main image
         mediaDetailContainer.visible = true;
         mediaDetailImage.url = mediaData.mediaStandardImage;
+        mediaDetailImage.mediaType = mediaData.mediaType;
 
         // image description (profile picture, name and image description)
         mediaDetailMediaDescription.userimage = mediaData.userData.profilePicture;
@@ -270,7 +271,7 @@ Page {
 
         // if the image has comments, show them in the preview component
         if (mediaData.commentData.length > 0) {
-            mediaDetailCommentPreview.addToGallery(mediaData.commentData);
+            mediaDetailCommentPreview.addToList(mediaData.commentData);
             mediaDetailCommentPreview.visible = true;
             mediaDetailCommentPreview.mediaId = mediaData.mediaId;
         }

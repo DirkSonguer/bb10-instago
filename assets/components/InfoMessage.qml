@@ -45,6 +45,7 @@ Container {
         multiline: true
         
         // hide title components initially
+        // will be set true if content is added
         visible: false
     }
 
@@ -59,6 +60,7 @@ Container {
         multiline: true
 
         // hide message components initially
+        // will be set true if content is added
         visible: false
     }
     
