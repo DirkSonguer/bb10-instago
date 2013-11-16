@@ -203,11 +203,13 @@ Page {
                     visible: false
 
                     onClicked: {
+                        console.log("# Comment preview clicked");
+
                         if (Authentication.auth.isAuthenticated()) {
-                            // console.log("# Comment preview clicked");
-                            var mediaLikesPage = mediaLikesComponent.createObject();
-                            mediaLikesPage.mediaData = mediaDetailPage.mediaData;
-                            navigationPane.push(mediaLikesPage);
+                            console.log("# Comment preview clicked");
+                            var mediaCommentsPage = mediaCommentsComponent.createObject();
+                            mediaCommentsPage.mediaData = mediaDetailPage.mediaData;
+                            navigationPane.push(mediaCommentsPage);
                         }
                     }
                 }

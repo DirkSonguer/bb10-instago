@@ -119,6 +119,13 @@ Page {
                         layoutProperties: StackLayoutProperties {
                             spaceQuota: 1.0
                         }
+                        
+                        // show followers list
+                        onClicked: {
+                            var userFollowersPage = userFollowersComponent.createObject();
+                            userFollowersPage.userData = userData;
+                            navigationPane.push(userFollowersPage);
+                        }
 
                         // layout definition
                         rightMargin: 1
@@ -288,6 +295,12 @@ Page {
         ComponentDefinition {
             id: detailImageComponent
             source: "MediaDetail.qml"
+        },
+        // follower list page
+        // will be called if user clicks on followers button
+        ComponentDefinition {
+            id: userFollowersComponent
+            source: "UserFollowers.qml"
         },
         // system toast
         // is used for messages

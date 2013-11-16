@@ -179,7 +179,8 @@ Container {
             commentPreviewComponent.background = Color.create(Globals.instagoDefaultBackgroundColor);
         }
     }
-
+    
+    // TODO: This does not work for some reason
     // handle tap on comment preview component
     gestureHandlers: [
         TapHandler {

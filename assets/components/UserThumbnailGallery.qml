@@ -23,7 +23,7 @@ Container {
 
     // property that holds the id of the next image
     // this is given by Instagram for easy pagination
-    property string paginationNextMaxId: ""
+    property string cursorId: ""
 
     // property that holds the current index
     // this is incremented as new items are added
