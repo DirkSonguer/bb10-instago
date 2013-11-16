@@ -41,6 +41,8 @@ Page {
     // this is filled by the calling page
     property string userId
 
+    property variant userData
+
     // content container
     Container {
         layout: DockLayout {
@@ -73,6 +75,22 @@ Page {
 
                     // layout definition
                     topMargin: 1
+
+                    // check relationship status
+                    onUserRelationshipChanged: {
+                        console.log("# Relationship is " + userRelationship);
+
+                        if ((userRelationship == "private") || (userRelationship == "requested")) {
+                            // hide loader and show content
+                            loadingIndicator.hideLoader();
+                            userDetailContainer.visible = true;
+
+                            // fill in blank data
+                            userDetailHeader.userimage = userDetailPage.userData.profilePicture;
+                            userDetailHeader.username = "@" + userDetailPage.userData.username;
+                            userDetailHeader.userfullname = "User is private";
+                        }
+                    }
                 }
 
                 // the like and comment button
@@ -136,18 +154,18 @@ Page {
                 // calculate current view port and component height
                 var userMediaListHeight = Math.ceil(userDetailMediaThumbnails.currentItemIndex / 2) * (Math.round(DisplayInfo.width / 2));
                 var currentVisibleArea = viewableArea.height + viewableArea.y;
-                
+
                 // check if view port is at the bottom of the component height
                 if (currentVisibleArea > userMediaListHeight) {
                     // console.log("# List bottom reached");
-                    
+
                     // check if there is another page available
                     // if so, load the data
                     if ((userDetailMediaThumbnails.paginationNextMaxId != "") && (userDetailMediaThumbnails.paginationNextMaxId != 0)) {
                         // console.log("# List bottom reached. Next pagination id is " + userDetailMediaThumbnails.paginationNextMaxId);
                         UserRepository.getUserMedia(userDetailPage.userId, userDetailMediaThumbnails.paginationNextMaxId, userDetailPage);
                         userDetailMediaThumbnails.paginationNextMaxId = 0;
-                        
+
                         // show toast that new images are loading
                         userDetailToast.body = "Loading more images..";
                         userDetailToast.show();
@@ -169,19 +187,23 @@ Page {
         }
     }
 
-    onUserIdChanged: {
+    onUserDataChanged: {
         // show loader
         loadingIndicator.showLoader("Loading user data");
 
-        console.log("# Loading current user data for user " + userDetailPage.userId);
-        UserRepository.getUserProfile(userDetailPage.userId, userDetailPage);
-        UserRepository.getUserMedia(userDetailPage.userId, 0, userDetailPage);
+        console.log("# Loading current user data for user " + userDetailPage.userData.userId);
+        UserRepository.getUserProfile(userDetailPage.userData.userId, userDetailPage);
+        UserRepository.getUserMedia(userDetailPage.userData.userId, 0, userDetailPage);
+        userDetailFollowButton.userId = userDetailPage.userData.userId;
     }
 
     // user profile data loaded and transformed
     // data is stored in "userData" variant of type InstagramUserData
     onUserDetailDataLoaded: {
         console.log("# User detail data loaded for user " + userData.username);
+
+        // update page userData object with full data
+        userDetailPage.userData = userData;
 
         // hide loader and show content
         loadingIndicator.hideLoader();
@@ -193,26 +215,29 @@ Page {
         userDetailHeader.userfullname = userData.fullName;
         userDetailHeader.userwebsite = userData.website;
 
+        // followers and following count
         userDetailFollowersCount.boldText = userData.numberOfFollowers;
         userDetailFollowersCount.narrowText = "followers";
         userDetailFollowingCount.boldText = userData.numberOfFollows;
         userDetailFollowingCount.narrowText = "following";
 
-        userDetailFollowButton.userId = userData.userId;
+        // add username to follow button
         userDetailFollowButton.username = userData.username;
     }
-    
+
+    // user profile data could not be loaded or transformed
+    // show error message
     onUserDetailDataError: {
-        console.log("# User detail data could not be loaded. Error: " + errorData.errorMessage);
+        // console.log("# User detail data could not be loaded. Error: " + errorData.errorMessage);
 
         // show error message
-        loadingIndicator.showLoader(errorData.errorMessage, "Error " + errorData.errorCode);        
+        loadingIndicator.showLoader(errorData.errorMessage, "Error " + errorData.errorCode);
     }
 
     // user media data loaded and transformed
     // data is stored in "mediaDataArray" variant as array of type InstagramMediaData
     onUserMediaDataLoaded: {
-        console.log("# User media data loaded. Found " + mediaDataArray.length + " items");
+        // console.log("# User media data loaded. Found " + mediaDataArray.length + " items");
 
         // check if the result pagination id is another one than we already have
         if (userDetailMediaThumbnails.paginationNextMaxId != paginationId) {

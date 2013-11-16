@@ -18,19 +18,15 @@ Qt.include(dirPaths.assetPath + "structures/userdata.js");
 // Second parameter is the id of the calling page, which will receive the
 // userDetailDataLoaded() signal
 function getUserProfile(userId, callingPage) {
-	console.log("# Loading user profile for user " + userId);
+	// console.log("# Loading user profile for user " + userId);
 
 	var req = new XMLHttpRequest();
 	req.onreadystatechange = function() {
-		console.log("# Loading ready state loaded");
-
 		// this handles the result for each ready state
 		var jsonObject = network.handleHttpResult(req);
 
 		// jsonObject contains either false or the http result as object
 		if (jsonObject) {
-			console.log("# JSON object found");
-
 			// prepare transformator and return object
 			var userTransformator = new UserTransformator();
 			var userItem = new InstagramUserData();
@@ -38,10 +34,9 @@ function getUserProfile(userId, callingPage) {
 			// get user object and store it into return object
 			userItem = userTransformator.getUserDataFromObject(jsonObject.data);
 
-			console.log("# Done loading user profile");
+			// console.log("# Done loading user profile");
 			callingPage.userDetailDataLoaded(userItem);
 		} else {
-			console.log("# Could not handle network result");
 			// normally there is no need for error handling here the normal
 			// user page will execute getRelationship, which will handle the
 			// error states however this method is also used for loading the

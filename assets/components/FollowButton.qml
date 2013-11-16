@@ -71,13 +71,15 @@ Container {
     // user id is set
     // get the relationship with the given user
     onUserIdChanged: {
+        console.log("# Getting relationship status for user " + followButtonComponent.userId);
+
         if (Authentication.auth.isAuthenticated()) {
             RelationshipRepository.getRelationship(followButtonComponent.userId, followButtonComponent);
         }
     }
 
     onUserRelationshipLoaded: {
-        // console.log("# User relationship loaded for user " + followButtonComponent.userId);
+        console.log("# User relationship loaded for user " + followButtonComponent.userId);
 
         // check if user is not followed and not private
         if ((relationshipData.outgoing_status === "none") && (relationshipData.target_user_is_private === false)) {
@@ -120,6 +122,10 @@ Container {
         }
 
         followButton.visible = true;
+    }
+    
+    onUsernameChanged: {
+        followButton.narrowText += followButtonComponent.username;
     }
 
     onUserRelationshipSet: {
