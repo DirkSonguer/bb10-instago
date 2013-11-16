@@ -1,5 +1,5 @@
 // *************************************************** //
-// User Followers Page
+// User Following Page
 //
 // The user folloers page shows a gallery of users that
 // follow the current user.
@@ -18,13 +18,13 @@ import "../global/copytext.js" as Copytext
 import "../instagramapi/relationships.js" as RelationshipRepository
 
 Page {
-    id: userFollowersPage
+    id: userFollowingPage
 
-    // signal if user follower data loading is complete
-    signal userFollowerDataLoaded(variant userDataArray, string cursorId)
-
-    // signal if user follower data loading encountered an error
-    signal userFollowerDataError(variant errorData)
+    // signal if user following data loading is complete
+    signal userFollowingDataLoaded(variant userDataArray, string cursorId)
+    
+    // signal if user following data loading encountered an error
+    signal userFollowingDataError(variant errorData)
 
     // property containing the user data
     // this is filled by the calling page
@@ -39,7 +39,7 @@ Page {
 
         // likes header
         PageHeader {
-            headline: "Followers"
+            headline: "Following"
             image: userData.profilePicture
         }
 
@@ -51,7 +51,7 @@ Page {
 
             // user gallery
             UserThumbnailGallery {
-                id: userFollowersGallery
+                id: userFollowingGallery
 
                 // gallery sorted by index
                 // newest likes on top
@@ -70,9 +70,9 @@ Page {
                 onListBottomReached: {
                     if ((cursorId != "") && (cursorId != 0)) {
                         // console.log("# List bottom reached. Next cursor id is " + cursorId);
-                        RelationshipRepository.getUserFollowers(userData.userId, cursorId, userFollowersPage);
-                        userFollowersToast.body = "Loading more users..";
-                        userFollowersToast.show();
+                        RelationshipRepository.getUserFollowing(userData.userId, cursorId, userFollowingPage);
+                        userFollowingToast.body = "Loading more users..";
+                        userFollowingToast.show();
                     }
                 }
             }
@@ -97,23 +97,23 @@ Page {
         // console.log("# User data item given with ID " + userData.userId);
 
         // show loader
-        loadingIndicator.showLoader("Loading followers");
+        loadingIndicator.showLoader("Loading Following");
 
         // load likes for given media item
-        RelationshipRepository.getUserFollowers(userData.userId, 0, userFollowersPage);
+        RelationshipRepository.getUserFollowing(userData.userId, 0, userFollowingPage);
     }
 
     // media likes loaded and transformed
     // data is stored in "userDataArray" variant as array of type InstagramUserData
-    onUserFollowerDataLoaded: {
-        // console.log("# List of users that the current user follows loaded. Found " + userDataArray.length + " items with cursor id " + cursorId);
+    onUserFollowingDataLoaded: {
+        // console.log("# List of users that follow the current user. Found " + userDataArray.length + " items with cursor id " + cursorId);
 
         // set new cursor id
-        userFollowersGallery.cursorId = cursorId;
+        userFollowingGallery.cursorId = cursorId;
 
         // iterate through data objects
         for (var index in userDataArray) {
-            userFollowersGallery.addToGallery(userDataArray[index]);
+            userFollowingGallery.addToGallery(userDataArray[index]);
         }
 
         // hide loader
@@ -131,7 +131,7 @@ Page {
         // system toast
         // is used for messages
         SystemToast {
-            id: userFollowersToast
+            id: userFollowingToast
             position: SystemUiPosition.MiddleCenter
         }
     ]

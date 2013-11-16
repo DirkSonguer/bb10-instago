@@ -120,15 +120,15 @@ Page {
                             spaceQuota: 1.0
                         }
                         
+                        // layout definition
+                        rightMargin: 1
+                        
                         // show followers list
                         onClicked: {
                             var userFollowersPage = userFollowersComponent.createObject();
                             userFollowersPage.userData = userData;
                             navigationPane.push(userFollowersPage);
                         }
-
-                        // layout definition
-                        rightMargin: 1
                     }
 
                     CustomButton {
@@ -137,6 +137,13 @@ Page {
                         // position and layout properties
                         layoutProperties: StackLayoutProperties {
                             spaceQuota: 1.0
+                        }
+                        
+                        // show followers list
+                        onClicked: {
+                            var userFollowingPage = userFollowingComponent.createObject();
+                            userFollowingPage.userData = userData;
+                            navigationPane.push(userFollowingPage);
                         }
                     }
                 }
@@ -301,6 +308,12 @@ Page {
         ComponentDefinition {
             id: userFollowersComponent
             source: "UserFollowers.qml"
+        },
+        // following list page
+        // will be called if user clicks on following button
+        ComponentDefinition {
+            id: userFollowingComponent
+            source: "UserFollowing.qml"
         },
         // system toast
         // is used for messages

@@ -122,6 +122,11 @@ function getUserFollowing(userId, cursorId, callingPage) {
 	var instagramUserdata = auth.getStoredInstagramData();
 	var url = instagramkeys.instagramAPIUrl + "/v1/users/" + userId + "/follows?access_token=" + instagramUserdata["access_token"];
 
+	// if a cursor id was given, add it to the request
+	if (cursorId !== 0) {
+		url += "&cursor=" + cursorId;
+	}
+
 	req.open("GET", url, true);
 	req.send();
 }
