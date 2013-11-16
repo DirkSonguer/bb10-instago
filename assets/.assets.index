@@ -1,5 +1,5 @@
 1
-68
+69
 classes/authenticationhandler.js
 classes/commenttransformator.js
 classes/locationtransformator.js
@@ -21,6 +21,7 @@ components/MediaCommentList.qml
 components/MediaDescription.qml
 components/MediaFullsizeGallery.qml
 components/MediaThumbnailGallery.qml
+components/PageHeader.qml
 components/UserHeader.qml
 components/UserThumbnailGallery.qml
 global/copytext.js

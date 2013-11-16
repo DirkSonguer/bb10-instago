@@ -32,36 +32,49 @@ Page {
 
     // main content container
     Container {
-        // layout orientation
-        layout: DockLayout {
+        layout: StackLayout {
+            orientation: LayoutOrientation.TopToBottom
         }
 
-        // user gallery
-        UserThumbnailGallery {
-            id: userGalleryThumbnails
+        // likes header
+        PageHeader {
+            headline: "Likes"
+            image: mediaData.mediaStandardImage
+        }
 
-            // gallery sorted by index
-            listSortingKey: "currentIndex"
-            listSortAscending: true
-
-            onItemClicked: {
-                // console.log("# Item clicked: " + userData.userId);
-                var userDetailPage = userDetailComponent.createObject();
-                userDetailPage.userData = userData;
-                navigationPane.push(userDetailPage);
+        // content container
+        Container {
+            // layout orientation
+            layout: DockLayout {
             }
-        }
 
-        LoadingIndicator {
-            id: loadingIndicator
-            verticalAlignment: VerticalAlignment.Center
-            horizontalAlignment: HorizontalAlignment.Center
-        }
+            // user gallery
+            UserThumbnailGallery {
+                id: userGalleryThumbnails
 
-        InfoMessage {
-            id: infoMessage
-            verticalAlignment: VerticalAlignment.Center
-            horizontalAlignment: HorizontalAlignment.Center
+                // gallery sorted by index
+                listSortingKey: "currentIndex"
+                listSortAscending: true
+
+                onItemClicked: {
+                    // console.log("# Item clicked: " + userData.userId);
+                    var userDetailPage = userDetailComponent.createObject();
+                    userDetailPage.userData = userData;
+                    navigationPane.push(userDetailPage);
+                }
+            }
+
+            LoadingIndicator {
+                id: loadingIndicator
+                verticalAlignment: VerticalAlignment.Center
+                horizontalAlignment: HorizontalAlignment.Center
+            }
+
+            InfoMessage {
+                id: infoMessage
+                verticalAlignment: VerticalAlignment.Center
+                horizontalAlignment: HorizontalAlignment.Center
+            }
         }
     }
 

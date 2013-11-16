@@ -32,36 +32,51 @@ Page {
 
     // main content container
     Container {
-        // layout orientation
-        layout: DockLayout {
+        layout: StackLayout {
+            orientation: LayoutOrientation.TopToBottom
         }
-        
-        // user gallery
-        MediaCommentList {
-            id: mediaCommentsList
-            
-            // gallery sorted by index
-            listSortingKey: "currentIndex"
-            listSortAscending: true
-            
-            onItemClicked: {
-                // console.log("# Item clicked: " + userData.userId);
-                // var userDetailPage = userDetailComponent.createObject();
-                // userDetailPage.userData = userData;
-                // navigationPane.push(userDetailPage);
+
+        // comments header
+        PageHeader {
+            headline: "Comments"
+            image: mediaData.mediaStandardImage
+        }
+
+        // content container
+        Container {
+            // layout orientation
+            layout: DockLayout {
             }
-        }        
 
-        LoadingIndicator {
-            id: loadingIndicator
-            verticalAlignment: VerticalAlignment.Center
-            horizontalAlignment: HorizontalAlignment.Center
-        }
+            topMargin: 1
 
-        InfoMessage {
-            id: infoMessage
-            verticalAlignment: VerticalAlignment.Center
-            horizontalAlignment: HorizontalAlignment.Center
+            // user gallery
+            MediaCommentList {
+                id: mediaCommentsList
+
+                // gallery sorted by index
+                listSortingKey: "currentIndex"
+                listSortAscending: true
+
+                onItemClicked: {
+                    // console.log("# Item clicked: " + userData.userId);
+                    // var userDetailPage = userDetailComponent.createObject();
+                    // userDetailPage.userData = userData;
+                    // navigationPane.push(userDetailPage);
+                }
+            }
+
+            LoadingIndicator {
+                id: loadingIndicator
+                verticalAlignment: VerticalAlignment.Center
+                horizontalAlignment: HorizontalAlignment.Center
+            }
+
+            InfoMessage {
+                id: infoMessage
+                verticalAlignment: VerticalAlignment.Center
+                horizontalAlignment: HorizontalAlignment.Center
+            }
         }
     }
 
