@@ -59,7 +59,7 @@ Container {
     // this is a workaround to make the signals visible inside the listview item scope
     // see here for details: http://supportforums.blackberry.com/t5/Cascades-Development/QML-Accessing-variables-defined-outside-a-list-component-from/m-p/1786265#M641
     onCreationCompleted: {
-        Qt.thumbnailSize = DisplayInfo.width;
+        Qt.fullDisplaySize = DisplayInfo.width;
     }
 
     // layout orientation
@@ -100,8 +100,8 @@ Container {
 
                     MediaDescription {
                         // layout definition
-                        preferredWidth: Qt.thumbnailSize
-                        minWidth: Qt.thumbnailSize
+                        preferredWidth: Qt.fullDisplaySize
+                        minWidth: Qt.fullDisplaySize
 
                         // image description (profile picture, name and image description)
                         userimage: ListItemData.commentData.userData.profilePicture

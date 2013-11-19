@@ -60,7 +60,7 @@ Container {
     // this is a workaround to make the signals visible inside the listview item scope
     // see here for details: http://supportforums.blackberry.com/t5/Cascades-Development/QML-Accessing-variables-defined-outside-a-list-component-from/m-p/1786265#M641
     onCreationCompleted: {
-        Qt.thumbnailSize = Math.round(DisplayInfo.width / 2);
+        Qt.thirdDisplaySize = Math.round(DisplayInfo.width / 3);
     }
 
     // layout orientation
@@ -77,7 +77,7 @@ Container {
         // layout orientation
         layout: GridListLayout {
             orientation: LayoutOrientation.TopToBottom
-            columnCount: 2
+            columnCount: 3
             verticalCellSpacing: 1
             horizontalCellSpacing: 1
         }
@@ -108,7 +108,7 @@ Container {
                         horizontalAlignment: HorizontalAlignment.Center
                         
                         // set size, type and url
-                        imageSize: Qt.thumbnailSize
+                        imageSize: Qt.thirdDisplaySize
                         mediaType: "image"
                         url: ListItemData.userData.profilePicture
 					}
@@ -122,10 +122,10 @@ Container {
                         horizontalAlignment: HorizontalAlignment.Center
                         
                         // set image size to maximum profile picture size
-                        preferredHeight: Qt.thumbnailSize
-                        preferredWidth: Qt.thumbnailSize
-                        minHeight: Qt.thumbnailSize
-                        minWidth: Qt.thumbnailSize
+                        preferredHeight: Qt.thirdDisplaySize
+                        preferredWidth: Qt.thirdDisplaySize
+                        minHeight: Qt.thirdDisplaySize
+                        minWidth: Qt.thirdDisplaySize
                         
                         imageSource: "asset:///images/mask_profile_pictures_default.png"
                     }					
@@ -135,8 +135,8 @@ Container {
                     Container {
                         // layout definition
                         verticalAlignment: VerticalAlignment.Bottom
-                        preferredWidth: Qt.thumbnailSize
-                        minWidth: Qt.thumbnailSize
+                        preferredWidth: Qt.thirdDisplaySize
+                        minWidth: Qt.thirdDisplaySize
                         topPadding: 2
                         leftPadding: 5
                         bottomPadding: 2
@@ -151,7 +151,7 @@ Container {
                             text: "@" + ListItemData.userData.username
 
                             // layout definition
-                            textStyle.base: SystemDefaults.TextStyles.BodyText
+                            textStyle.base: SystemDefaults.TextStyles.SmallText
                             textStyle.fontWeight: FontWeight.W100
                             textStyle.textAlign: TextAlign.Left
                         }
@@ -165,21 +165,21 @@ Container {
                             itemImage.opacity = 0.75
 
                             // set size so that image gets smaller on press
-                            itemImage.imageSize = Qt.thumbnailSize - 20
-                            imageDescriptionMask.preferredHeight = Qt.thumbnailSize - 20
-                            imageDescriptionMask.preferredWidth = Qt.thumbnailSize - 20
-                            imageDescriptionMask.minHeight = Qt.thumbnailSize - 20
-                            imageDescriptionMask.minWidth = Qt.thumbnailSize - 20
+                            itemImage.imageSize = Qt.thirdDisplaySize - 20
+                            imageDescriptionMask.preferredHeight = Qt.thirdDisplaySize - 20
+                            imageDescriptionMask.preferredWidth = Qt.thirdDisplaySize - 20
+                            imageDescriptionMask.minHeight = Qt.thirdDisplaySize - 20
+                            imageDescriptionMask.minWidth = Qt.thirdDisplaySize - 20
                         } else {
                             // reset opacity to normal
                             itemImage.opacity = 1.0
 
                             // set size so that image resets to normal on release
-                            itemImage.imageSize = Qt.thumbnailSize
-                            imageDescriptionMask.preferredHeight = Qt.thumbnailSize
-                            imageDescriptionMask.preferredWidth = Qt.thumbnailSize
-                            imageDescriptionMask.minHeight = Qt.thumbnailSize
-                            imageDescriptionMask.minWidth = Qt.thumbnailSize
+                            itemImage.imageSize = Qt.thirdDisplaySize
+                            imageDescriptionMask.preferredHeight = Qt.thirdDisplaySize
+                            imageDescriptionMask.preferredWidth = Qt.thirdDisplaySize
+                            imageDescriptionMask.minHeight = Qt.thirdDisplaySize
+                            imageDescriptionMask.minWidth = Qt.thirdDisplaySize
                         }
                     }
                 }

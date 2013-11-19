@@ -63,7 +63,7 @@ Container {
     // this is a workaround to make the signals visible inside the listview item scope
     // see here for details: http://supportforums.blackberry.com/t5/Cascades-Development/QML-Accessing-variables-defined-outside-a-list-component-from/m-p/1786265#M641
     onCreationCompleted: {
-        Qt.thumbnailSize = DisplayInfo.width;
+        Qt.fullDisplaySize = DisplayInfo.width;
     }
 
     // layout orientation
@@ -115,7 +115,7 @@ Container {
                         horizontalAlignment: HorizontalAlignment.Center
 
                         // set size, type and url
-                        imageSize: Qt.thumbnailSize
+                        imageSize: Qt.fullDisplaySize
                         mediaType: ListItemData.mediaData.mediaType
                         url: ListItemData.mediaData.mediaStandardImage
 
@@ -134,8 +134,8 @@ Container {
 
                         // layout definition
                         verticalAlignment: VerticalAlignment.Bottom
-                        preferredWidth: Qt.thumbnailSize
-                        minWidth: Qt.thumbnailSize
+                        preferredWidth: Qt.fullDisplaySize
+                        minWidth: Qt.fullDisplaySize
 
                         // image description (profile picture, name and image description)
                         userimage: ListItemData.mediaData.userData.profilePicture
@@ -157,8 +157,8 @@ Container {
                     Container {
                         // layout definition
                         verticalAlignment: VerticalAlignment.Bottom
-                        preferredWidth: Qt.thumbnailSize
-                        minWidth: Qt.thumbnailSize
+                        preferredWidth: Qt.fullDisplaySize
+                        minWidth: Qt.fullDisplaySize
                         preferredHeight: 5
                         maxHeight: 5
 
@@ -174,13 +174,13 @@ Container {
                             itemImage.opacity = 0.5
 
                             // set size so that image gets smaller on press
-                            // itemImage.imageSize = Qt.thumbnailSize - 20
+                            itemImage.imageSize = Qt.fullDisplaySize - 20
                         } else {
                             // reset opacity to normal
                             itemImage.opacity = 1.0
 
                             // set size so that image resets to normal on release
-                            // itemImage.imageSize = Qt.thumbnailSize
+                            itemImage.imageSize = Qt.fullDisplaySize
                         }
                     }
                 }
