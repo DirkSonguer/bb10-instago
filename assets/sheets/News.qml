@@ -82,7 +82,7 @@ Page {
             // close sheet when pressed
             // note that the sheet is defined in the main.qml
             onTriggered: {
-                aboutSheet.close();
+                newsSheet.close();
             }
         }
     ]
