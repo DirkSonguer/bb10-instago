@@ -70,7 +70,6 @@ function getMediaSearchResults(searchTags, paginationId, callingPage) {
 		url += "&max_id=" + paginationId;
 	}
 	
-	console.log("# asset " + url);
 	req.open("GET", url, true);
 	req.send();
 }
@@ -119,7 +118,6 @@ function getUserSearchResults(searchTags, callingPage) {
 	var instagramUserdata = auth.getStoredInstagramData();
 	var url = instagramkeys.instagramAPIUrl + "/v1/users/search?q=" + searchTags + "&access_token=" + instagramUserdata["access_token"];
 
-	console.log("# asset " + url);
 	req.open("GET", url, true);
 	req.send();
 }

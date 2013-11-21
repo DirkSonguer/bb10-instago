@@ -26,6 +26,9 @@ Container {
     // signal if media search data loading encountered an error
     signal searchMediaDataError(variant errorData)
 
+    // signal that next media page should be loaded
+    signal nextMediaPage(string paginationNextMaxId)
+
     // signal if user search data loading is complete
     signal searchUserDataLoaded(variant userDataArray)
 
@@ -37,6 +40,9 @@ Container {
 
     // flag to search for media or users
     property string searchType: "media"
+    
+    // property that contains the current search term
+    property string currentSearchTerm: ""
 
     // make input field properties accessible by external components
     property alias text: searchInput.text
@@ -73,9 +79,9 @@ Container {
                         // load users with given search terms
                         SearchRepository.getUserSearchResults(submitter.text, searchInputComponent);
                     }
-
-                    // clear and hide the comment list, hide the input field and show the loader
-                    searchInput.text = "";
+                    
+                    // store current search term
+                    searchInputComponent.currentSearchTerm = submitter.text;
                     
                     // signal that loading process has been triggered
                     searchInputComponent.triggered();
@@ -92,5 +98,10 @@ Container {
             // send the submit signal to the text input field
             searchInput.input.submitted(searchInput);
         }
+    }
+    
+    // load next set of media items for current search
+    onNextMediaPage: {
+        SearchRepository.getMediaSearchResults(searchInputComponent.currentSearchTerm, paginationNextMaxId, searchInputComponent);
     }
 }

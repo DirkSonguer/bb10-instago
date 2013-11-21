@@ -7,6 +7,7 @@
 
 // import blackberry components
 import bb.cascades 1.2
+import bb.system 1.2
 
 // set import directory for components
 import "../components"
@@ -99,42 +100,104 @@ NavigationPane {
                         // check if search results are available
                         // if not, show default message
                         if (mediaDataArray.length == 0) {
-                            infoMessage.showMessage(Copytext.instagoSearchNoItemsFound, "");
-                        }
+                            // hide gallery components
+                            searchMediaGallery.visible = false;
+                            searchUserGallery.visible = false;
 
-                        if (searchMediaGallery.paginationNextMaxId != paginationId) {
-                            // set new pagination id to component
-                            searchMediaGallery.paginationNextMaxId = paginationId;
+                            // hide loader
+                            loadingIndicator.hideLoader();
 
-                            // iterate through data objects
-                            for (var index in mediaDataArray) {
-                                // console.log("# Adding item with ID " + data[index].mediaId + " to gallery list data model");
-                                searchMediaGallery.addToGallery(mediaDataArray[index]);
+                            // show message
+                            infoMessage.showMessage(Copytext.instagoSearchNoItemsFound, "Sorry");
+                        } else {
+                            if (searchMediaGallery.paginationNextMaxId != paginationId) {
+                                // set new pagination id to component
+                                searchMediaGallery.paginationNextMaxId = paginationId;
+
+                                // iterate through data objects
+                                for (var index in mediaDataArray) {
+                                    // console.log("# Adding item with ID " + data[index].mediaId + " to gallery list data model");
+                                    searchMediaGallery.addToGallery(mediaDataArray[index]);
+                                }
                             }
-                        }
 
-                        // hide loading indicator & show gallery
-                        loadingIndicator.hideLoader();
-                        searchMediaGallery.visible = true;
+                            // hide loading indicator & show gallery
+                            loadingIndicator.hideLoader();
+                            searchMediaGallery.visible = true;
+                        }
                     }
 
                     // user search items loaded
                     // show the user gallery accordingly
                     onSearchUserDataLoaded: {
+                        // check if search results are available
+                        // if not, show default message
+                        if (userDataArray.length == 0) {
+                            // hide gallery components
+                            searchMediaGallery.visible = false;
+                            searchUserGallery.visible = false;
 
+                            // hide loader
+                            loadingIndicator.hideLoader();
+
+                            // show message
+                            infoMessage.showMessage(Copytext.instagoSearchNoItemsFound, "Sorry");
+                        } else {
+                            // iterate through data objects
+                            for (var index in userDataArray) {
+                                // console.log("# Adding item with ID " + data[index].mediaId + " to gallery list data model");
+                                searchUserGallery.addToGallery(userDataArray[index]);
+                            }
+
+                            // hide loading indicator & show gallery
+                            loadingIndicator.hideLoader();
+                            searchUserGallery.visible = true;
+                        }
                     }
                 }
 
                 MediaThumbnailGallery {
                     id: searchMediaGallery
 
+                    // set initial visibility to false
+                    // will be set visible once data is loaded
                     visible: false
+
+                    // load detail media item page
+                    onItemClicked: {
+                        // console.log("# Item clicked: " + mediaData.mediaId);
+                        var detailImagePage = detailImageComponent.createObject();
+                        detailImagePage.mediaData = mediaData;
+                        navigationPane.push(detailImagePage);
+                    }
+
+                    // load next set of data
+                    onListBottomReached: {
+                        if ((paginationNextMaxId != "") && (paginationNextMaxId != 0)) {
+                            // console.log("# List bottom reached. Next pagination id is " + paginationNextMaxId);
+                            searchInput.nextMediaPage(paginationNextMaxId);
+
+                            // show toast that new images are loading
+                            searchToast.body = "Loading more images..";
+                            searchToast.show();
+                        }
+                    }
                 }
 
                 UserThumbnailGallery {
                     id: searchUserGallery
 
+                    // set initial visibility to false
+                    // will be set visible once data is loaded
                     visible: false
+
+                    // load detail user page
+                    onItemClicked: {
+                        // console.log("# Item clicked: " + mediaData.userData.userId);
+                        var userDetailPage = userDetailComponent.createObject();
+                        userDetailPage.userData = userData;
+                        navigationPane.push(userDetailPage);
+                    }
                 }
             }
 
@@ -150,5 +213,32 @@ NavigationPane {
                 horizontalAlignment: HorizontalAlignment.Center
             }
         }
+    }
+
+    // attach components
+    attachedObjects: [
+        // detail image page
+        // will be called if user clicks on image gallery item
+        ComponentDefinition {
+            id: detailImageComponent
+            source: "MediaDetail.qml"
+        },
+        // user detail page
+        // will be called if user clicks on user description
+        ComponentDefinition {
+            id: userDetailComponent
+            source: "UserDetail.qml"
+        },
+        // system toast
+        // is used for messages
+        SystemToast {
+            id: searchToast
+            body: ""
+        }
+    ]
+
+    // destroy pages after use
+    onPopTransitionEnded: {
+        page.destroy();
     }
 }
