@@ -60,7 +60,7 @@ Container {
     // this is a workaround to make the signals visible inside the listview item scope
     // see here for details: http://supportforums.blackberry.com/t5/Cascades-Development/QML-Accessing-variables-defined-outside-a-list-component-from/m-p/1786265#M641
     onCreationCompleted: {
-        halfDisplaySize = Math.round(DisplayInfo.width / 2);
+        Qt.halfDisplaySize = Math.round(DisplayInfo.width / 2);
     }
 
     // layout orientation
@@ -111,7 +111,7 @@ Container {
                         horizontalAlignment: HorizontalAlignment.Center
                         
                         // set size, type and url
-                        imageSize: halfDisplaySize
+                        imageSize: Qt.halfDisplaySize
                         mediaType: ListItemData.mediaData.mediaType
                         url: ListItemData.mediaData.mediaThumbnailUrl
 					}
@@ -121,8 +121,8 @@ Container {
                     Container {
                         // layout definition
                         verticalAlignment: VerticalAlignment.Bottom
-                        preferredWidth: halfDisplaySize
-                        minWidth: halfDisplaySize
+                        preferredWidth: Qt.halfDisplaySize
+                        minWidth: Qt.halfDisplaySize
                         topPadding: 2
                         leftPadding: 5
                         bottomPadding: 2
@@ -151,13 +151,13 @@ Container {
                             itemImage.opacity = 0.75
 
                             // set size so that image gets smaller on press
-                            itemImage.imageSize = halfDisplaySize - 20
+                            itemImage.imageSize = Qt.halfDisplaySize - 20
                         } else {
                             // reset opacity to normal
                             itemImage.opacity = 1.0
 
                             // set size so that image resets to normal on release
-                            itemImage.imageSize = halfDisplaySize
+                            itemImage.imageSize = Qt.halfDisplaySize
                         }
                     }
                 }

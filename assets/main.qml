@@ -90,9 +90,8 @@ TabbedPane {
         // check authentication state and load tab content accordingly
         onTriggered: {
             if (Authentication.auth.isAuthenticated()) {
-                profileComponent.source = "pages/UserDetail.qml"
+                profileComponent.source = "pages/UserProfile.qml"
                 var profilePage = profileComponent.createObject();
-                profilePage.userId = "self";
                 profileTab.setContent(profilePage);
             } else {
                 // console.log("# User not logged in, loading login page");
@@ -115,6 +114,31 @@ TabbedPane {
         ]
     }
 
+    // tab for the search page
+    // tab is only visible if user is logged in
+    Tab {
+        id: searchTab
+        title: "Search"
+        imageSource: "asset:///images/icons/icon_search.png"
+        
+        // note that the page is bound to the component every time it loads
+        // this is because the page needs to be created as tapped
+        // if created on startup it does not work immediately after login
+        onTriggered: {
+            searchComponent.source = "pages/Search.qml";
+            var searchPage = searchComponent.createObject();
+            searchTab.setContent(searchPage);
+        }
+        
+        // attach a component for the user feed page
+        // this is bound to the content property later on onCreationCompleted()
+        attachedObjects: [
+            ComponentDefinition {
+                id: searchComponent
+            }
+        ]
+    }
+
     // main logic on startup
     onCreationCompleted: {
         popularMediaComponent.source = "pages/PopularMedia.qml"
@@ -128,6 +152,7 @@ TabbedPane {
             // remove tabs and menu items that are authenticated only
             mainMenu.removeAction(mainMenuLogout);
             mainTabbedPane.remove(personalFeedTab);
+            mainTabbedPane.remove(searchTab);
 
             // reset tab content by resetting the page
             mainTabbedPane.activeTab = profileTab;

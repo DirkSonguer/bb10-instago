@@ -1,5 +1,5 @@
 1
-71
+76
 classes/authenticationhandler.js
 classes/commenttransformator.js
 classes/locationtransformator.js
@@ -22,6 +22,7 @@ components/MediaDescription.qml
 components/MediaFullsizeGallery.qml
 components/MediaThumbnailGallery.qml
 components/PageHeader.qml
+components/SearchInput.qml
 components/UserHeader.qml
 components/UserThumbnailGallery.qml
 global/copytext.js
@@ -40,6 +41,8 @@ images/icons/icon_play_white_background.png
 images/icons/icon_popular.png
 images/icons/icon_profile.png
 images/icons/icon_reload.png
+images/icons/icon_search.png
+images/icons/icon_search_dimmed.png
 images/mask_profile_pictures_default.png
 images/mask_profile_pictures_highlight.png
 images/splashscreens/instago_splash_720x1280.png
@@ -59,10 +62,12 @@ pages/MediaDetail.qml
 pages/MediaLikes.qml
 pages/PersonalFeed.qml
 pages/PopularMedia.qml
+pages/Search.qml
 pages/UserDetail.qml
 pages/UserFollowers.qml
 pages/UserFollowing.qml
 pages/UserLogin.qml
+pages/UserProfile.qml
 sheets/About.qml
 sheets/News.qml
 sheets/UserLogin.qml

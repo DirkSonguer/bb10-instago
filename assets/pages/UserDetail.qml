@@ -1,10 +1,10 @@
 // *************************************************** //
-// User Profile Page
+// User Detail Page
 //
-// The user profile page shows the personal information
-// about the current user.
-// Note that is only the profile page of the currently
-// logged in user, not users in general
+// The user detail page shows the detail user information
+// about a given user.
+// Note that is only the detail page, not the profile page
+// of the currently logged in user
 // *************************************************** //
 
 // import blackberry components
@@ -37,10 +37,10 @@ Page {
     // signal if user media data loading encountered an error
     signal userMediaDataError(variant errorData)
 
-    // property that holds the user ID to load
+    // property that holds the user data to load
     // this is filled by the calling page
-    property string userId
-
+    // contains only a limited object when filled
+    // will be extended once the full data is loaded
     property variant userData
 
     // content container
@@ -80,7 +80,7 @@ Page {
 
                     // check relationship status
                     onUserRelationshipChanged: {
-                        console.log("# Relationship is " + userRelationship);
+                        // console.log("# Relationship is " + userRelationship);
 
                         if ((userRelationship == "private") || (userRelationship == "requested")) {
                             // hide loader and show content
@@ -186,7 +186,7 @@ Page {
                     // if so, load the data
                     if ((userDetailMediaThumbnails.paginationNextMaxId != "") && (userDetailMediaThumbnails.paginationNextMaxId != 0)) {
                         // console.log("# List bottom reached. Next pagination id is " + userDetailMediaThumbnails.paginationNextMaxId);
-                        UserRepository.getUserMedia(userDetailPage.userId, userDetailMediaThumbnails.paginationNextMaxId, userDetailPage);
+                        UserRepository.getUserMedia(userDetailPage.userData.userId, userDetailMediaThumbnails.paginationNextMaxId, userDetailPage);
                         userDetailMediaThumbnails.paginationNextMaxId = 0;
 
                         // show toast that new images are loading
@@ -276,7 +276,7 @@ Page {
     // user media data loaded and transformed
     // data is stored in "mediaDataArray" variant as array of type InstagramMediaData
     onUserMediaDataLoaded: {
-        // console.log("# User media data loaded. Found " + mediaDataArray.length + " items");
+        console.log("# User media data loaded. Found " + mediaDataArray.length + " items");
 
         // check if the result pagination id is another one than we already have
         if (userDetailMediaThumbnails.paginationNextMaxId != paginationId) {

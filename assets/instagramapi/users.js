@@ -81,7 +81,7 @@ function getUserProfile(userId, callingPage) {
 // Third parameter is the id of the calling page, which will receive the
 // userMediaDataLoaded() signal
 function getUserMedia(userId, paginationId, callingPage) {
-	// console.log("# Loading media data for user " + userId);
+	console.log("# Loading media data for user " + userId);
 
 	var req = new XMLHttpRequest();
 	req.onreadystatechange = function() {
