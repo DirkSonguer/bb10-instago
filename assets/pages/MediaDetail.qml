@@ -102,7 +102,7 @@ Page {
                         // like button long pressed
                         onLongPress: {
                             // console.log("# Like button long pressed");
-                            if (parseInt(mediaDetailLikeButton.count) > 0) {
+                            if ((Authentication.auth.isAuthenticated()) && (parseInt(mediaDetailLikeButton.count) > 0)) {
                                 var mediaLikesPage = mediaLikesComponent.createObject();
                                 mediaLikesPage.mediaData = mediaDetailPage.mediaData;
                                 navigationPane.push(mediaLikesPage);
@@ -128,7 +128,7 @@ Page {
                         // comment button long pressed
                         onLongPress: {
                             // console.log("# Comment button long pressed");
-                            if (parseInt(mediaDetailCommentButton.count) > 0) {
+                            if ((Authentication.auth.isAuthenticated()) && (parseInt(mediaDetailCommentButton.count) > 0)) {
                                 var mediaCommentsPage = mediaCommentsComponent.createObject();
                                 mediaCommentsPage.mediaData = mediaDetailPage.mediaData;
                                 navigationPane.push(mediaCommentsPage);

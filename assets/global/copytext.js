@@ -12,6 +12,7 @@ var instagoAboutBody = "<html>Instago is an Instagram viewer for BlackBerry 10. 
 var instagoLoginBody = "<html>You are not connected to Instagram, only the public features are available at the moment.<br /><br />Please connect to Instagram to use features like following other users and liking or commenting photos.<br /><br />Note that you need an Instagram account to log in.</html>";
 
 
+var instagoLoginNotification = "Please log in";
 var instagoLoginSuccessTitle = "Thank you for authenticating";
 var instagoLoginSuccessMessage = "You are authenticated with Instagram and you can now use all Instago features. Have fun!";
 var insagoLoginErrorTitle = "Authentication went wrong";
@@ -22,6 +23,8 @@ var instagoLogoutSuccessMessage = "You are logged out of Instagram.";
 var instagoLoadingPopularMedia = "Loading popular media";
 
 var instagoTitlePopular = "Popular Images";
+
+var instagoUserDetailNotLoggedIn = "Please log into your Instagram account to see user media gallery";
 
 var instagoAddLike = "Like";
 var instagoAddLikeSuccess = "Like added!";

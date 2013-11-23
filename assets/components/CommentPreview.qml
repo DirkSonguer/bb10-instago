@@ -171,12 +171,12 @@ Container {
     onTouch: {
         // user pressed description
         if (event.touchType == TouchType.Down) {
-            commentPreviewComponent.background = Color.create(Globals.instagoHighlightBackgroundColor);
+            // commentPreviewComponent.background = Color.create(Globals.instagoHighlightBackgroundColor);
         }
 
         // user released description or is moving
         if ((event.touchType == TouchType.Up) || (event.touchType == TouchType.Cancel)) {
-            commentPreviewComponent.background = Color.create(Globals.instagoDefaultBackgroundColor);
+            // commentPreviewComponent.background = Color.create(Globals.instagoDefaultBackgroundColor);
         }
     }
     

@@ -156,6 +156,7 @@ NavigationPane {
                     }
                 }
 
+                // media item result gallery
                 MediaThumbnailGallery {
                     id: searchMediaGallery
 
@@ -184,6 +185,7 @@ NavigationPane {
                     }
                 }
 
+                // user item result gallery
                 UserThumbnailGallery {
                     id: searchUserGallery
 

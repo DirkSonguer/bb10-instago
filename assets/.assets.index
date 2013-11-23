@@ -1,8 +1,9 @@
 1
-76
+77
 classes/authenticationhandler.js
 classes/commenttransformator.js
 classes/locationtransformator.js
+classes/loginuihandler.js
 classes/mediatransformator.js
 classes/networkhandler.js
 classes/texttransformator.js

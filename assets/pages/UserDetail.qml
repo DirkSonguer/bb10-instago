@@ -18,6 +18,7 @@ import "../components"
 import "../global/globals.js" as Globals
 import "../global/copytext.js" as Copytext
 import "../instagramapi/users.js" as UserRepository
+import "../classes/authenticationhandler.js" as Authentication
 
 // import image url loader component
 import WebImageView 1.0
@@ -99,12 +100,12 @@ Page {
                 // the like and comment button
                 Container {
                     id: userDetailFollowerAndFollowingCount
-                    
+
                     // layout orientation
                     layout: StackLayout {
                         orientation: LayoutOrientation.LeftToRight
                     }
-                    
+
                     // set initial visibiity to false
                     // will be set once data is loaded
                     visible: false
@@ -119,15 +120,17 @@ Page {
                         layoutProperties: StackLayoutProperties {
                             spaceQuota: 1.0
                         }
-                        
+
                         // layout definition
                         rightMargin: 1
-                        
+
                         // show followers list
                         onClicked: {
-                            var userFollowersPage = userFollowersComponent.createObject();
-                            userFollowersPage.userData = userData;
-                            navigationPane.push(userFollowersPage);
+                            if (Authentication.auth.isAuthenticated()) {
+                                var userFollowersPage = userFollowersComponent.createObject();
+                                userFollowersPage.userData = userData;
+                                navigationPane.push(userFollowersPage);
+                            }
                         }
                     }
 
@@ -138,12 +141,14 @@ Page {
                         layoutProperties: StackLayoutProperties {
                             spaceQuota: 1.0
                         }
-                        
+
                         // show followers list
                         onClicked: {
-                            var userFollowingPage = userFollowingComponent.createObject();
-                            userFollowingPage.userData = userData;
-                            navigationPane.push(userFollowingPage);
+                            if (Authentication.auth.isAuthenticated()) {
+                                var userFollowingPage = userFollowingComponent.createObject();
+                                userFollowingPage.userData = userData;
+                                navigationPane.push(userFollowingPage);
+                            }
                         }
                     }
                 }
@@ -196,21 +201,21 @@ Page {
                 }
             }
         }
-        
+
         // icon if user is private
         ImageView {
             id: userDetailUserPrivateIcon
-            
+
             // position and layout properties
             verticalAlignment: VerticalAlignment.Center
             horizontalAlignment: HorizontalAlignment.Center
-            
+
             // set initial visibility to false
             // will be set true if user is private
             visible: false
-            
+
             imageSource: "asset:///images/icons/icon_lock_dimmed.png"
-        }        
+        }
 
         LoadingIndicator {
             id: loadingIndicator
@@ -229,16 +234,25 @@ Page {
         // show loader
         loadingIndicator.showLoader("Loading user data");
 
-        console.log("# Loading current user data for user " + userDetailPage.userData.userId);
+        // console.log("# Loading current user data for user " + userDetailPage.userData.userId);
         UserRepository.getUserProfile(userDetailPage.userData.userId, userDetailPage);
-        UserRepository.getUserMedia(userDetailPage.userData.userId, 0, userDetailPage);
+
+        // only load media data if user is logged in
+        if (Authentication.auth.isAuthenticated()) {
+            UserRepository.getUserMedia(userDetailPage.userData.userId, 0, userDetailPage);
+        } else {
+            console.log("# Showing message");
+            infoMessage.showMessage(Copytext.instagoUserDetailNotLoggedIn, "User Media");
+        }
+
+        // setting user id to buttons
         userDetailFollowButton.userId = userDetailPage.userData.userId;
     }
 
     // user profile data loaded and transformed
     // data is stored in "userData" variant of type InstagramUserData
     onUserDetailDataLoaded: {
-        console.log("# User detail data loaded for user " + userData.username);
+        // console.log("# User detail data loaded for user " + userData.username);
 
         // update page userData object with full data
         userDetailPage.userData = userData;
@@ -276,7 +290,7 @@ Page {
     // user media data loaded and transformed
     // data is stored in "mediaDataArray" variant as array of type InstagramMediaData
     onUserMediaDataLoaded: {
-        console.log("# User media data loaded. Found " + mediaDataArray.length + " items");
+        // console.log("# User media data loaded. Found " + mediaDataArray.length + " items");
 
         // check if the result pagination id is another one than we already have
         if (userDetailMediaThumbnails.paginationNextMaxId != paginationId) {

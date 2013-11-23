@@ -16,6 +16,7 @@ import "pages"
 
 // shared js files
 import "classes/authenticationhandler.js" as Authentication
+import "classes/loginuihandler.js" as LoginUIHandler
 import "instagramapi/users.js" as UserRepository
 
 TabbedPane {
@@ -120,7 +121,7 @@ TabbedPane {
         id: searchTab
         title: "Search"
         imageSource: "asset:///images/icons/icon_search.png"
-        
+
         // note that the page is bound to the component every time it loads
         // this is because the page needs to be created as tapped
         // if created on startup it does not work immediately after login
@@ -129,7 +130,7 @@ TabbedPane {
             var searchPage = searchComponent.createObject();
             searchTab.setContent(searchPage);
         }
-        
+
         // attach a component for the user feed page
         // this is bound to the content property later on onCreationCompleted()
         attachedObjects: [
@@ -150,15 +151,16 @@ TabbedPane {
         // also: set active tabs
         if (! Authentication.auth.isAuthenticated()) {
             // remove tabs and menu items that are authenticated only
-            mainMenu.removeAction(mainMenuLogout);
-            mainTabbedPane.remove(personalFeedTab);
-            mainTabbedPane.remove(searchTab);
+            LoginUIHandler.loginUIHandler.setLoggedOutState();
 
             // reset tab content by resetting the page
+            profileTab.triggered();
             mainTabbedPane.activeTab = profileTab;
             mainTabbedPane.activeTab = popularMediaTab;
         } else {
-            // activate tabs
+            // activate tabs that are authenticated only
+            LoginUIHandler.loginUIHandler.setLoggedInState();
+
             // this is a workaround as the initial tab does not recognize taps
             // and does not have the correct height / positioning
             personalFeedTab.triggered();
@@ -184,6 +186,9 @@ TabbedPane {
 
                     // remove tabs and menu items that are authenticated only
                     mainMenu.removeAction(mainMenuLogout);
+
+                    // set UI elements to logged out state
+                    LoginUIHandler.loginUIHandler.setLoggedOutState();
 
                     // change current tab to profile tab
                     popularMediaTab.triggered();
@@ -276,7 +281,7 @@ TabbedPane {
         // this is used by the main menu news item
         Sheet {
             id: newsSheet
-            
+
             // attach a component for the about page
             attachedObjects: [
                 ComponentDefinition {

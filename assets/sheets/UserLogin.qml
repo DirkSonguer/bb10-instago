@@ -16,6 +16,7 @@ import "../global/globals.js" as Globals
 import "../global/copytext.js" as Copytext
 import "../global/instagramkeys.js" as InstagramKeys
 import "../classes/authenticationhandler.js" as Authentication
+import "../classes/loginuihandler.js" as LoginUIHandler
 
 Page {
     id: userLoginSheet
@@ -94,34 +95,14 @@ Page {
                     if (instagramResponse["status"] === "AUTH_SUCCESS") {
                         // console.log("# Authentication successful: " + instagramResponse["status"]);
 
+                        // show confirmation
                         loginInstagramWebView.visible = false
                         loadingIndicator.hideLoader();
                         infoMessage.showMessage(Copytext.instagoLoginSuccessMessage, Copytext.instagoLoginSuccessTitle);
                         authenticationDone = true;
 
-                        // changing available menu items
-                        // first we remove all available items
-                        // afterwards we add them again in the right order
-                        mainMenu.removeAction(mainMenuAbout);
-                        mainMenu.removeAction(mainMenuRate);
-                        mainMenu.removeAction(mainMenuNews);
-                        mainMenu.addAction(mainMenuLogout);
-                        mainMenu.addAction(mainMenuAbout);
-                        mainMenu.addAction(mainMenuRate);
-                        mainMenu.addAction(mainMenuNews);
-
-                        /*
-                         * // changing available tabs
-                         * mainTabbedPane.remove(popularMediaTab);
-                         * mainTabbedPane.remove(profileTab);
-                         * mainTabbedPane.add(personalFeedTab);
-                         * mainTabbedPane.add(popularMediaTab);
-                         * // mainTabbedPane.add(newsFeedTab);
-                         * mainTabbedPane.add(searchTab);
-                         * mainTabbedPane.add(nearbyLocationTab);
-                         * mainTabbedPane.add(profileTab);
-                         * mainTabbedPane.activeTab = popularMediaTab;
-                         */
+                        // activate tabs that are authenticated only
+                        LoginUIHandler.loginUIHandler.setLoggedInState();
                     }
                 }
             }
