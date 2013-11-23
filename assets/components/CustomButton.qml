@@ -15,6 +15,7 @@ import bb.system 1.2
 import "../global/globals.js" as Globals
 import "../global/copytext.js" as Copytext
 import "../instagramapi/media.js" as MediaRepository
+import "../classes/authenticationhandler.js" as Authentication
 
 Container {
     id: customButtonComponent
@@ -22,13 +23,19 @@ Container {
     // signal that button has been clicked
     signal clicked()
 
-    // external properties
+    // appearance properties
     property alias backgroundColor: customButtonComponent.background
+    property variant componentBackground
+
+    // content properties
     property alias alignText: customButtonContainer.horizontalAlignment
     property alias iconSource: customButtonIcon.imageSource
     property alias boldText: customButtonBoldLabel.text
     property alias narrowText: customButtonNarrowLabel.text
-    property variant componentBackground
+
+    // access properties
+    property bool authenticationRequired: false
+    property string authenticationText: ""
 
     // layout definition
     topPadding: 30
@@ -131,8 +138,28 @@ Container {
     gestureHandlers: [
         TapHandler {
             onTapped: {
-                customButtonComponent.clicked();
+                if (customButtonComponent.authenticationRequired) {
+                    if (! Authentication.auth.isAuthenticated()) {
+                        // show toast that new images are loading
+                        customButtonToast.body = customButtonComponent.authenticationText;
+                        customButtonToast.show();
+                    } else {
+                        customButtonComponent.clicked();
+                    }
+                } else {
+                    customButtonComponent.clicked();
+                }
             }
+        }
+    ]
+
+    // attach components
+    attachedObjects: [
+        // system toast
+        // is used for messages
+        SystemToast {
+            id: customButtonToast
+            position: SystemUiPosition.TopCenter
         }
     ]
 }

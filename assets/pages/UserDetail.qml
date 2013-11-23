@@ -124,13 +124,15 @@ Page {
                         // layout definition
                         rightMargin: 1
 
+                        // set authentication rules
+                        authenticationRequired: true
+                        authenticationText: Copytext.instagoFollowersNotLoggedIn
+
                         // show followers list
                         onClicked: {
-                            if (Authentication.auth.isAuthenticated()) {
-                                var userFollowersPage = userFollowersComponent.createObject();
-                                userFollowersPage.userData = userData;
-                                navigationPane.push(userFollowersPage);
-                            }
+                            var userFollowersPage = userFollowersComponent.createObject();
+                            userFollowersPage.userData = userData;
+                            navigationPane.push(userFollowersPage);
                         }
                     }
 
@@ -142,13 +144,15 @@ Page {
                             spaceQuota: 1.0
                         }
 
+                        // set authentication rules
+                        authenticationRequired: true
+                        authenticationText: Copytext.instagoFollowersNotLoggedIn
+
                         // show followers list
                         onClicked: {
-                            if (Authentication.auth.isAuthenticated()) {
-                                var userFollowingPage = userFollowingComponent.createObject();
-                                userFollowingPage.userData = userData;
-                                navigationPane.push(userFollowingPage);
-                            }
+                            var userFollowingPage = userFollowingComponent.createObject();
+                            userFollowingPage.userData = userData;
+                            navigationPane.push(userFollowingPage);
                         }
                     }
                 }
@@ -171,6 +175,21 @@ Page {
                         var detailImagePage = detailImageComponent.createObject();
                         detailImagePage.mediaData = mediaData;
                         navigationPane.push(detailImagePage);
+                    }
+                }
+
+                // due to Q series size the info message has to be located below the header
+                Container {
+                    // layout orientation
+                    layout: DockLayout {
+                    }
+                    
+                    verticalAlignment: VerticalAlignment.Fill
+                    
+                    InfoMessage {
+                        id: infoMessage
+                        verticalAlignment: VerticalAlignment.Center
+                        horizontalAlignment: HorizontalAlignment.Center
                     }
                 }
             }
@@ -219,12 +238,6 @@ Page {
 
         LoadingIndicator {
             id: loadingIndicator
-            verticalAlignment: VerticalAlignment.Center
-            horizontalAlignment: HorizontalAlignment.Center
-        }
-
-        InfoMessage {
-            id: infoMessage
             verticalAlignment: VerticalAlignment.Center
             horizontalAlignment: HorizontalAlignment.Center
         }
