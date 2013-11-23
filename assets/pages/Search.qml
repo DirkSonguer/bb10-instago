@@ -85,7 +85,9 @@ NavigationPane {
                     onTriggered: {
                         // hide gallery components
                         searchMediaGallery.visible = false;
+                        searchMediaGallery.clearGallery();
                         searchUserGallery.visible = false;
+                        searchUserGallery.clearGallery();
 
                         // hide possible messages
                         infoMessage.hideMessage();
