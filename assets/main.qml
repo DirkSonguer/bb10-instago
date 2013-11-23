@@ -10,6 +10,7 @@
 
 // import blackberry components
 import bb.cascades 1.2
+import bb.system 1.2
 
 // set import directory for pages
 import "pages"
@@ -298,6 +299,16 @@ TabbedPane {
                 mimeType: "application/x-bb-appworld"
                 uri: "appworld://content/24485875"
             }
+        },
+        // system toast used globally by all pages and components
+        SystemToast {
+            id: instagoTopToast
+            position: SystemUiPosition.TopCenter
+        },
+        // system toast used globally by all pages and components
+        SystemToast {
+            id: instagoCenterToast
+            position: SystemUiPosition.MiddleCenter
         }
-    ]
+    ]    
 }

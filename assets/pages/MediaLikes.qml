@@ -38,8 +38,8 @@ Page {
 
         // likes header
         PageHeader {
+            id: mediaLikesPageHeader
             headline: "Likes"
-            image: mediaData.mediaStandardImage
         }
 
         // content container
@@ -86,6 +86,9 @@ Page {
 
         // show loader
         loadingIndicator.showLoader("Loading likes");
+        
+        // fill header
+        mediaLikesPageHeader.image = mediaData.mediaStandardImage;
 
         // load likes for given media item
         MediaRepository.getLikes(mediaData.mediaId, mediaLikesPage);

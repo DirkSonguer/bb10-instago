@@ -9,7 +9,6 @@
 
 // import blackberry components
 import bb.cascades 1.2
-import bb.system 1.2
 
 // set import directory for components
 import "../components"
@@ -227,12 +226,6 @@ NavigationPane {
             ComponentDefinition {
                 id: userFollowingComponent
                 source: "UserFollowing.qml"
-            },
-            // system toast
-            // is used for messages
-            SystemToast {
-                id: userProfileToast
-                position: SystemUiPosition.TopCenter
             }
         ]
     }

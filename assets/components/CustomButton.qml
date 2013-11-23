@@ -140,7 +140,6 @@ Container {
             onTapped: {
                 if (customButtonComponent.authenticationRequired) {
                     if (! Authentication.auth.isAuthenticated()) {
-                        // show toast that new images are loading
                         customButtonToast.body = customButtonComponent.authenticationText;
                         customButtonToast.show();
                     } else {

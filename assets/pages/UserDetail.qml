@@ -214,8 +214,8 @@ Page {
                         userDetailMediaThumbnails.paginationNextMaxId = 0;
 
                         // show toast that new images are loading
-                        userDetailToast.body = "Loading more images..";
-                        userDetailToast.show();
+                        instagoTopToast.body = "Loading more images..";
+                        instagoTopToast.show();
                     }
                 }
             }
@@ -341,12 +341,6 @@ Page {
         ComponentDefinition {
             id: userFollowingComponent
             source: "UserFollowing.qml"
-        },
-        // system toast
-        // is used for messages
-        SystemToast {
-            id: userDetailToast
-            position: SystemUiPosition.TopCenter
         }
     ]
 }

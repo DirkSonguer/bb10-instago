@@ -7,7 +7,6 @@
 
 // import blackberry components
 import bb.cascades 1.2
-import bb.system 1.2
 
 // set import directory for components
 import "../components"
@@ -60,8 +59,8 @@ NavigationPane {
                         paginationNextMaxId = 0;
 
                         // show toast that new images are loading
-                        personalFeedToast.body = "Loading more images..";
-                        personalFeedToast.show();
+                        instagoCenterToast.body = "Loading more images..";
+                        instagoCenterToast.show();
                     }
                 }
             }
@@ -123,12 +122,6 @@ NavigationPane {
         ComponentDefinition {
             id: detailImageComponent
             source: "MediaDetail.qml"
-        },
-        // system toast
-        // is used for messages
-        SystemToast {
-            id: personalFeedToast
-            body: ""
         }
     ]
 

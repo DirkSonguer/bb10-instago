@@ -7,7 +7,6 @@
 
 // import blackberry components
 import bb.cascades 1.2
-import bb.system 1.2
 
 // set import directory for components
 import "../components"
@@ -71,8 +70,10 @@ Page {
                     if ((cursorId != "") && (cursorId != 0)) {
                         // console.log("# List bottom reached. Next cursor id is " + cursorId);
                         RelationshipRepository.getUserFollowers(userData.userId, cursorId, userFollowersPage);
-                        userFollowersToast.body = "Loading more users..";
-                        userFollowersToast.show();
+                        
+                        // show toast that new images are loading
+                        instagoCenterToast.body = "Loading more users..";
+                        instagoCenterToast.show();                        
                     }
                 }
             }
@@ -127,12 +128,6 @@ Page {
         ComponentDefinition {
             id: userDetailComponent
             source: "UserDetail.qml"
-        },
-        // system toast
-        // is used for messages
-        SystemToast {
-            id: userFollowersToast
-            position: SystemUiPosition.MiddleCenter
         }
     ]
 }

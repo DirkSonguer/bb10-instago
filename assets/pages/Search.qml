@@ -181,8 +181,8 @@ NavigationPane {
                             searchInput.nextMediaPage(paginationNextMaxId);
 
                             // show toast that new images are loading
-                            searchToast.body = "Loading more images..";
-                            searchToast.show();
+                            instagoCenterToast.body = "Loading more images..";
+                            instagoCenterToast.show();
                         }
                     }
                 }
@@ -232,12 +232,6 @@ NavigationPane {
         ComponentDefinition {
             id: userDetailComponent
             source: "UserDetail.qml"
-        },
-        // system toast
-        // is used for messages
-        SystemToast {
-            id: searchToast
-            body: ""
         }
     ]
 
