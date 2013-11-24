@@ -34,6 +34,10 @@ Container {
     // properties to define how the list should be sorted
     property string listSortingKey: "timestamp"
     property alias listSortAscending: userThumbnailGalleryDataModel.sortedAscending
+    
+    // properties for the headline
+    property alias headerText: userThumbnailHeader.headline
+    property alias headerImage: userThumbnailHeader.image
 
     // signal to clear the gallery contents
     signal clearGallery()
@@ -61,6 +65,11 @@ Container {
     // see here for details: http://supportforums.blackberry.com/t5/Cascades-Development/QML-Accessing-variables-defined-outside-a-list-component-from/m-p/1786265#M641
     onCreationCompleted: {
         Qt.thirdDisplaySize = Math.round(DisplayInfo.width / 3);
+        
+        if (userThumbnailGalleryComponent.headerText != "") {
+            userThumbnailGallery.scrollToPosition(0, ScrollAnimation.None);
+            userThumbnailGallery.scroll(-105, ScrollAnimation.Smooth);
+        }
     }
 
     // layout orientation
@@ -73,6 +82,27 @@ Container {
 
         // associate the data model for the list view
         dataModel: userThumbnailGalleryDataModel
+        
+        leadingVisual: Container {
+            id: userThumbnailHeaderContainer
+            
+            // set initial visibility to false
+            // will be set true when the headline is added
+            visible: false
+            
+            // likes header
+            PageHeader {
+                id: userThumbnailHeader
+                
+                // layout definition
+                bottomPadding: 5
+                
+                // make header component visible when content is added
+                onHeadlineChanged: {
+                    userThumbnailHeaderContainer.visible = true;
+                }
+            }            
+        }
 
         // layout orientation
         layout: GridListLayout {

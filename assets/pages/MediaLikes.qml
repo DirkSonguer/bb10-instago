@@ -35,13 +35,13 @@ Page {
         layout: StackLayout {
             orientation: LayoutOrientation.TopToBottom
         }
-
+/*
         // likes header
         PageHeader {
             id: mediaLikesPageHeader
             headline: "Likes"
         }
-
+*/
         // content container
         Container {
             // layout orientation
@@ -56,6 +56,9 @@ Page {
                 // newest likes on top
                 listSortingKey: "currentIndex"
                 listSortAscending: false
+                
+                // header text
+                headerText: "Likes"
 
                 onItemClicked: {
                     // console.log("# Item clicked: " + userData.userId);
@@ -87,8 +90,8 @@ Page {
         // show loader
         loadingIndicator.showLoader("Loading likes");
         
-        // fill header
-        mediaLikesPageHeader.image = mediaData.mediaStandardImage;
+        // fill header image
+        userGalleryThumbnails.headerImage = mediaData.mediaStandardImage;
 
         // load likes for given media item
         MediaRepository.getLikes(mediaData.mediaId, mediaLikesPage);

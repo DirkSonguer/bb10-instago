@@ -36,12 +36,6 @@ Page {
             orientation: LayoutOrientation.TopToBottom
         }
 
-        // likes header
-        PageHeader {
-            headline: "Followers"
-            image: userData.profilePicture
-        }
-
         // content container
         Container {
             // layout orientation
@@ -56,6 +50,9 @@ Page {
                 // newest likes on top
                 listSortingKey: "currentIndex"
                 listSortAscending: true
+                
+                // header text
+                headerText: "Followers"
 
                 onItemClicked: {
                     // console.log("# Item clicked: " + userData.userId);
@@ -99,6 +96,9 @@ Page {
 
         // show loader
         loadingIndicator.showLoader("Loading followers");
+        
+        // fill header image
+        userFollowersGallery.headerImage = userData.profilePicture;
 
         // load likes for given media item
         RelationshipRepository.getUserFollowers(userData.userId, 0, userFollowersPage);
