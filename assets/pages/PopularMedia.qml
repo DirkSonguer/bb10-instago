@@ -40,17 +40,28 @@ NavigationPane {
 
             MediaThumbnailGallery {
                 id: popularMediaThumbnails
-                
-                // gallery sorted by index 
+
+                // gallery sorted by index
                 listSortingKey: "currentIndex"
                 listSortAscending: true
-                
+
                 onItemClicked: {
                     // console.log("# Item clicked: " + mediaData.mediaId);
                     var detailImagePage = detailImageComponent.createObject();
                     detailImagePage.mediaData = mediaData;
                     navigationPane.push(detailImagePage);
-                }             
+                }
+
+                onListBottomReached: {
+                    if (currentItemIndex > 0) {
+                        // console.log("# Appending popular stream");
+                        MediaRepository.getPopularMedia(popularMediaPage);
+                        
+                        // show toast that new images are loading
+                        instagoCenterToast.body = "Loading more images..";
+                        instagoCenterToast.show();
+                    }
+                }
             }
 
             LoadingIndicator {
@@ -90,9 +101,10 @@ NavigationPane {
 
             // hide loader
             loadingIndicator.hideLoader();
+            instagoCenterToast.cancel();
         }
     }
-    
+
     // attach components
     attachedObjects: [
         // detail image page

@@ -35,13 +35,7 @@ Page {
         layout: StackLayout {
             orientation: LayoutOrientation.TopToBottom
         }
-/*
-        // likes header
-        PageHeader {
-            id: mediaLikesPageHeader
-            headline: "Likes"
-        }
-*/
+
         // content container
         Container {
             // layout orientation

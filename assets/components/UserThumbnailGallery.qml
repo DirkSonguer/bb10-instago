@@ -34,7 +34,7 @@ Container {
     // properties to define how the list should be sorted
     property string listSortingKey: "timestamp"
     property alias listSortAscending: userThumbnailGalleryDataModel.sortedAscending
-    
+
     // properties for the headline
     property alias headerText: userThumbnailHeader.headline
     property alias headerImage: userThumbnailHeader.image

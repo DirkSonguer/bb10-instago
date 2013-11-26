@@ -41,6 +41,8 @@ Page {
 
         // comments header
         PageHeader {
+            id: mediaCommentsHeader
+            
             headline: "Comments"
             image: mediaData.mediaStandardImage
         }
@@ -87,15 +89,18 @@ Page {
 
                 onListIsScrolling: {
                     mediaCommentsInput.visible = false;
+                    mediaCommentsHeader.visible = false;
                 }
 
                 onListTopReached: {
                     mediaCommentsInput.visible = true;
+                    mediaCommentsHeader.visible = true;
                 }
 
                 onItemClicked: {
                     // console.log("# Item clicked: " + userData.userId);
                     mediaCommentsInput.visible = true;
+                    mediaCommentsHeader.visible = true;
                     mediaCommentsInput.text = "@" + commentData.userData.username;
                 }
             }
