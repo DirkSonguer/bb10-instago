@@ -112,6 +112,7 @@ NavigationPane {
 
             // hide loader
             loadingIndicator.hideLoader();
+            instagoCenterToast.cancel();
         }
     }
 

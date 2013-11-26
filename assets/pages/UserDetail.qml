@@ -214,8 +214,8 @@ Page {
                         userDetailMediaThumbnails.paginationNextMaxId = 0;
 
                         // show toast that new images are loading
-                        instagoTopToast.body = "Loading more images..";
-                        instagoTopToast.show();
+                        instagoCenterToast.body = "Loading more images..";
+                        instagoCenterToast.show();
                     }
                 }
             }
@@ -319,6 +319,7 @@ Page {
 
             // show gallery component
             userDetailMediaThumbnails.visible = true;
+            instagoCenterToast.cancel();
         }
     }
 

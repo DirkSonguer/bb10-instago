@@ -119,6 +119,7 @@ Page {
 
         // hide loader
         loadingIndicator.hideLoader();
+        instagoCenterToast.cancel();
     }
 
     // attach components

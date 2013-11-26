@@ -126,6 +126,7 @@ NavigationPane {
                             // hide loading indicator & show gallery
                             loadingIndicator.hideLoader();
                             searchMediaGallery.visible = true;
+                            instagoCenterToast.cancel();
                         }
                     }
 
@@ -154,6 +155,7 @@ NavigationPane {
                             // hide loading indicator & show gallery
                             loadingIndicator.hideLoader();
                             searchUserGallery.visible = true;
+                            instagoCenterToast.cancel();
                         }
                     }
                 }
