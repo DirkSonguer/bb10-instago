@@ -33,6 +33,10 @@ Container {
     // flag if caption should be shown completely (multiline) or
     // just as one line (false)
     property alias captionMultiline: mediaDescriptionCaption.multiline
+    
+    // flag if description should be in confirmed mode
+    // this will set a confirmed background color and mask
+    property bool confirmed: false
 
     // layout orientation
     layout: StackLayout {
@@ -133,6 +137,22 @@ Container {
 
         // user release description or is moving
         if ((event.touchType == TouchType.Up) || (event.touchType == TouchType.Cancel)) {
+            if (mediaDescriptionComponent.confirmed) {
+                mediaDescriptionComponent.background = Color.create(Globals.instagoConfirmedBackgroundColor);
+                mediaDescriptionMask.imageSource = "asset:///images/mask_profile_pictures_confirmed.png"
+            } else {
+                mediaDescriptionComponent.background = Color.create(Globals.instagoDefaultBackgroundColor);
+                mediaDescriptionMask.imageSource = "asset:///images/mask_profile_pictures_default.png"
+            }
+        }
+    }
+
+    // change background and mask color according to confirmed state
+    onConfirmedChanged: {
+        if (mediaDescriptionComponent.confirmed) {
+            mediaDescriptionComponent.background = Color.create(Globals.instagoConfirmedBackgroundColor);
+            mediaDescriptionMask.imageSource = "asset:///images/mask_profile_pictures_confirmed.png"
+        } else {
             mediaDescriptionComponent.background = Color.create(Globals.instagoDefaultBackgroundColor);
             mediaDescriptionMask.imageSource = "asset:///images/mask_profile_pictures_default.png"
         }

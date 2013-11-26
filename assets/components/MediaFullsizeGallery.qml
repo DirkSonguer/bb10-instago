@@ -76,7 +76,7 @@ Container {
 
         // associate the data model for the list view
         dataModel: mediaFullsizeGalleryDataModel
-        
+
         // define snap mode so that on the q series
         // an image is always visible full screen
         snapMode: SnapMode.LeadingEdge
@@ -102,7 +102,7 @@ Container {
                     // item positioning
                     verticalAlignment: VerticalAlignment.Fill
                     horizontalAlignment: HorizontalAlignment.Fill
-                    
+
                     // item created time
                     property string itemCreatedTime: ListItemData.mediaData.createdTime
 
@@ -122,6 +122,15 @@ Container {
                         // when image loading is done, set image description visibility to true
                         onLoadProgressChanged: {
                             if (loadProgress == 1) {
+                                // check if user has liked the image
+                                // if so, set confirmed state accordingly
+                                if ((typeof ListItemData.mediaData !== "undefined") && (ListItemData.mediaData.userHasLiked == true)) {
+                                    mediaDetailMediaDescription.confirmed = true;
+                                } else {                                    
+                                    mediaDetailMediaDescription.confirmed = false;
+                                }
+
+                                // show description
                                 mediaDetailMediaDescription.visible = true;
                             }
                         }
@@ -174,7 +183,7 @@ Container {
                             itemImage.opacity = 0.5
 
                             // set size so that image gets smaller on press
-                            itemImage.imageSize = Qt.fullDisplaySize - 20
+                            itemImage.imageSize = Qt.fullDisplaySize - 5
                         } else {
                             // reset opacity to normal
                             itemImage.opacity = 1.0

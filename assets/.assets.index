@@ -1,5 +1,5 @@
 1
-77
+78
 classes/authenticationhandler.js
 classes/commenttransformator.js
 classes/locationtransformator.js
@@ -44,6 +44,7 @@ images/icons/icon_profile.png
 images/icons/icon_reload.png
 images/icons/icon_search.png
 images/icons/icon_search_dimmed.png
+images/mask_profile_pictures_confirmed.png
 images/mask_profile_pictures_default.png
 images/mask_profile_pictures_highlight.png
 images/splashscreens/instago_splash_720x1280.png
