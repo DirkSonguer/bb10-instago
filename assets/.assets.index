@@ -1,5 +1,5 @@
 1
-81
+82
 classes/authenticationhandler.js
 classes/commenttransformator.js
 classes/locationtransformator.js
@@ -26,6 +26,7 @@ components/PageHeader.qml
 components/SearchInput.qml
 components/UserHeader.qml
 components/UserThumbnailGallery.qml
+components/VideoPlayer.qml
 global/copytext.js
 global/globals.js
 global/instagramkeys.js

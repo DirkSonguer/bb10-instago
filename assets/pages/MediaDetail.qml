@@ -64,12 +64,10 @@ Page {
                     // image was clicked
                     // call video page if media type is a video
                     onImageClicked: {
-                        // console.log("# Image clicked, checking media type: " + mediaData.mediaType);
                         if (mediaData.mediaType == "video") {
-                            // console.log("# Media is a video");
-                            var videoDetailPage = videoDetailComponent.createObject();
-                            videoDetailPage.mediaData = mediaData
-                            navigationPane.push(videoDetailPage);
+                            mediaDetailImage.visible = false;
+                            mediaDetailVideoPlayer.visible = true;
+                            mediaDetailVideoPlayer.playVideo();
                         }
                     }
 
@@ -80,7 +78,16 @@ Page {
                         mediaDetailLikeButton.pressButton();
                     }
                 }
-
+                
+                // video player
+                VideoPlayer {
+                    id: mediaDetailVideoPlayer
+                    
+                    // set initial visibility to false
+                    // will be changed by mediaDetailImage
+                    visible: false;
+                }
+                
                 // the like and comment button
                 Container {
                     // layout orientation
@@ -282,7 +289,11 @@ Page {
         mediaDetailContainer.visible = true;
         mediaDetailImage.url = mediaData.mediaStandardImage;
         mediaDetailImage.mediaType = mediaData.mediaType;
-
+        
+        if (mediaData.mediaType == "video") {
+            mediaDetailVideoPlayer.videoSource = mediaData.mediaStandardVideo;
+        }
+        
         // image description (profile picture, name and image description)
         mediaDetailMediaDescription.userimage = mediaData.userData.profilePicture;
         mediaDetailMediaDescription.username = mediaData.userData.username;
