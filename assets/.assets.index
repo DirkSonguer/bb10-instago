@@ -1,5 +1,5 @@
 1
-82
+81
 classes/authenticationhandler.js
 classes/commenttransformator.js
 classes/locationtransformator.js
@@ -73,7 +73,6 @@ pages/UserFollowers.qml
 pages/UserFollowing.qml
 pages/UserLogin.qml
 pages/UserProfile.qml
-pages/VideoDetail.qml
 sheets/About.qml
 sheets/News.qml
 sheets/UserLogin.qml
