@@ -87,12 +87,15 @@ Page {
                         if (videoDetailPlayer.bufferStatus == BufferStatus.Buffering) {
                             // show the loading indicator when loading started
                             loadingIndicator.showLoader("");
+                            console.log("# Video buffering status Buffering");
                         } else if (videoDetailPlayer.bufferStatus == BufferStatus.Playing) {
                             // hide the loading indictor when loading is complete
                             loadingIndicator.hideLoader();
                             videoDetailPreviewImage.visible = false;
+                            console.log("# Video buffering status Playing");
                         } else if (videoDetailPlayer.bufferStatus == BufferStatus.Idle) {
                             loadingIndicator.hideLoader();
+                            console.log("# Video buffering status Idle");
                         }
                     }
                 }
@@ -130,7 +133,7 @@ Page {
             visible: true
 
             onLoadProgressChanged: {
-                if ((loadProgress == 100) && (videoIsPlaying == false)) {
+                if ((loadProgress == 1) && (videoIsPlaying == false)) {
                     videoIsPlaying = true;
                     videoDetailPlayer.play();
                 }

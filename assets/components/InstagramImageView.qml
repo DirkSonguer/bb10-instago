@@ -110,6 +110,22 @@ Container {
 
         // set initial visibility to false
         visible: false
+        
+        // handle tap on icon
+        gestureHandlers: [
+            // Add a handler for single tap gesture
+            TapHandler {
+                onTapped: {
+                    instagramImageViewComponent.imageClicked();
+                }
+            },
+            // Add a handler for double tap gesture
+            DoubleTapHandler {
+                onDoubleTapped: {
+                    instagramImageViewComponent.imageDoubleClicked();
+                }
+            }
+        ]
     }
 
     // standard grey image substitute
