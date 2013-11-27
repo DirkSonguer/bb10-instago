@@ -85,10 +85,10 @@ Page {
                     // this is thrown when the video is buffering / loading
                     onBufferStatusChanged: {
                         if (videoDetailPlayer.bufferStatus == BufferStatus.Buffering) {
-                            // Show the ProgressBar when loading started.
+                            // show the loading indicator when loading started
                             loadingIndicator.showLoader("");
                         } else if (videoDetailPlayer.bufferStatus == BufferStatus.Playing) {
-                            // Hide the ProgressBar when loading is complete.
+                            // hide the loading indictor when loading is complete
                             loadingIndicator.hideLoader();
                             videoDetailPreviewImage.visible = false;
                         } else if (videoDetailPlayer.bufferStatus == BufferStatus.Idle) {
@@ -156,6 +156,9 @@ Page {
         videoIsPlaying = false;
         videoDetailPreviewImage.url = mediaData.mediaStandardImage;
         videoDetailPlayer.sourceUrl = mediaData.mediaStandardVideo;
+
+        // show initial loading indicator
+        loadingIndicator.showLoader("");
     }
     
     actions: [
@@ -167,13 +170,13 @@ Page {
             title: "Loading"
             
             onTriggered: {
-                myForeignWindow.visible = true;
-                videodetailPreviewImage.visible = false;
+                videoPlayerForeignWindow.visible = true;
+                videoDetailPreviewImage.visible = false;
                 
-                if (videodetailPlayer.mediaState == MediaState.Started) {
-                    videodetailPlayer.pause();
+                if (videoDetailPlayer.mediaState == MediaState.Started) {
+                    videoDetailPlayer.pause();
                 } else {
-                    videodetailPlayer.play();
+                    videoDetailPlayer.play();
                 }
             }
         }
