@@ -53,7 +53,7 @@ Page {
                     orientation: LayoutOrientation.TopToBottom
                 }
 
-                // the actual thumbnail image
+                // the actual detail image
                 InstagramImageView {
                     id: mediaDetailImage
 
@@ -61,6 +61,21 @@ Page {
                     verticalAlignment: VerticalAlignment.Center
                     horizontalAlignment: HorizontalAlignment.Center
 
+                    // image was clicked
+                    // call video page if media type is a video
+                    onImageClicked: {
+                        // console.log("# Image clicked, checking media type: " + mediaData.mediaType);
+                        if (mediaData.mediaType == "video") {
+                            // console.log("# Media is a video");
+                            var videoDetailPage = videoDetailComponent.createObject();
+                            videoDetailPage.mediaData = mediaData
+                            navigationPane.push(videoDetailPage);
+                        }
+                    }
+
+                    // image was double clicked
+                    // add like for image by using the like button
+                    // this will also check for the login state of the user
                     onImageDoubleClicked: {
                         mediaDetailLikeButton.pressButton();
                     }
@@ -317,6 +332,12 @@ Page {
         ComponentDefinition {
             id: mediaLikesComponent
             source: "MediaLikes.qml"
+        },
+        // video detail page
+        // will be called if user taps on a video preview
+        ComponentDefinition {
+            id: videoDetailComponent
+            source: "VideoDetail.qml"
         }
     ]
 }

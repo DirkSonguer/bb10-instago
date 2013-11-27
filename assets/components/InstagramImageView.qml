@@ -21,12 +21,15 @@ import WebImageView 1.0
 Container {
     id: instagramImageViewComponent
 
-    // signal if a like has been added
+    // signal if image was tapped
+    signal imageClicked()
+
+    // signal if image was double tapped
     signal imageDoubleClicked()
 
     // property containing the image url
     property alias url: instagramImage.url
-    
+
     // property to hold the loading progress
     property alias loadProgress: instagramImage.loading
 
@@ -79,7 +82,13 @@ Container {
 
         // handle tap on image
         gestureHandlers: [
-            // Add a handler for tap gestures
+            // Add a handler for single tap gesture
+            TapHandler {
+                onTapped: {
+                    instagramImageViewComponent.imageClicked();
+                }
+            },
+            // Add a handler for double tap gesture
             DoubleTapHandler {
                 onDoubleTapped: {
                     instagramImageViewComponent.imageDoubleClicked();
