@@ -291,6 +291,19 @@ TabbedPane {
                 }
             ]
         },
+        // sheet for edit profile page
+        // this is used by the user profile page
+        Sheet {
+            id: editProfileSheet
+
+            // attach a component for the about page
+            attachedObjects: [
+                ComponentDefinition {
+                    id: editProfileComponent
+                    source: "sheets/EditProfile.qml"
+                }
+            ]
+        },
         // invocation for bb world
         // used by the action menu to switch to bb world
         Invocation {
@@ -310,5 +323,5 @@ TabbedPane {
             id: instagoCenterToast
             position: SystemUiPosition.MiddleCenter
         }
-    ]    
+    ]
 }

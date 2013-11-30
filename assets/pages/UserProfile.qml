@@ -35,6 +35,12 @@ NavigationPane {
         // signal if user profile data loading encountered an error
         signal userDetailDataError(variant errorData)
 
+        // signal if user media data loading is complete
+        signal userMediaDataLoaded(variant mediaDataArray, string paginationId)
+
+        // signal if user media data loading encountered an error
+        signal userMediaDataError(variant errorData)
+
         // property that holds the loaded user data
         property variant userData
 
@@ -94,6 +100,10 @@ NavigationPane {
                             // layout definition
                             rightMargin: 1
 
+                            // set authentication rules
+                            authenticationRequired: true
+                            authenticationText: Copytext.instagoFollowersNotLoggedIn
+
                             // show followers list
                             onClicked: {
                                 var userFollowersPage = userFollowersComponent.createObject();
@@ -110,6 +120,10 @@ NavigationPane {
                                 spaceQuota: 1.0
                             }
 
+                            // set authentication rules
+                            authenticationRequired: true
+                            authenticationText: Copytext.instagoFollowersNotLoggedIn
+
                             // show followers list
                             onClicked: {
                                 var userFollowingPage = userFollowingComponent.createObject();
@@ -119,33 +133,101 @@ NavigationPane {
                         }
                     }
 
-                    CustomButton {
-                        id: userProfileImages
-                        
-                        narrowText: "Your images"
-                        
-                        // show followers list
-                        onClicked: {
-                        }
-                    }
-                    
+                    // media items the user liked
                     CustomButton {
                         id: userProfileFavourites
-                        
+
+                        // layout definition
+                        preferredWidth: DisplayInfo.width
+                        topMargin: 1
+
+                        // button label
                         narrowText: "Your favourites"
-                        
-                        // show followers list
+
                         onClicked: {
                         }
                     }
 
+                    // link to edit profile sheet
                     CustomButton {
                         id: userProfileEditProfile
-                        
+
+                        // layout definition
+                        preferredWidth: DisplayInfo.width
+                        topMargin: 1
+
+                        // button label
                         narrowText: "Edit profile"
-                        
-                        // show followers list
+
                         onClicked: {
+                            // create edit profile sheet
+                            // note that the components are defined in /main.qml
+                            var editProfilePage = editProfileComponent.createObject();
+                            editProfileSheet.setContent(editProfilePage);
+                            
+                            editProfileSheet.open();
+                        }
+                    }
+
+                    MediaThumbnailGallery {
+                        id: userProfileMediaThumbnails
+
+                        // gallery sorted by index
+                        listSortingKey: "currentIndex"
+                        listSortAscending: true
+
+                        // set initial visibility to false
+                        visible: false
+
+                        // calculate the actual height of the thumbnail gallery
+                        preferredHeight: Math.ceil(currentItemIndex / 2) * (Math.round(DisplayInfo.width / 2))
+
+                        onItemClicked: {
+                            // console.log("# Item clicked: " + mediaData.mediaId);
+                            var detailImagePage = detailImageComponent.createObject();
+                            detailImagePage.mediaData = mediaData;
+                            navigationPane.push(detailImagePage);
+                        }
+                    }
+
+                    // due to Q series size the info message has to be located below the header
+                    Container {
+                        // layout orientation
+                        layout: DockLayout {
+                        }
+
+                        verticalAlignment: VerticalAlignment.Fill
+
+                        InfoMessage {
+                            id: infoMessage
+                            verticalAlignment: VerticalAlignment.Center
+                            horizontalAlignment: HorizontalAlignment.Center
+                        }
+                    }
+                }
+
+                // check if list scrolled to bottom and load more images if available
+                // as the scolling is done by the page scrollview container
+                // the listview scroll indicators can't be used
+                onViewableAreaChanged: {
+                    // calculate current view port and component height
+                    var userMediaListHeight = Math.ceil(userProfileMediaThumbnails.currentItemIndex / 2) * (Math.round(DisplayInfo.width / 2));
+                    var currentVisibleArea = viewableArea.height + viewableArea.y;
+
+                    // check if view port is at the bottom of the component height
+                    if (currentVisibleArea > userMediaListHeight) {
+                        // console.log("# List bottom reached");
+
+                        // check if there is another page available
+                        // if so, load the data
+                        if ((userProfileMediaThumbnails.paginationNextMaxId != "") && (userProfileMediaThumbnails.paginationNextMaxId != 0)) {
+                            // console.log("# List bottom reached. Next pagination id is " + userProfileMediaThumbnails.paginationNextMaxId);
+                            UserRepository.getUserMedia(userProfilePage.userData.userId, userProfileMediaThumbnails.paginationNextMaxId, userProfilePage);
+                            userProfileMediaThumbnails.paginationNextMaxId = 0;
+
+                            // show toast that new images are loading
+                            instagoCenterToast.body = "Loading more images..";
+                            instagoCenterToast.show();
                         }
                     }
                 }
@@ -153,12 +235,6 @@ NavigationPane {
 
             LoadingIndicator {
                 id: loadingIndicator
-                verticalAlignment: VerticalAlignment.Center
-                horizontalAlignment: HorizontalAlignment.Center
-            }
-
-            InfoMessage {
-                id: infoMessage
                 verticalAlignment: VerticalAlignment.Center
                 horizontalAlignment: HorizontalAlignment.Center
             }
@@ -196,6 +272,9 @@ NavigationPane {
             userProfileFollowersCount.narrowText = "followers";
             userProfileFollowingCount.boldText = userData.numberOfFollows;
             userProfileFollowingCount.narrowText = "following";
+
+            // load user media items
+            UserRepository.getUserMedia(userData.userId, 0, userProfilePage);
         }
 
         // user profile data could not be loaded or transformed
@@ -204,9 +283,31 @@ NavigationPane {
             // console.log("# User detail data could not be loaded. Error: " + errorData.errorMessage);
 
             // show error message
-            loadingIndicator.showLoader(errorData.errorMessage, "Error " + errorData.errorCode);
+            infoMessage.showMessage(errorData.errorMessage, "Error " + errorData.errorCode);
         }
 
+        // user media data loaded and transformed
+        // data is stored in "mediaDataArray" variant as array of type InstagramMediaData
+        onUserMediaDataLoaded: {
+            // console.log("# User media data loaded. Found " + mediaDataArray.length + " items");
+
+            // check if the result pagination id is another one than we already have
+            if (userProfileMediaThumbnails.paginationNextMaxId != paginationId) {
+                // set new pagination id to component
+                userProfileMediaThumbnails.paginationNextMaxId = paginationId;
+
+                // iterate through data objects
+                for (var index in mediaDataArray) {
+                    // add each object to the gallery list data model
+                    // console.log("# Adding item to list with ID: " + mediaDataArray[index].mediaId);
+                    userProfileMediaThumbnails.addToGallery(mediaDataArray[index]);
+                }
+
+                // show gallery component
+                userProfileMediaThumbnails.visible = true;
+                instagoCenterToast.cancel();
+            }
+        }
         // attach components
         attachedObjects: [
             // detail image page
