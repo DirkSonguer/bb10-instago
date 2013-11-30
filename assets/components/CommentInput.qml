@@ -26,14 +26,14 @@ Container {
     
     // make input field accessible by external components
     property alias text: mediaCommentInput.text
-
+    
     // layout orientation
     layout: StackLayout {
         orientation: LayoutOrientation.LeftToRight
     }
 
     // layout definition
-    topPadding: 15
+    topPadding: 5
     rightPadding: 5
     leftPadding: 5
     bottomPadding: 5
@@ -92,7 +92,7 @@ Container {
         // is used for messages
         SystemToast {
             id: commentInputToast
-            position: SystemUiPosition.TopCenter
+            position: SystemUiPosition.MiddleCenter
         }
     ]
 }

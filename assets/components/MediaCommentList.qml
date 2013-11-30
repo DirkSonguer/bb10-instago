@@ -19,6 +19,13 @@ Container {
     signal listBottomReached()
     signal listTopReached()
     signal listIsScrolling()
+    
+    // signal that comment has been added
+    // note that the actual logic is done by the component
+    signal commentAdded()
+    
+    // signal if item was clicked
+    signal itemClicked(variant commentData)
 
     // property that holds the id of the next image
     // this is given by Instagram for easy pagination
@@ -33,6 +40,10 @@ Container {
     // properties to define how the list should be sorted
     property string listSortingKey: "timestamp"
     property alias listSortAscending: mediaCommentListDataModel.sortedAscending
+    
+    // properties for the headline
+    property alias headerText: mediaCommentHeader.headline
+    property alias headerImage: mediaCommentHeader.image
 
     // signal to clear the gallery contents
     signal clearList()
@@ -53,13 +64,15 @@ Container {
             });
     }
 
-    // signal if item was clicked
-    signal itemClicked(variant commentData)
-
     // this is a workaround to make the signals visible inside the listview item scope
     // see here for details: http://supportforums.blackberry.com/t5/Cascades-Development/QML-Accessing-variables-defined-outside-a-list-component-from/m-p/1786265#M641
     onCreationCompleted: {
         Qt.fullDisplaySize = DisplayInfo.width;
+
+        if (mediaCommentListComponent.headerText != "") {
+            mediaCommentList.scrollToPosition(0, ScrollAnimation.None);
+            mediaCommentList.scroll(-205, ScrollAnimation.Smooth);
+        }
     }
 
     // layout orientation
@@ -73,6 +86,46 @@ Container {
         // associate the data model for the list view
         dataModel: mediaCommentListDataModel
 
+        leadingVisual: Container {
+            id: mediaCommentHeaderContainer
+            
+            // layout orientation
+            layout: StackLayout {
+                orientation: LayoutOrientation.TopToBottom
+            }
+            
+            // layout definition
+            bottomPadding: 5
+            
+            // set initial visibility to false
+            // will be set true when the headline is added
+            visible: false
+            
+            // likes header
+            PageHeader {
+                id: mediaCommentHeader
+                
+                // layout definition
+                bottomPadding: 5
+                
+                // make header component visible when content is added
+                onHeadlineChanged: {
+                    mediaCommentHeaderContainer.visible = true;
+                }
+            }
+            
+            // comment input container
+            CommentInput {
+                id: mediaCommentsInput
+                
+                // add comment signal
+                onCommentAdded: {
+                    mediaCommentListComponent.commentAdded();
+                    mediaCommentsInput.visible = true;
+                }
+            }                        
+        }
+        
         // layout orientation
         layout: StackListLayout {
             orientation: LayoutOrientation.TopToBottom

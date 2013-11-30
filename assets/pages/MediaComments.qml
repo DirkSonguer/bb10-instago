@@ -39,36 +39,6 @@ Page {
             orientation: LayoutOrientation.TopToBottom
         }
 
-        // comments header
-        PageHeader {
-            id: mediaCommentsHeader
-            
-            headline: "Comments"
-            image: mediaData.mediaStandardImage
-        }
-
-        // comment input container
-        CommentInput {
-            id: mediaCommentsInput
-
-            // layout definition
-            bottomMargin: 10
-            topMargin: 1
-
-            // add comment count
-            onCommentAdded: {
-                // show loader
-                loadingIndicator.showLoader("Loading comments");
-
-                // clear list
-                mediaCommentsList.clearList()
-
-                // start the timer
-                // this basically waits a second and then reloads the comment list
-                mediaCommentsTimer.start();
-            }
-        }
-
         // content container
         Container {
             // layout orientation
@@ -86,21 +56,30 @@ Page {
                 // newest comments on top
                 listSortingKey: "currentIndex"
                 listSortAscending: false
+                
+                // header text
+                headerText: "Comments"
 
+                // add comment count
+                onCommentAdded: {
+                    // show loader
+                    loadingIndicator.showLoader("Loading comments");
+                    
+                    // clear list
+                    mediaCommentsList.clearList()
+                    
+                    // start the timer
+                    // this basically waits a second and then reloads the comment list
+                    mediaCommentsTimer.start();
+                }
+                
                 onListIsScrolling: {
                     mediaCommentsInput.visible = false;
-                    mediaCommentsHeader.visible = false;
-                }
-
-                onListTopReached: {
-                    mediaCommentsInput.visible = true;
-                    mediaCommentsHeader.visible = true;
                 }
 
                 onItemClicked: {
                     // console.log("# Item clicked: " + userData.userId);
                     mediaCommentsInput.visible = true;
-                    mediaCommentsHeader.visible = true;
                     mediaCommentsInput.text = "@" + commentData.userData.username;
                 }
             }
@@ -117,6 +96,32 @@ Page {
                 horizontalAlignment: HorizontalAlignment.Center
             }
         }
+        
+        // comment input container
+        CommentInput {
+            id: mediaCommentsInput
+            
+            // layout definition
+            bottomMargin: 20
+            topMargin: 1
+            
+            // set initial visibility to false
+            // will be changed by logic
+            visible: false
+            
+            // add comment count
+            onCommentAdded: {
+                // show loader
+                loadingIndicator.showLoader("Loading comments");
+                
+                // clear list
+                mediaCommentsList.clearList()
+                
+                // start the timer
+                // this basically waits a second and then reloads the comment list
+                mediaCommentsTimer.start();
+            }
+        }        
     }
 
     // media data has changed
@@ -126,6 +131,9 @@ Page {
 
         // show loader
         loadingIndicator.showLoader("Loading comments");
+        
+        // add image
+        mediaCommentsList.headerImage = mediaData.mediaStandardImage;
 
         // load comments for given media item
         MediaRepository.getComments(mediaData.mediaId, mediaCommentsPage);

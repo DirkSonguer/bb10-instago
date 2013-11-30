@@ -101,7 +101,7 @@ Container {
                 onHeadlineChanged: {
                     userThumbnailHeaderContainer.visible = true;
                 }
-            }            
+            }                        
         }
 
         // layout orientation
