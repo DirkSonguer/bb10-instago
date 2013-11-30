@@ -107,7 +107,7 @@ NavigationPane {
                             // show followers list
                             onClicked: {
                                 var userFollowersPage = userFollowersComponent.createObject();
-                                userFollowersPage.userData = userData;
+                                userFollowersPage.userData = userProfilePage.userData;
                                 navigationPane.push(userFollowersPage);
                             }
                         }
@@ -127,7 +127,7 @@ NavigationPane {
                             // show followers list
                             onClicked: {
                                 var userFollowingPage = userFollowingComponent.createObject();
-                                userFollowingPage.userData = userData;
+                                userFollowingPage.userData = userProfilePage.userData;
                                 navigationPane.push(userFollowingPage);
                             }
                         }

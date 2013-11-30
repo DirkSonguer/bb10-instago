@@ -192,24 +192,24 @@ Container {
                     ListItem.onActivationChanged: {
                         if (active) {
                             // set opacity to transparent, image wil lfade into the background
-                            itemImage.opacity = 0.75
+                            itemImage.opacity = 0.5;
 
                             // set size so that image gets smaller on press
-                            itemImage.imageSize = Qt.thirdDisplaySize - 20
-                            imageDescriptionMask.preferredHeight = Qt.thirdDisplaySize - 20
-                            imageDescriptionMask.preferredWidth = Qt.thirdDisplaySize - 20
-                            imageDescriptionMask.minHeight = Qt.thirdDisplaySize - 20
-                            imageDescriptionMask.minWidth = Qt.thirdDisplaySize - 20
+                            itemImage.imageSize = Qt.thirdDisplaySize - 5;
+                            imageDescriptionMask.preferredHeight = Qt.thirdDisplaySize - 5;
+                            imageDescriptionMask.preferredWidth = Qt.thirdDisplaySize - 5;
+                            imageDescriptionMask.minHeight = Qt.thirdDisplaySize - 5;
+                            imageDescriptionMask.minWidth = Qt.thirdDisplaySize - 5;
                         } else {
                             // reset opacity to normal
-                            itemImage.opacity = 1.0
+                            itemImage.opacity = 1.0;
 
                             // set size so that image resets to normal on release
-                            itemImage.imageSize = Qt.thirdDisplaySize
-                            imageDescriptionMask.preferredHeight = Qt.thirdDisplaySize
-                            imageDescriptionMask.preferredWidth = Qt.thirdDisplaySize
-                            imageDescriptionMask.minHeight = Qt.thirdDisplaySize
-                            imageDescriptionMask.minWidth = Qt.thirdDisplaySize
+                            itemImage.imageSize = Qt.thirdDisplaySize;
+                            imageDescriptionMask.preferredHeight = Qt.thirdDisplaySize;
+                            imageDescriptionMask.preferredWidth = Qt.thirdDisplaySize;
+                            imageDescriptionMask.minHeight = Qt.thirdDisplaySize;
+                            imageDescriptionMask.minWidth = Qt.thirdDisplaySize;
                         }
                     }
                 }

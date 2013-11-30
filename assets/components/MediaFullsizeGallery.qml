@@ -180,16 +180,16 @@ Container {
                     ListItem.onActivationChanged: {
                         if (active) {
                             // set opacity to transparent, image wil lfade into the background
-                            itemImage.opacity = 0.5
+                            itemImage.opacity = 0.5;
 
                             // set size so that image gets smaller on press
-                            itemImage.imageSize = Qt.fullDisplaySize - 5
+                            itemImage.imageSize = Qt.fullDisplaySize - 5;
                         } else {
                             // reset opacity to normal
-                            itemImage.opacity = 1.0
+                            itemImage.opacity = 1.0;
 
                             // set size so that image resets to normal on release
-                            itemImage.imageSize = Qt.fullDisplaySize
+                            itemImage.imageSize = Qt.fullDisplaySize;
                         }
                     }
                 }
