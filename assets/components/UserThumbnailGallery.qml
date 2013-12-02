@@ -69,7 +69,7 @@ Container {
     // see here for details: http://supportforums.blackberry.com/t5/Cascades-Development/QML-Accessing-variables-defined-outside-a-list-component-from/m-p/1786265#M641
     onCreationCompleted: {
         Qt.thirdDisplaySize = Math.round(DisplayInfo.width / 3);
-        
+
         if (userThumbnailGalleryComponent.headerText != "") {
             userThumbnailGallery.scrollToPosition(0, ScrollAnimation.None);
             userThumbnailGallery.scroll(-105, ScrollAnimation.Smooth);
@@ -86,26 +86,31 @@ Container {
 
         // associate the data model for the list view
         dataModel: userThumbnailGalleryDataModel
-        
+
         leadingVisual: Container {
             id: userThumbnailHeaderContainer
-            
+
             // set initial visibility to false
             // will be set true when the headline is added
             visible: false
-            
+
             // likes header
             PageHeader {
                 id: userThumbnailHeader
-                
+
                 // layout definition
                 bottomPadding: 5
-                
+
+                // set initial visibility to false
+                // will be set true when the headline is added
+                visible: false
+
                 // make header component visible when content is added
                 onHeadlineChanged: {
+                    userThumbnailHeader.visible = true;
                     userThumbnailHeaderContainer.visible = true;
                 }
-            }                        
+            }
         }
 
         // layout orientation
@@ -132,38 +137,38 @@ Container {
                     // item positioning
                     verticalAlignment: VerticalAlignment.Fill
                     horizontalAlignment: HorizontalAlignment.Fill
-                    
+
                     // the actual thumbnail image
-					InstagramImageView {
+                    InstagramImageView {
                         id: itemImage
 
                         // position and layout properties
                         verticalAlignment: VerticalAlignment.Center
                         horizontalAlignment: HorizontalAlignment.Center
-                        
+
                         // set size, type and url
                         imageSize: Qt.thirdDisplaySize
                         mediaType: "image"
                         url: ListItemData.userData.profilePicture
-					}
-					
+                    }
+
                     // mask the profile image to make it round
                     ImageView {
                         id: imageDescriptionMask
-                        
+
                         // position and layout properties
                         verticalAlignment: VerticalAlignment.Center
                         horizontalAlignment: HorizontalAlignment.Center
-                        
+
                         // set image size to maximum profile picture size
                         preferredHeight: Qt.thirdDisplaySize
                         preferredWidth: Qt.thirdDisplaySize
                         minHeight: Qt.thirdDisplaySize
                         minWidth: Qt.thirdDisplaySize
-                        
+
                         imageSource: "asset:///images/mask_profile_pictures_default.png"
-                    }					
-					
+                    }
+
                     // image description
                     // dark gray container containing the text
                     Container {

@@ -23,11 +23,11 @@ Container {
     signal listBottomReached()
     signal listTopReached()
     signal listIsScrolling()
-    
+
     // signal that comment has been added
     // note that the actual logic is done by the component
     signal commentAdded()
-    
+
     // signal if item was clicked
     signal itemClicked(variant commentData)
 
@@ -44,7 +44,7 @@ Container {
     // properties to define how the list should be sorted
     property string listSortingKey: "timestamp"
     property alias listSortAscending: mediaCommentListDataModel.sortedAscending
-    
+
     // properties for the headline
     property alias headerText: mediaCommentHeader.headline
     property alias headerImage: mediaCommentHeader.image
@@ -92,44 +92,49 @@ Container {
 
         leadingVisual: Container {
             id: mediaCommentHeaderContainer
-            
+
             // layout orientation
             layout: StackLayout {
                 orientation: LayoutOrientation.TopToBottom
             }
-            
+
             // layout definition
             bottomPadding: 5
-            
+
             // set initial visibility to false
             // will be set true when the headline is added
             visible: false
-            
+
             // likes header
             PageHeader {
                 id: mediaCommentHeader
-                
+
                 // layout definition
                 bottomPadding: 5
-                
+
+                // set initial visibility to false
+                // will be set true when the headline is added
+                visible: false
+
                 // make header component visible when content is added
                 onHeadlineChanged: {
+                    mediaCommentHeader.visible = true;
                     mediaCommentHeaderContainer.visible = true;
                 }
             }
-            
+
             // comment input container
             CommentInput {
                 id: mediaCommentsInput
-                
+
                 // add comment signal
                 onCommentAdded: {
                     mediaCommentListComponent.commentAdded();
                     mediaCommentsInput.visible = true;
                 }
-            }                        
+            }
         }
-        
+
         // layout orientation
         layout: StackListLayout {
             orientation: LayoutOrientation.TopToBottom
@@ -151,7 +156,7 @@ Container {
                     // item positioning
                     verticalAlignment: VerticalAlignment.Fill
                     horizontalAlignment: HorizontalAlignment.Fill
-                    
+
                     // layout definition
                     topMargin: 1
 
@@ -175,7 +180,7 @@ Container {
         // add action for tap on item
         onTriggered: {
             var currentItemData = mediaCommentListDataModel.data(indexPath);
-            
+
             // send item clicked event
             mediaCommentListComponent.itemClicked(currentItemData.commentData);
         }

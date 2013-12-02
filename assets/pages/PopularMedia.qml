@@ -48,6 +48,9 @@ NavigationPane {
                 // gallery sorted by index
                 listSortingKey: "currentIndex"
                 listSortAscending: true
+                
+                // gallery header
+                // headerText: "Popular"
 
                 onItemClicked: {
                     // console.log("# Item clicked: " + mediaData.mediaId);
@@ -101,6 +104,11 @@ NavigationPane {
             // iterate through data objects
             for (var index in mediaDataArray) {
                 popularMediaThumbnails.addToGallery(mediaDataArray[index]);
+                
+                // add image for header, use the first image
+                if (index == 0) {
+                    popularMediaThumbnails.headerImage = mediaDataArray[index].mediaStandardImage;
+                }
             }
 
             // hide loader

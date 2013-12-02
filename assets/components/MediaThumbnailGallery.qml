@@ -38,7 +38,7 @@ Container {
     // properties to define how the list should be sorted
     property string listSortingKey: "timestamp"
     property alias listSortAscending: mediaThumbnailGalleryDataModel.sortedAscending
-    
+
     // properties for the headline
     property alias headerText: mediaThumbnailHeader.headline
     property alias headerImage: mediaThumbnailHeader.image
@@ -69,7 +69,7 @@ Container {
     // see here for details: http://supportforums.blackberry.com/t5/Cascades-Development/QML-Accessing-variables-defined-outside-a-list-component-from/m-p/1786265#M641
     onCreationCompleted: {
         Qt.halfDisplaySize = Math.round(DisplayInfo.width / 2);
-        
+
         if (mediaThumbnailGalleryComponent.headerText != "") {
             mediaThumbnailGallery.scrollToPosition(0, ScrollAnimation.None);
             mediaThumbnailGallery.scroll(-105, ScrollAnimation.Smooth);
@@ -89,23 +89,28 @@ Container {
 
         leadingVisual: Container {
             id: mediaThumbnailHeaderContainer
-            
+
             // set initial visibility to false
             // will be set true when the headline is added
             visible: false
-            
+
             // likes header
             PageHeader {
                 id: mediaThumbnailHeader
-                
+
                 // layout definition
                 bottomPadding: 5
-                
+
+                // set initial visibility to false
+                // will be set true when the headline is added
+                visible: false
+
                 // make header component visible when content is added
                 onHeadlineChanged: {
+                    mediaThumbnailHeader.visible = true;
                     mediaThumbnailHeaderContainer.visible = true;
                 }
-            }                        
+            }
         }
 
         // layout orientation
@@ -132,24 +137,24 @@ Container {
                     // item positioning
                     verticalAlignment: VerticalAlignment.Fill
                     horizontalAlignment: HorizontalAlignment.Fill
-                    
+
                     // item created time
                     property string itemCreatedTime: ListItemData.mediaData.createdTime
-                    
+
                     // the actual thumbnail image
-					InstagramImageView {
+                    InstagramImageView {
                         id: itemImage
 
                         // position and layout properties
                         verticalAlignment: VerticalAlignment.Center
                         horizontalAlignment: HorizontalAlignment.Center
-                        
+
                         // set size, type and url
                         imageSize: Qt.halfDisplaySize
                         mediaType: ListItemData.mediaData.mediaType
                         url: ListItemData.mediaData.mediaThumbnailUrl
-					}
-					
+                    }
+
                     // image description
                     // dark gray container containing the text
                     Container {
