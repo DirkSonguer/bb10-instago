@@ -3,6 +3,10 @@
 //
 // This component is a custom header with a background
 // color and image as well as a custom header text
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

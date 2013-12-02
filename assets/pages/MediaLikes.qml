@@ -3,6 +3,10 @@
 //
 // The media likes page shows a grid of users that have
 // liked the given media item.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

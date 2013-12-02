@@ -3,6 +3,10 @@
 //
 // The news sheet shows a webview with the Instago news
 // blog.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

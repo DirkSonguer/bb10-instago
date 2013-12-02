@@ -3,6 +3,10 @@
 //
 // This component shows the user profile image name and
 // the media caption text
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

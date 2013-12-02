@@ -4,6 +4,10 @@
 // This page is used when the user is not logged in.
 // It shows the login notification as well as a button
 // to start the login process (via the login sheet).
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

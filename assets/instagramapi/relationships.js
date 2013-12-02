@@ -4,6 +4,10 @@
 // This script is used to load, format and show user
 // relationship data as well as provide user actions
 // related to relationships.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 //include other scripts used here

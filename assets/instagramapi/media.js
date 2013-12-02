@@ -3,6 +3,10 @@
 
 // This script is used to handle all calls to the media
 // endpoints of Instagram.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 //*************************************************** //
 
 //include other scripts used here

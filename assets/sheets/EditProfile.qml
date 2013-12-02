@@ -5,6 +5,10 @@
 // of the currently logged in user.
 // If the user is not logged in, then a link to the
 // login process is shown.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

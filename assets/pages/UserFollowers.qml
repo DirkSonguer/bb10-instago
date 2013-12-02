@@ -3,6 +3,10 @@
 //
 // The user folloers page shows a gallery of users that
 // follow the current user.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

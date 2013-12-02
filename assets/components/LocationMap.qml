@@ -4,6 +4,10 @@
 // This component shows a map with the defined dimensions
 // and provides logic to show a simple marker in the
 // center of the map component.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

@@ -4,6 +4,10 @@
 // This file contains globally relevant text content.
 // Note that the var content is stable (making them
 // constants - if there was such a thing in JS).
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 var instagoAboutHeadline = "Instago";

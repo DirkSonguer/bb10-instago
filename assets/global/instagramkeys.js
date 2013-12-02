@@ -5,6 +5,10 @@
 // You can get your own here:
 // http://instagram.com/developer/clients/manage/
 // (you need to be logged into Instagram to create apps)
+//
+// Author: Dirk Songuer
+// License: All rights reserved
+// Do NOT use this API key :)
 // *************************************************** //
 
 //singleton instance of class

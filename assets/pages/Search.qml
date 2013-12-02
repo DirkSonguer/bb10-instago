@@ -3,6 +3,10 @@
 //
 // This page shows the search input field as well as
 // the respective search results.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

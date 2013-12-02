@@ -4,6 +4,10 @@
 // This component provides an input field for the
 // comments. It also handles the actual sending of the
 // comment data to Instagram.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

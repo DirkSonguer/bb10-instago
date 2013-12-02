@@ -3,6 +3,10 @@
 //
 // The personal feed page shows the media feed for the
 // currently logged in user.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

@@ -5,6 +5,10 @@
 // InstagramMediaData objects
 // It also handles the grey backgrounds while loading
 // as well as the video indicator and touch events
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

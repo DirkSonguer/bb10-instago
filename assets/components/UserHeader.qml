@@ -5,6 +5,10 @@
 // component. It's used for the user detai pages.
 // It also handles opening the browser if clicked on
 // the user website information.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

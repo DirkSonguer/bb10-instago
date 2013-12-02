@@ -4,6 +4,10 @@
 // This component acts as the like button. It shows the
 // current number of likes as well as provides the
 // functionality to like / unlike a media item.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

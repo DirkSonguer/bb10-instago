@@ -5,6 +5,10 @@
 // popular photos that can be tapped.
 // It is shown as default starting page if the user is
 // not logged in.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

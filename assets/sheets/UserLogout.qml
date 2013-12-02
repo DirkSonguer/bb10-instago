@@ -4,6 +4,10 @@
 // The user logout sheet uses a webview to trigger the
 // logout functionality of Instagram. The platform will
 // invalidate the session keys accordingly.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

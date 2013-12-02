@@ -6,6 +6,10 @@
 // the components for the main pages.
 // Note that the actual page content is defined in
 // the /pages.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

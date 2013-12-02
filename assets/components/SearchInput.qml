@@ -6,6 +6,10 @@
 // sending of the search parameters and receives the
 // answers, which are handed back to the using page
 // via the respective signals.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

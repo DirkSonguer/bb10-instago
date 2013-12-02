@@ -3,6 +3,10 @@
 //
 // The media comments page shows a list of user comments
 // for a given media item.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

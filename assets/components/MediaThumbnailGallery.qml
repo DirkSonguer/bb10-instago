@@ -4,6 +4,10 @@
 // This component shows a gallery of thumbnails with an
 // optional text field.
 // This component accepts data of type InstagramMediaData
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

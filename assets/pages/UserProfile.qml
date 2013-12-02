@@ -4,7 +4,11 @@
 // The user profile page shows the personal information
 // about the current user.
 // Note that is only the profile page of the currently
-// logged in user, not users in general
+// logged in user, not users in general.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

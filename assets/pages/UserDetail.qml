@@ -5,6 +5,10 @@
 // about a given user.
 // Note that is only the detail page, not the profile page
 // of the currently logged in user
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

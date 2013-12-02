@@ -4,6 +4,10 @@
 // This component acts as the comment button. It shows
 // the current number of comments as well as provides
 // the functionality to comment a media item.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

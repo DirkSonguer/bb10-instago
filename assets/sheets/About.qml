@@ -3,6 +3,10 @@
 //
 // The about sheet hows a description text for Instago
 // defined in the copytext file.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

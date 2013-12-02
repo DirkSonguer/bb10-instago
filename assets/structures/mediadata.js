@@ -3,6 +3,10 @@
 //
 // This structure holds media data for a single
 // Instagram media.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // data structure for Instagram media

@@ -6,6 +6,10 @@
 // The page has a number of features that can be
 // applied to the media item as well as the user that
 // uploaded it.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

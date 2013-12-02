@@ -3,6 +3,10 @@
 //
 // The user login sheet uses a webview to show the login
 // process of Instagram.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

@@ -5,6 +5,10 @@
 // current relationship state of the active user and the
 // given one. It also provides the state as external
 // property.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

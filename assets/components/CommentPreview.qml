@@ -5,6 +5,10 @@
 // user and comment message
 // This component accepts an array of data of type
 // InstagramCommentData
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

@@ -5,6 +5,10 @@
 // bold and narrow text. It also provides tap
 // functionality. It's used as base component by other
 // specialized buttons (eg. like and comment).
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components

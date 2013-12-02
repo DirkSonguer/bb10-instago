@@ -3,6 +3,10 @@
 //
 // This component shows an information message with
 // message content and header
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // import blackberry components
