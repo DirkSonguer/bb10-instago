@@ -149,6 +149,8 @@ NavigationPane {
                         narrowText: "Your favourites"
 
                         onClicked: {
+                            var userFavoritesPage = userFavoritesComponent.createObject();
+                            navigationPane.push(userFavoritesPage);
                         }
                     }
 
@@ -331,6 +333,12 @@ NavigationPane {
             ComponentDefinition {
                 id: userFollowingComponent
                 source: "UserFollowing.qml"
+            },
+            // follower list page
+            // will be called if user clicks on followers button
+            ComponentDefinition {
+                id: userFavoritesComponent
+                source: "UserFavorites.qml"
             }
         ]
     }

@@ -1,7 +1,7 @@
 // *************************************************** //
 // User Followers Page
 //
-// The user folloers page shows a gallery of users that
+// The user followers page shows a gallery of users that
 // follow the current user.
 //
 // Author: Dirk Songuer

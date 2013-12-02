@@ -1,8 +1,8 @@
 // *************************************************** //
 // User Following Page
 //
-// The user folloers page shows a gallery of users that
-// follow the current user.
+// The user following page shows a gallery of users that
+// the current user follows.
 //
 // Author: Dirk Songuer
 // License: GPL v2
