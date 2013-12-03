@@ -22,8 +22,11 @@ import WebImageView 1.0
 Container {
     id: mediaDescriptionComponent
 
+    // signal that profile has been clicked
+    signal profileClicked()
+
     // signal that description has been clicked
-    signal clicked()
+    signal descriptionClicked()
 
     // property for the user profile image given as url
     property alias userimage: mediaDescriptionProfileImage.url
@@ -97,6 +100,16 @@ Container {
 
             imageSource: "asset:///images/mask_profile_pictures_default.png"
         }
+        
+        // handle tap on profile picture
+        gestureHandlers: [
+            TapHandler {
+                onTapped: {
+                    // console.log("# User profile clicked");
+                    mediaDescriptionComponent.profileClicked();
+                }
+            }
+        ]
     }
 
     // username and caption container
@@ -129,6 +142,16 @@ Container {
             textStyle.textAlign: TextAlign.Left
             multiline: true
         }
+        
+        // handle tap on custom button
+        gestureHandlers: [
+            TapHandler {
+                onTapped: {
+                    // console.log("# Container clicked");
+                    mediaDescriptionComponent.descriptionClicked();
+                }
+            }
+        ]
     }
 
     // handle ui touch elements
@@ -161,13 +184,4 @@ Container {
             mediaDescriptionMask.imageSource = "asset:///images/mask_profile_pictures_default.png"
         }
     }
-
-    // handle tap on custom button
-    gestureHandlers: [
-        TapHandler {
-            onTapped: {
-                mediaDescriptionComponent.clicked();
-            }
-        }
-    ]
 }

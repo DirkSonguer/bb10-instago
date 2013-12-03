@@ -30,6 +30,9 @@ Container {
 
     // signal if item was clicked
     signal itemClicked(variant commentData)
+    
+    // signal if user was clicked
+    signal profileClicked(variant userData)
 
     // property that holds the id of the next image
     // this is given by Instagram for easy pagination
@@ -72,6 +75,8 @@ Container {
     // see here for details: http://supportforums.blackberry.com/t5/Cascades-Development/QML-Accessing-variables-defined-outside-a-list-component-from/m-p/1786265#M641
     onCreationCompleted: {
         Qt.fullDisplaySize = DisplayInfo.width;
+        Qt.itemClicked = mediaCommentListComponent.itemClicked;
+        Qt.profileClicked = mediaCommentListComponent.profileClicked;
 
         if (mediaCommentListComponent.headerText != "") {
             mediaCommentList.scrollToPosition(0, ScrollAnimation.None);
@@ -172,18 +177,20 @@ Container {
 
                         // show only one line of the caption
                         captionMultiline: true
+                        
+                        onProfileClicked: {
+                            // send user clicked event
+                            Qt.profileClicked(ListItemData.commentData.userData);
+                        }
+                        
+                        onDescriptionClicked: {
+                            // send item clicked event
+                            Qt.itemClicked(ListItemData.commentData);
+                        }
                     }
                 }
             }
         ]
-
-        // add action for tap on item
-        onTriggered: {
-            var currentItemData = mediaCommentListDataModel.data(indexPath);
-
-            // send item clicked event
-            mediaCommentListComponent.itemClicked(currentItemData.commentData);
-        }
 
         // add action for loading additional data after scrolling to bottom
         attachedObjects: [

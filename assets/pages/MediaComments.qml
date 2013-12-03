@@ -86,6 +86,13 @@ Page {
                     mediaCommentsInput.visible = true;
                     mediaCommentsInput.text = "@" + commentData.userData.username;
                 }
+                
+                onProfileClicked: {
+                    // console.log("# Item clicked: " + mediaData.userData.userId);
+                    var userDetailPage = userDetailComponent.createObject();
+                    userDetailPage.userData = userData;
+                    navigationPane.push(userDetailPage);
+                }
             }
 
             LoadingIndicator {

@@ -194,7 +194,14 @@ Page {
                     // layout definition
                     topMargin: 1
 
-                    onClicked: {
+                    onDescriptionClicked: {
+                        // console.log("# Item clicked: " + mediaData.userData.userId);
+                        var userDetailPage = userDetailComponent.createObject();
+                        userDetailPage.userData = mediaData.userData;
+                        navigationPane.push(userDetailPage);
+                    }
+
+                    onProfileClicked: {
                         // console.log("# Item clicked: " + mediaData.userData.userId);
                         var userDetailPage = userDetailComponent.createObject();
                         userDetailPage.userData = mediaData.userData;
@@ -347,12 +354,6 @@ Page {
         ComponentDefinition {
             id: mediaLikesComponent
             source: "MediaLikes.qml"
-        },
-        // video detail page
-        // will be called if user taps on a video preview
-        ComponentDefinition {
-            id: videoDetailComponent
-            source: "VideoDetail.qml"
         }
     ]
 }
