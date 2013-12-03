@@ -3,6 +3,10 @@
 //
 // This class contains methods to transform text
 // into rich text that includes links and other logic.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 //*************************************************** //
 
 // Class function that gets the prototype methods

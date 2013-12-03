@@ -10,6 +10,10 @@
 // app database (table: userdata).
 // Note that it's a class that needs to be defined first:
 // auth = new AuthenticationHandler();
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // include other scripts used here

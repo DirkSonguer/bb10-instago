@@ -3,6 +3,10 @@
 //
 // This script handles the UI changes when a login or
 // logout process (sucessfully) happened.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // include other scripts used here

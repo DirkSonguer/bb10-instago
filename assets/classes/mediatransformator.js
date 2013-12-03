@@ -3,6 +3,10 @@
 //
 // This class contains methods to transform the data
 // from Instagram into usable stuctures.
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 //*************************************************** //
 
 // include other scripts used here

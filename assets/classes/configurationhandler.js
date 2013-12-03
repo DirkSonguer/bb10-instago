@@ -7,6 +7,10 @@
 // local app database (table: configurationdata).
 // Note that it's a class that needs to be defined first:
 // auth = new ConfigurationHandler();
+//
+// Author: Dirk Songuer
+// License: GPL v2
+// See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
 // include other scripts used here
