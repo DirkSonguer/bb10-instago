@@ -1,7 +1,8 @@
 1
-83
+86
 classes/authenticationhandler.js
 classes/commenttransformator.js
+classes/configurationhandler.js
 classes/locationtransformator.js
 classes/loginuihandler.js
 classes/mediatransformator.js
@@ -47,6 +48,7 @@ images/icons/icon_profile.png
 images/icons/icon_reload.png
 images/icons/icon_search.png
 images/icons/icon_search_dimmed.png
+images/instago_introduction.png
 images/mask_profile_pictures_confirmed.png
 images/mask_profile_pictures_default.png
 images/mask_profile_pictures_highlight.png
@@ -76,6 +78,7 @@ pages/UserLogin.qml
 pages/UserProfile.qml
 sheets/About.qml
 sheets/EditProfile.qml
+sheets/Introduction.qml
 sheets/News.qml
 sheets/UserLogin.qml
 sheets/UserLogout.qml

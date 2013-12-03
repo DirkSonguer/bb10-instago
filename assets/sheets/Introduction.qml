@@ -1,8 +1,8 @@
 // *************************************************** //
-// About Sheet
+// Introduction Sheet
 //
-// The about sheet shows a description text for Instago
-// defined in the copytext file.
+// The introduction sheet shows an intro image on first
+// start of the application.
 //
 // Author: Dirk Songuer
 // License: GPL v2
@@ -20,22 +20,25 @@ import "../global/globals.js" as Globals
 import "../global/copytext.js" as Copytext
 
 Page {
-    // id: aboutSheet
     
     Container {
         // layout orientation
         layout: DockLayout {
         }
         
-        InfoMessage {
-            id: infoMessage
-            verticalAlignment: VerticalAlignment.Center
-            horizontalAlignment: HorizontalAlignment.Center
+        ScrollView {
+            id: introductionScrollContainer
+            scrollViewProperties {
+                scrollMode: ScrollMode.Vertical
+                pinchToZoomEnabled: false
+            }
+            
+            ImageView {
+                id: introductionImage
+                
+                imageSource: "asset:///images/instago_introduction.png"
+            }
         }
-    }
-    
-    onCreationCompleted: {
-        infoMessage.showMessage(Copytext.instagoAboutBody, Copytext.instagoAboutHeadline);
     }
     
     // close action for the sheet
@@ -48,7 +51,7 @@ Page {
             // close sheet when pressed
             // note that the sheet is defined in the main.qml
             onTriggered: {
-                aboutSheet.close();
+                introductionSheet.close();
             }
         }
     ]    

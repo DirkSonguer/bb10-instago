@@ -21,6 +21,7 @@ import "pages"
 
 // shared js files
 import "classes/authenticationhandler.js" as Authentication
+import "classes/configurationhandler.js" as Configuration
 import "classes/loginuihandler.js" as LoginUIHandler
 import "instagramapi/users.js" as UserRepository
 
@@ -172,6 +173,17 @@ TabbedPane {
             mainTabbedPane.activeTab = profileTab;
             mainTabbedPane.activeTab = personalFeedTab;
         }
+                
+        // check on startup for introduction sheet
+        var configurationData = Configuration.conf.getConfiguration("introduction");   
+        if (configurationData.length < 1) {
+            console.log("# Introduction not shown yet. Open intro sheet");
+            var introductionPage = introductionComponent.createObject();
+            introductionSheet.setContent(introductionPage);
+            introductionSheet.open();
+            
+            Configuration.conf.setConfiguration("introduction", "1");
+        }
     }
 
     // application menu (top menu)
@@ -305,6 +317,19 @@ TabbedPane {
                 ComponentDefinition {
                     id: editProfileComponent
                     source: "sheets/EditProfile.qml"
+                }
+            ]
+        },
+        // sheet for introduction page
+        // this is used automatically on first start
+        Sheet {
+            id: introductionSheet
+            
+            // attach a component for the about page
+            attachedObjects: [
+                ComponentDefinition {
+                    id: introductionComponent
+                    source: "sheets/Introduction.qml"
                 }
             ]
         },
