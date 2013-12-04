@@ -27,9 +27,6 @@ Container {
     // signal if media search data loading is complete
     signal searchMediaDataLoaded(variant mediaDataArray, string paginationId)
 
-    // signal if media search data loading encountered an error
-    signal searchMediaDataError(variant errorData)
-
     // signal that next media page should be loaded
     signal nextMediaPage(string paginationNextMaxId)
 

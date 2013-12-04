@@ -54,7 +54,7 @@ var instagoFlagCommentError = "Could not flag comment as inappropriate. Instagra
 var instagoNoLocationFound = "No media items found for this location";
 var instagoQueryCurrentPosition = "Trying to fix your current location";
 
-var instagoSearchNoItemsFound = "No items found for your search";
+var instagoSearchNoItemsFound = "No items could be found for your search";
 
 var instagoFollowUser = "Follow @";
 var instagoFollowingUser = "You follow @";

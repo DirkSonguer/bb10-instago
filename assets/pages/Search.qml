@@ -134,6 +134,17 @@ NavigationPane {
                         }
                     }
 
+                    // media search items error
+                    // show error output
+                    onSearchDataError: {
+                        infoMessage.showMessage(Copytext.instagoSearchNoItemsFound + " Reason: " + errorData.errorMessage, "Sorry");
+
+                        // hide loading indicator & show gallery
+                        loadingIndicator.hideLoader();
+                        searchMediaGallery.visible = false;
+                        instagoCenterToast.cancel();
+                    }
+
                     // user search items loaded
                     // show the user gallery accordingly
                     onSearchUserDataLoaded: {
