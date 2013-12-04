@@ -28,45 +28,37 @@ Page {
         layout: DockLayout {
         }
 
-        ScrollView {
-            id: newsWebViewScrollContainer
-            scrollViewProperties {
-                scrollMode: ScrollMode.Vertical
-                pinchToZoomEnabled: false
+        Container {
+            // layout orientation
+            layout: StackLayout {
+                orientation: LayoutOrientation.TopToBottom
             }
 
-            Container {
-                // layout orientation
-                layout: StackLayout {
-                    orientation: LayoutOrientation.TopToBottom
-                }
+            // layout definiton
+            verticalAlignment: VerticalAlignment.Center
+            horizontalAlignment: HorizontalAlignment.Center
+            leftPadding: 10
+            rightPadding: 10
 
-                // layout definiton
-                verticalAlignment: VerticalAlignment.Center
-                horizontalAlignment: HorizontalAlignment.Center
-                leftPadding: 10
-                rightPadding: 10
+            InfoMessage {
+                id: infoMessage
 
-                InfoMessage {
-                    id: infoMessage
+                leftPadding: 0
+                rightPadding: 0
+            }
 
-                    leftPadding: 0
-                    rightPadding: 0
-                }
+            CustomButton {
+                narrowText: "Login"
 
-                CustomButton {
-                    narrowText: "Login"
+                // layout definition
+                preferredWidth: DisplayInfo.width
+                topMargin: 30
 
-                    // layout definition
-                    preferredWidth: DisplayInfo.width
-                    topMargin: 30
-
-                    onClicked: {
-                        // create login sheet
-                        var loginPage = loginComponent.createObject();
-                        loginSheet.setContent(loginPage);
-                        loginSheet.open();
-                    }
+                onClicked: {
+                    // create login sheet
+                    var loginPage = loginComponent.createObject();
+                    loginSheet.setContent(loginPage);
+                    loginSheet.open();
                 }
             }
         }

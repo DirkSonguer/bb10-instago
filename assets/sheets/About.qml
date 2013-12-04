@@ -20,18 +20,17 @@ import "../global/globals.js" as Globals
 import "../global/copytext.js" as Copytext
 
 Page {
-    // id: aboutSheet
-
-    Container {
-        // layout orientation
-        layout: DockLayout {
+/*
+    ScrollView {
+        // only vertical scrolling is needed
+        scrollViewProperties {
+            scrollMode: ScrollMode.Vertical
+            pinchToZoomEnabled: false
         }
-
-        ScrollView {
-            // only vertical scrolling is needed
-            scrollViewProperties {
-                scrollMode: ScrollMode.Vertical
-                pinchToZoomEnabled: false
+*/
+        Container {
+            // layout orientation
+            layout: DockLayout {
             }
 
             Container {
@@ -41,6 +40,7 @@ Page {
                 }
 
                 // layout definiton
+                // layout definition
                 verticalAlignment: VerticalAlignment.Center
                 horizontalAlignment: HorizontalAlignment.Center
                 leftPadding: 10
@@ -52,28 +52,14 @@ Page {
                     leftPadding: 0
                     rightPadding: 0
                 }
-
-                // contact invocation trigger
-                CustomButton {
-                    narrowText: "Contact me"
-
-                    // layout definition
-                    preferredWidth: DisplayInfo.width
-                    topMargin: 30
-
-                    onClicked: {
-                        emailInvocation.query.uri = "mailto:appworld@songuer.de?subject=Instago Feedback";
-                        emailInvocation.query.updateQuery();
-                    }
-                }
-
+                
                 // introduction trigger
                 CustomButton {
                     narrowText: "Show introduction"
                     
                     // layout definition
                     preferredWidth: DisplayInfo.width
-                    topMargin: 1
+                    topMargin: 30
                     
                     onClicked: {
                         aboutSheet.close();
@@ -84,21 +70,22 @@ Page {
                     }
                 }
 
-                // bugreport invocation trigger
+                // contact invocation trigger
                 CustomButton {
-                    narrowText: "Report a bug"
+                    narrowText: "Contact me"
 
                     // layout definition
                     preferredWidth: DisplayInfo.width
                     topMargin: 1
 
                     onClicked: {
-                        bugReportInvocation.trigger("bb.action.OPEN");
+                        emailInvocation.query.uri = "mailto:appworld@songuer.de?subject=Instago Feedback";
+                        emailInvocation.query.updateQuery();
                     }
                 }
             }
         }
-    }
+//    }
 
     onCreationCompleted: {
         infoMessage.showMessage(Copytext.instagoAboutBody, Copytext.instagoAboutHeadline);
@@ -121,17 +108,6 @@ Page {
 
     // invocation for opening browser
     attachedObjects: [
-        // bug report invocation
-        Invocation {
-            id: bugReportInvocation
-            query {
-                InvokeQuery {
-                    mimeType: "text/html"
-                    uri: "https://github.com/DirkSonguer/InstagoBB10/issues"
-                    invokeActionId: "bb.action.OPEN"
-                }
-            }
-        },
         // contact invocation
         Invocation {
             id: emailInvocation
