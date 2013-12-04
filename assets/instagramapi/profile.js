@@ -29,7 +29,7 @@ function getProfileData(callingPage) {
 	var req = new XMLHttpRequest();
 	req.onreadystatechange = function() {
 		// this handles the result for each ready state
-		console.log("# Loading state: " + req.readyState);
+		// console.log("# Loading state: " + req.readyState);
 		
 		if (req.readyState === req.DONE) {
 			var formString = req.responseText;
@@ -42,7 +42,7 @@ function getProfileData(callingPage) {
 			var csrfmiddlewaretoken = formString.substr(tempIndexPosition + 34);
 			tempIndexPosition = csrfmiddlewaretoken.indexOf("\"");
 			csrfmiddlewaretoken = csrfmiddlewaretoken.substr(0, tempIndexPosition);
-			console.log("# Found csrfmiddlewaretoken: " + csrfmiddlewaretoken);
+			// console.log("# Found csrfmiddlewaretoken: " + csrfmiddlewaretoken);
 
 			tempIndexPosition = formString.indexOf("input name=\"first_name\" autocorrect=\"off\" value=");
 			var username = formString.substr(tempIndexPosition + 49);
@@ -50,7 +50,7 @@ function getProfileData(callingPage) {
 			tempIndexPosition = username.indexOf("\"");
 			console.log("Position: " + tempIndexPosition);
 			username = username.substr(0, tempIndexPosition);
-			console.log("# Found username: " + username);
+			// console.log("# Found username: " + username);
 		}		
 	};
 

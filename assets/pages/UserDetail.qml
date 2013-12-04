@@ -258,7 +258,7 @@ Page {
         if (Authentication.auth.isAuthenticated()) {
             UserRepository.getUserMedia(userDetailPage.userData.userId, 0, userDetailPage);
         } else {
-            console.log("# Showing message");
+            // console.log("# Showing message");
             infoMessage.showMessage(Copytext.instagoUserDetailNotLoggedIn, "User Media");
         }
 

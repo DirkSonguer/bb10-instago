@@ -71,7 +71,7 @@ Container {
             submitKey: SubmitKey.Submit
             onSubmitted: {
                 if (submitter.text.length > 0) {
-                    console.log("# Searching for " + searchInputComponent.searchType + " with terms " + submitter.text);
+                    // console.log("# Searching for " + searchInputComponent.searchType + " with terms " + submitter.text);
 
                     if (searchInputComponent.searchType == "media") {
                         // load media items with given search terms

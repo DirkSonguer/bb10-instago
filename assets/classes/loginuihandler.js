@@ -23,7 +23,7 @@ function LoginUIHandler() {
 
 // Set the UI to logged in state
 LoginUIHandler.prototype.setLoggedInState = function() {
-	console.log("# Changing UI to logged in state");
+	// console.log("# Changing UI to logged in state");
 
 	// changing available menu items
 	// first we remove all available items
@@ -53,7 +53,7 @@ LoginUIHandler.prototype.setLoggedInState = function() {
 
 // Set the UI to logged out state
 LoginUIHandler.prototype.setLoggedOutState = function() {
-	console.log("# Changing UI to logged out state");
+	// console.log("# Changing UI to logged out state");
 
 	// changing available menu items
 	// first we remove all available items

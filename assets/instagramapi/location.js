@@ -133,8 +133,6 @@ function getMediaForGeoLocation(GeoLocationObject, paginationId, callingPage) {
 	url += "&lat=" + GeoLocationObject.latitude;
 	url += "&lng=" + GeoLocationObject.longitude;
 	
-	console.log("# Location search URL: " + url);
-
 	// if a pagination id was given, add it to the request
 	if (paginationId !== 0) {
 		url += "&max_id=" + paginationId;

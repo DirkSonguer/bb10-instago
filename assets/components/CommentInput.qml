@@ -59,8 +59,7 @@ Container {
             submitKey: SubmitKey.Submit
             onSubmitted: {
                 if (submitter.text.length > 0) {
-                    console.log("# Adding comment: " + submitter.text);
-                    // add comment to image
+                    // console.log("# Adding comment: " + submitter.text);
                     MediaRepository.addComment(mediaData.mediaId, submitter.text, commentInputComponent);
 
                     // clear and hide the comment list, hide the input field and show the loader

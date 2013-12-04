@@ -108,15 +108,15 @@ Container {
                     onBufferStatusChanged: {
                         if (videoPlayer.bufferStatus == BufferStatus.Buffering) {
                             // show the loading indicator when loading started
-                            console.log("# Video buffering status Buffering");
+                            // console.log("# Video buffering status Buffering");
                             loadingIndicator.showLoader("");
                         } else if (videoPlayer.bufferStatus == BufferStatus.Playing) {
                             // hide the loading indictor when loading is complete
-                            console.log("# Video buffering status Playing");
+                            // console.log("# Video buffering status Playing");
                             loadingIndicator.hideLoader();
                         } else if (videoPlayer.bufferStatus == BufferStatus.Idle) {
                             // hide the loader when video player is idle
-                            console.log("# Video buffering status Idle");
+                            // console.log("# Video buffering status Idle");
                             loadingIndicator.hideLoader();
                         }
                     }
