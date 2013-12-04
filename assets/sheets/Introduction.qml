@@ -20,39 +20,43 @@ import "../global/globals.js" as Globals
 import "../global/copytext.js" as Copytext
 
 Page {
-    
+
     Container {
         // layout orientation
         layout: DockLayout {
         }
-        
+
         ScrollView {
-            id: introductionScrollContainer
+            // only vertical scrolling is needed
             scrollViewProperties {
                 scrollMode: ScrollMode.Vertical
                 pinchToZoomEnabled: false
             }
-            
+
             ImageView {
                 id: introductionImage
-                
-                imageSource: "asset:///images/instago_introduction.png"
+
+                // set width to full screen width
+                preferredWidth: DisplayInfo.width
+
+                // introduction is just an image
+                imageSource: "asset:///images/instago_introduction.jpg"
             }
         }
     }
-    
+
     // close action for the sheet
     actions: [
         ActionItem {
             title: "Close"
             ActionBar.placement: ActionBarPlacement.OnBar
             imageSource: "asset:///images/icons/icon_close.png"
-            
+
             // close sheet when pressed
             // note that the sheet is defined in the main.qml
             onTriggered: {
                 introductionSheet.close();
             }
         }
-    ]    
+    ]
 }

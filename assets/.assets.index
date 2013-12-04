@@ -1,5 +1,5 @@
 1
-86
+87
 classes/authenticationhandler.js
 classes/commenttransformator.js
 classes/configurationhandler.js
@@ -48,6 +48,7 @@ images/icons/icon_profile.png
 images/icons/icon_reload.png
 images/icons/icon_search.png
 images/icons/icon_search_dimmed.png
+images/instago_introduction.jpg
 images/instago_introduction.png
 images/mask_profile_pictures_confirmed.png
 images/mask_profile_pictures_default.png

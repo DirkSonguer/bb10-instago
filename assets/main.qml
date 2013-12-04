@@ -177,7 +177,7 @@ TabbedPane {
         // check on startup for introduction sheet
         var configurationData = Configuration.conf.getConfiguration("introduction");   
         if (configurationData.length < 1) {
-            console.log("# Introduction not shown yet. Open intro sheet");
+            // console.log("# Introduction not shown yet. Open intro sheet");
             var introductionPage = introductionComponent.createObject();
             introductionSheet.setContent(introductionPage);
             introductionSheet.open();

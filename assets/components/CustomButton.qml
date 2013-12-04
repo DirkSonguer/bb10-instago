@@ -44,7 +44,7 @@ Container {
     // layout definition
     topPadding: 30
     bottomPadding: 25
-    leftPadding: 30
+    leftPadding: 10
     rightPadding: 10
 
     // set initial background color

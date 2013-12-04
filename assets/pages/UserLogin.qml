@@ -23,58 +23,56 @@ import "../global/copytext.js" as Copytext
 Page {
     id: userLoginPage
 
-    // content container
     Container {
         // layout orientation
         layout: DockLayout {
         }
 
-        // actual content
-        // note shown when the user is not logged in
-        // this contains the button to open the login sheet
-        Container {
-            // layout definition
-            horizontalAlignment: HorizontalAlignment.Left
-            verticalAlignment: VerticalAlignment.Center
-
-            // login headline
-            Container {
-                leftPadding: 10
-                Label {
-                    text: qsTr("Login required")
-                    textStyle.base: SystemDefaults.TextStyles.BigText
-                    textStyle.fontWeight: FontWeight.W500
-                    textStyle.textAlign: TextAlign.Left
-                }
+        ScrollView {
+            id: newsWebViewScrollContainer
+            scrollViewProperties {
+                scrollMode: ScrollMode.Vertical
+                pinchToZoomEnabled: false
             }
 
-            // login detail text
             Container {
-                leftPadding: 15
-                rightPadding: 15
-                Label {
-                    text: qsTr(Copytext.instagoLoginBody)
-                    textStyle.base: SystemDefaults.TextStyles.BodyText
-                    textStyle.fontWeight: FontWeight.W100
-                    textStyle.textAlign: TextAlign.Left
-                    multiline: true
+                // layout orientation
+                layout: StackLayout {
+                    orientation: LayoutOrientation.TopToBottom
                 }
-            }
 
-            // login button
-            Button {
-                id: userProfileLoginButton
-                text: "Login"
-                topMargin: 25
-                horizontalAlignment: HorizontalAlignment.Center
+                // layout definiton
                 verticalAlignment: VerticalAlignment.Center
-                onClicked: {
-                    // create login sheet
-                    var loginPage = loginComponent.createObject();
-                    loginSheet.setContent(loginPage);
-                    loginSheet.open();
+                horizontalAlignment: HorizontalAlignment.Center
+                leftPadding: 10
+                rightPadding: 10
+
+                InfoMessage {
+                    id: infoMessage
+
+                    leftPadding: 0
+                    rightPadding: 0
+                }
+
+                CustomButton {
+                    narrowText: "Login"
+
+                    // layout definition
+                    preferredWidth: DisplayInfo.width
+                    topMargin: 30
+
+                    onClicked: {
+                        // create login sheet
+                        var loginPage = loginComponent.createObject();
+                        loginSheet.setContent(loginPage);
+                        loginSheet.open();
+                    }
                 }
             }
+        }
+
+        onCreationCompleted: {
+            infoMessage.showMessage(Copytext.instagoLoginBody, Copytext.instagoLoginHeadline);
         }
     }
 }
