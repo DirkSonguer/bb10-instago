@@ -86,11 +86,13 @@ Page {
                         // called pressButton() first
                         if (mediaDetailLikeButton.userHasLiked) {
                             instagoCenterToast.icon = "asset:///images/icons/icon_like.png";
+                            
                         } else {
                             instagoCenterToast.icon = "asset:///images/icons/icon_unlike.png";
                         }
                         
                         // show toast and remove icon for next use
+                        instagoCenterToast.body = "";
                         instagoCenterToast.show();
                         instagoCenterToast.icon = "";
                     }
