@@ -80,6 +80,19 @@ Page {
                     // this will also check for the login state of the user
                     onImageDoubleClicked: {
                         mediaDetailLikeButton.pressButton();
+                        
+                        // choose icon based on current like state
+                        // note that the state has changed by now because we
+                        // called pressButton() first
+                        if (mediaDetailLikeButton.userHasLiked) {
+                            instagoCenterToast.icon = "asset:///images/icons/icon_like.png";
+                        } else {
+                            instagoCenterToast.icon = "asset:///images/icons/icon_unlike.png";
+                        }
+                        
+                        // show toast and remove icon for next use
+                        instagoCenterToast.show();
+                        instagoCenterToast.icon = "";
                     }
                 }
                 
