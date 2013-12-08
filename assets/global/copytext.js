@@ -62,6 +62,9 @@ var instagoFollowPrivateUser = "Send follow request";
 var instagoFollowRequested = "You requested to follow @";
 var instagoFollowRequestedBy = " requested to follow you. Allow it?";
 
+var instagoFollowRequestConfirm = "is now following you";
+var instagoFollowRequestIgnore = "You ignored ";
+
 var instagoFollowersNotLoggedIn = "Please log into your Instagram account to see followers";
 
 var instagoWorking = "Working..";

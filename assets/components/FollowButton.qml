@@ -192,12 +192,17 @@ Container {
     }
 
     onUserRelationshipSet: {
-        // TODO: Add approve and ignore states
         // approve successfull
-        //        if (relationship == "approve") {
+        if (relationship == "approve") {
+            followButtonToast.body = followButtonComponent.username + Copytext.instagoFollowRequestConfirm;
+            followButtonToast.show();
+        }
 
         // ignore successfull
-        //        if (relationship == "ignore") {
+        if (relationship == "ignore") {
+            followButtonToast.body = Copytext.instagoFollowRequestIgnore + followButtonComponent.username;
+            followButtonToast.show();
+        }
 
         RelationshipRepository.getRelationship(followButtonComponent.userId, followButtonComponent);
     }
