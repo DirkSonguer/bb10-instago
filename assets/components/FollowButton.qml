@@ -44,7 +44,7 @@ Container {
 
     // layout orientation
     layout: StackLayout {
-        orientation: LayoutOrientation.LeftToRight
+        orientation: LayoutOrientation.TopToBottom
     }
 
     // actual like button component
@@ -57,11 +57,9 @@ Container {
 
         // position and layout properties
         alignText: HorizontalAlignment.Center
-
-        // position and layout properties
-        layoutProperties: StackLayoutProperties {
-            spaceQuota: 1.0
-        }
+        
+        // layout definition
+        preferredWidth: DisplayInfo.width
 
         // call logic on button press
         onClicked: {
@@ -71,6 +69,62 @@ Container {
         // set initial visibility to false
         // this will be changed if the relationship data is loaded
         visible: false
+    }
+    
+    // the like and comment button
+    Container {
+        id: allowFollowButtons
+        
+        // layout orientation
+        layout: StackLayout {
+            orientation: LayoutOrientation.LeftToRight
+        }
+        
+        // set initial visibiity to false
+        // will be set once data is loaded
+        visible: false
+        
+        // layout definition
+        topMargin: 1
+        
+        CustomButton {
+            id: allowFollowConfirm
+            
+            // position and layout properties
+            layoutProperties: StackLayoutProperties {
+                spaceQuota: 1.0
+            }
+            
+            // layout definition
+            rightMargin: 1
+            
+            // allow
+            narrowText: "Yes"
+            
+            // show followers list
+            onClicked: {
+                RelationshipRepository.setRelationship(followButtonComponent.userId, "approve", followButtonComponent);
+                allowFollowButtons.visible = false;
+            }
+        }
+        
+        CustomButton {
+            id: allowFollowDeny
+            
+            // position and layout properties
+            layoutProperties: StackLayoutProperties {
+                spaceQuota: 1.0
+            }
+            
+            // deny
+            narrowText: "No"
+            
+            // show followers list
+            onClicked: {
+                RelationshipRepository.setRelationship(followButtonComponent.userId, "ignore", followButtonComponent);
+                allowFollowButtons.visible = false;
+            }
+        }
     }
 
     // user id is set
@@ -123,9 +177,9 @@ Container {
         // check if user wants to follow the current user (only relevant if current user is private)
         if (relationshipData.incoming_status === "requested_by") {
             // console.log("# User " + userData.userId + " wants to follow current user");
-            // TODO: Show follow request confirmation option
             followButton.narrowText = followButtonComponent.username + Copytext.instagoFollowRequestedBy;
             followButtonComponent.userRelationship = "requested_by";
+            allowFollowButtons.visible = true;
         }
 
         followButton.visible = true;

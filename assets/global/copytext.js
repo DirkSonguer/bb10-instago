@@ -60,7 +60,7 @@ var instagoFollowUser = "Follow @";
 var instagoFollowingUser = "You follow @";
 var instagoFollowPrivateUser = "Send follow request";
 var instagoFollowRequested = "You requested to follow @";
-var instagoFollowRequestedBy = " requested to follow you";
+var instagoFollowRequestedBy = " requested to follow you. Allow it?";
 
 var instagoFollowersNotLoggedIn = "Please log into your Instagram account to see followers";
 
