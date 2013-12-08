@@ -57,7 +57,7 @@ Container {
 
         // position and layout properties
         alignText: HorizontalAlignment.Center
-        
+
         // layout definition
         preferredWidth: DisplayInfo.width
 
@@ -70,55 +70,55 @@ Container {
         // this will be changed if the relationship data is loaded
         visible: false
     }
-    
+
     // the like and comment button
     Container {
         id: allowFollowButtons
-        
+
         // layout orientation
         layout: StackLayout {
             orientation: LayoutOrientation.LeftToRight
         }
-        
+
         // set initial visibiity to false
         // will be set once data is loaded
         visible: false
-        
+
         // layout definition
         topMargin: 1
-        
+
         CustomButton {
             id: allowFollowConfirm
-            
+
             // position and layout properties
             layoutProperties: StackLayoutProperties {
                 spaceQuota: 1.0
             }
-            
+
             // layout definition
             rightMargin: 1
-            
+
             // allow
             narrowText: "Yes"
-            
+
             // show followers list
             onClicked: {
                 RelationshipRepository.setRelationship(followButtonComponent.userId, "approve", followButtonComponent);
                 allowFollowButtons.visible = false;
             }
         }
-        
+
         CustomButton {
             id: allowFollowDeny
-            
+
             // position and layout properties
             layoutProperties: StackLayoutProperties {
                 spaceQuota: 1.0
             }
-            
+
             // deny
             narrowText: "No"
-            
+
             // show followers list
             onClicked: {
                 RelationshipRepository.setRelationship(followButtonComponent.userId, "ignore", followButtonComponent);
@@ -204,6 +204,7 @@ Container {
             followButtonToast.show();
         }
 
+        // reload relationship state after update
         RelationshipRepository.getRelationship(followButtonComponent.userId, followButtonComponent);
     }
 

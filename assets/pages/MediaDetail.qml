@@ -69,6 +69,7 @@ Page {
                     // call video page if media type is a video
                     onImageClicked: {
                         if (mediaData.mediaType == "video") {
+                            // console.log("# Video preview image clicked");
                             mediaDetailImage.visible = false;
                             mediaDetailVideoPlayer.visible = true;
                             mediaDetailVideoPlayer.playVideo();

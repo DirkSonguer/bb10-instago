@@ -81,6 +81,7 @@ Container {
                         // player is started and playing
                         // changing controls accordingly
                         if (videoPlayer.mediaState == MediaState.Started) {
+                            // console.log("# Video player started");
                             videoPlayerComponent.videoIsPaused = false;
                             videoPlayerComponent.videoIsPlaying = true;
                             videoPlayButton.visible = false;
@@ -173,22 +174,31 @@ Container {
                     if (videoPlayerComponent.videoIsPlaying) {
                         videoPlayer.stop();
                     } else {
+                        // console.log("# Sending play() signal to video player");
+                        loadingIndicator.showLoader("");
                         videoPlayer.play();
                     }
                 }
             }
         ]
     }
+    
+    // start loader on creation
+    onCreationCompleted: {
+        loadingIndicator.showLoader("Loading video");
+    }
 
     // play video
     onPlayVideo: {
         if ((videoPlayer.sourceUrl != "") && (videoIsPlaying == false)) {
-            // play video
-            videoPlayer.play();
+            // console.log("# Sending play() signal to video player");
 
             // show initial loading indicator
-            // whill be changed by video player according to buffer state
+            // will be changed by video player according to buffer state
             loadingIndicator.showLoader("");
+
+            // play video
+            videoPlayer.play();
         }
     }
 }

@@ -325,7 +325,7 @@ function addComment(mediaId, commentText, callingPage) {
 // Third parameter is the id of the calling page, which will receive the
 // commentDeleted() signal
 function deleteComment(mediaId, commentId, callingPage) {
-	console.log("Deleting comment with id " + commentId);
+	// console.log("Deleting comment with id " + commentId);
 
 	var req = new XMLHttpRequest();
 	req.onreadystatechange = function() {
