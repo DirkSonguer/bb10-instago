@@ -81,33 +81,107 @@ Page {
                     // this will also check for the login state of the user
                     onImageDoubleClicked: {
                         mediaDetailLikeButton.pressButton();
-                        
+
                         // choose icon based on current like state
                         // note that the state has changed by now because we
                         // called pressButton() first
                         if (mediaDetailLikeButton.userHasLiked) {
                             instagoCenterToast.icon = "asset:///images/icons/icon_like.png";
-                            
+
                         } else {
                             instagoCenterToast.icon = "asset:///images/icons/icon_unlike.png";
                         }
-                        
+
                         // show toast and remove icon for next use
                         instagoCenterToast.body = "";
                         instagoCenterToast.show();
                         instagoCenterToast.icon = "";
                     }
+
+                    // context menu for image
+                    // this will be deactivated based on login state on creation
+                    contextActions: [
+                        ActionSet {
+                            id: mediaDetailActionSet
+                            title: "Image Actions"
+
+                            // comment image action
+                            ActionItem {
+                                id: mediaDetailCommentImageAction
+                                imageSource: "asset:///images/icons/icon_comments.png"
+                                title: "Show comments"
+
+                                // click action
+                                onTriggered: {
+                                    var mediaCommentsPage = mediaCommentsComponent.createObject();
+                                    mediaCommentsPage.mediaData = mediaDetailPage.mediaData;
+                                    navigationPane.push(mediaCommentsPage);
+                                }
+
+                                // shortcut for action
+                                shortcuts: [
+                                    Shortcut {
+                                        key: "c"
+
+                                        onTriggered: {
+                                            mediaDetailCommentImageAction.triggered();
+                                        }
+                                    }
+                                ]
+                            }
+
+                            // like image action
+                            ActionItem {
+                                id: mediaDetailLikeImageAction
+                                imageSource: "asset:///images/icons/icon_like.png"
+                                title: Copytext.instagoAddLike
+
+                                // click action
+                                onTriggered: {
+                                    mediaDetailLikeButton.pressButton();
+                                }
+
+                                // shortcut for action
+                                shortcuts: [
+                                    Shortcut {
+                                        key: "l"
+
+                                        onTriggered: {
+                                            mediaDetailLikeButton.pressButton();
+                                        }
+                                    }
+                                ]
+                            }
+
+                            // open in browser
+                            InvokeActionItem {
+                                id: mediaDetailOpenBrowserAction
+
+                                // query data
+                                query {
+                                    mimeType: "text/html"
+                                    invokeActionId: "bb.action.OPEN"
+
+                                    // note that when the url is set after creation
+                                    // the query has to be updated
+                                    onUriChanged: {
+                                        mediaDetailOpenBrowserAction.query.updateQuery();
+                                    }
+                                }
+                            }
+                        }
+                    ]
                 }
-                
+
                 // video player
                 VideoPlayer {
                     id: mediaDetailVideoPlayer
-                    
+
                     // set initial visibility to false
                     // will be changed by mediaDetailImage
-                    visible: false;
+                    visible: false
                 }
-                
+
                 // the like and comment button
                 Container {
                     // layout orientation
@@ -134,11 +208,15 @@ Page {
                         // increase like count
                         onLikeAdded: {
                             mediaDetailLikeButton.count = parseInt(mediaDetailLikeButton.count) + 1;
+                            mediaDetailLikeImageAction.imageSource = "asset:///images/icons/icon_unlike.png";
+                            mediaDetailLikeImageAction.title = Copytext.instagoRemoveLike;
                         }
 
                         // decrease like count
                         onLikeRemoved: {
                             mediaDetailLikeButton.count = parseInt(mediaDetailLikeButton.count) - 1;
+                            mediaDetailLikeImageAction.imageSource = "asset:///images/icons/icon_like.png";
+                            mediaDetailLikeImageAction.title = Copytext.instagoAddLike;
                         }
 
                         // like button long pressed
@@ -302,6 +380,12 @@ Page {
             ChromeVisibility.Hidden;
         }
 
+        // remove action items if user is not logged in
+        if (! Authentication.auth.isAuthenticated()) {
+            mediaDetailActionSet.remove(mediaDetailLikeImageAction);
+            mediaDetailActionSet.remove(mediaDetailCommentImageAction);
+        }
+
         // show loader
         loadingIndicator.showLoader("Loading media data");
     }
@@ -316,11 +400,11 @@ Page {
         mediaDetailContainer.visible = true;
         mediaDetailImage.url = mediaData.mediaStandardImage;
         mediaDetailImage.mediaType = mediaData.mediaType;
-        
+
         if (mediaData.mediaType == "video") {
             mediaDetailVideoPlayer.videoSource = mediaData.mediaStandardVideo;
         }
-        
+
         // image description (profile picture, name and image description)
         mediaDetailMediaDescription.userimage = mediaData.userData.profilePicture;
         mediaDetailMediaDescription.username = mediaData.userData.username;
@@ -348,6 +432,13 @@ Page {
             mediaDetailLocation.altitude = 1500;
             mediaDetailLocation.pinText = mediaData.locationName;
             mediaDetailLocation.visible = true;
+        }
+
+        // set browser invocation data accordingly
+        if ((typeof mediaData.linkToInstagram !== "undefined") && (mediaData.linkToInstagram != "")) {
+            mediaDetailOpenBrowserAction.query.uri = mediaData.linkToInstagram;
+        } else {
+            mediaDetailActionSet.remove(mediaDetailOpenBrowserAction);
         }
     }
 
