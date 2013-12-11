@@ -20,72 +20,73 @@ import "../global/globals.js" as Globals
 import "../global/copytext.js" as Copytext
 
 Page {
-/*
-    ScrollView {
-        // only vertical scrolling is needed
-        scrollViewProperties {
-            scrollMode: ScrollMode.Vertical
-            pinchToZoomEnabled: false
+    /*
+     * ScrollView {
+     * // only vertical scrolling is needed
+     * scrollViewProperties {
+     * scrollMode: ScrollMode.Vertical
+     * pinchToZoomEnabled: false
+     * }
+     */
+    Container {
+        // layout orientation
+        layout: DockLayout {
         }
-*/
+
         Container {
             // layout orientation
-            layout: DockLayout {
+            layout: StackLayout {
+                orientation: LayoutOrientation.TopToBottom
             }
 
-            Container {
-                // layout orientation
-                layout: StackLayout {
-                    orientation: LayoutOrientation.TopToBottom
-                }
+            // layout definiton
+            // layout definition
+            verticalAlignment: VerticalAlignment.Center
+            horizontalAlignment: HorizontalAlignment.Center
+            leftPadding: 10
+            rightPadding: 10
 
-                // layout definiton
+            InfoMessage {
+                id: infoMessage
+
+                leftPadding: 0
+                rightPadding: 0
+            }
+
+            // introduction trigger
+            CustomButton {
+                narrowText: "Show introduction"
+
                 // layout definition
-                verticalAlignment: VerticalAlignment.Center
-                horizontalAlignment: HorizontalAlignment.Center
-                leftPadding: 10
-                rightPadding: 10
+                preferredWidth: DisplayInfo.width
+                topMargin: 30
 
-                InfoMessage {
-                    id: infoMessage
+                // close about sheet and call up introduction sheet
+                onClicked: {
+                    aboutSheet.close();
 
-                    leftPadding: 0
-                    rightPadding: 0
+                    var introductionPage = introductionComponent.createObject();
+                    introductionSheet.setContent(introductionPage);
+                    introductionSheet.open();
                 }
-                
-                // introduction trigger
-                CustomButton {
-                    narrowText: "Show introduction"
-                    
-                    // layout definition
-                    preferredWidth: DisplayInfo.width
-                    topMargin: 30
-                    
-                    onClicked: {
-                        aboutSheet.close();
-                        
-                        var introductionPage = introductionComponent.createObject();
-                        introductionSheet.setContent(introductionPage);
-                        introductionSheet.open();
-                    }
-                }
+            }
 
-                // contact invocation trigger
-                CustomButton {
-                    narrowText: "Contact me"
+            // contact invocation trigger
+            CustomButton {
+                narrowText: "Contact developer"
 
-                    // layout definition
-                    preferredWidth: DisplayInfo.width
-                    topMargin: 1
+                // layout definition
+                preferredWidth: DisplayInfo.width
+                topMargin: 1
 
-                    onClicked: {
-                        emailInvocation.query.uri = "mailto:appworld@songuer.de?subject=Instago Feedback";
-                        emailInvocation.query.updateQuery();
-                    }
+                // trigger email invocation
+                onClicked: {
+                    emailInvocation.trigger(emailInvocation.query.invokeActionId);
                 }
             }
         }
-//    }
+    }
+    //    }
 
     onCreationCompleted: {
         infoMessage.showMessage(Copytext.instagoAboutBody, Copytext.instagoAboutHeadline);
@@ -111,11 +112,13 @@ Page {
         // contact invocation
         Invocation {
             id: emailInvocation
-            query.mimeType: "text/plain"
-            query.invokeTargetId: "sys.pim.uib.email.hybridcomposer"
-            query.invokeActionId: "bb.action.SENDEMAIL"
-            onArmed: {
-                emailInvocation.trigger(emailInvocation.query.invokeActionId);
+
+            // query data
+            query {
+                mimeType: "text/plain"
+                invokeTargetId: "sys.pim.uib.email.hybridcomposer"
+                invokeActionId: "bb.action.SENDEMAIL"
+                uri: "mailto:appworld@songuer.de?subject=Instago Feedback"
             }
         }
     ]
