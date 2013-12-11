@@ -301,6 +301,18 @@ Page {
                         userDetailPage.userData = mediaData.userData;
                         navigationPane.push(userDetailPage);
                     }
+                    
+                    onDescriptionUsernameClicked: {
+                    	// console.log("# Username clicked in description: " + username);
+                        var userDetailPage = userDetailComponent.createObject();
+                        userDetailPage.loadUserDataByName(username);
+                        navigationPane.push(userDetailPage);
+                    }
+
+                    onDescriptionHashtagClicked: {
+                        console.log("# Hashtag clicked in description: " + hashtag);
+                        
+                    }                    
                 }
 
                 // image location
@@ -408,7 +420,8 @@ Page {
         // image description (profile picture, name and image description)
         mediaDetailMediaDescription.userimage = mediaData.userData.profilePicture;
         mediaDetailMediaDescription.username = mediaData.userData.username;
-        mediaDetailMediaDescription.imagecaption = mediaData.caption;
+        // mediaDetailMediaDescription.imagecaption = mediaData.caption;
+        mediaDetailMediaDescription.imagecaption = mediaData.richCaption;
 
         // likes + comments
         mediaDetailLikeButton.count = mediaData.numberOfLikes;

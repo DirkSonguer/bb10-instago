@@ -41,6 +41,16 @@ Page {
 
     // signal if user media data loading encountered an error
     signal userMediaDataError(variant errorData)
+    
+    // signal if user profile data loading is complete
+    signal userIdLoaded(variant userData)
+    
+    // signal if user profile data loading encountered an error
+    signal userIdError(variant errorData)
+
+    // this is used by an external page to load the respective user data
+    // based on the user name alone
+    signal loadUserDataByName(string username)
 
     // property that holds the user data to load
     // this is filled by the calling page
@@ -187,9 +197,9 @@ Page {
                     // layout orientation
                     layout: DockLayout {
                     }
-                    
+
                     verticalAlignment: VerticalAlignment.Fill
-                    
+
                     InfoMessage {
                         id: infoMessage
                         verticalAlignment: VerticalAlignment.Center
@@ -302,6 +312,27 @@ Page {
 
         // show error message
         loadingIndicator.showLoader(errorData.errorMessage, "Error " + errorData.errorCode);
+    }
+
+
+    
+    onLoadUserDataByName: {
+        console.log("# Loading userdata for username " + username);
+        
+        // show loader
+        loadingIndicator.showLoader("Loading user data");
+        
+        // get the user id for the given user name
+        UserRepository.getUserIdByName(username, userDetailPage);        
+    }
+    
+    // user data is loaded here and handed over
+    onUserIdLoaded: {
+        // console.log("# User data loaded for name: " + userData.username + " with id: " + userData.userId);
+        
+        // hand over data to global userData structure
+        // this will load the additional data and fill the page components
+        userDetailPage.userData = userData;
     }
 
     // user media data loaded and transformed

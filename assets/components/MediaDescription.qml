@@ -28,6 +28,11 @@ Container {
     // signal that description has been clicked
     signal descriptionClicked()
 
+    // signal that a link inside the description has been clicked
+    // this can either be a username or a hashtag
+    signal descriptionUsernameClicked(string username)
+    signal descriptionHashtagClicked(string hashtag)
+    
     // property for the user profile image given as url
     property alias userimage: mediaDescriptionProfileImage.url
 
@@ -40,7 +45,7 @@ Container {
     // flag if caption should be shown completely (multiline) or
     // just as one line (false)
     property alias captionMultiline: mediaDescriptionCaption.multiline
-    
+
     // flag if description should be in confirmed mode
     // this will set a confirmed background color and mask
     property bool confirmed: false
@@ -100,7 +105,7 @@ Container {
 
             imageSource: "asset:///images/mask_profile_pictures_default.png"
         }
-        
+
         // handle tap on profile picture
         gestureHandlers: [
             TapHandler {
@@ -141,8 +146,25 @@ Container {
             textStyle.fontWeight: FontWeight.W100
             textStyle.textAlign: TextAlign.Left
             multiline: true
+
+            // this is a handler that tracks active interaction with the label
+            // basically this acts as a touch handler for special label content
+            activeTextHandler: ActiveTextHandler {
+                onTriggered: {
+                    // console.log("# Link inside caption was clicked: " + String(event.href));
+                    var linkString = new String(event.href);
+                    
+                    // identify if link was a username or a hashtag
+                    // send signal accordingly
+                    if (linkString.indexOf("ser:") == 1) {
+                        descriptionUsernameClicked(linkString.substring(5));
+                    } else {
+                        descriptionHashtagClicked(linkString.substring(8));
+                    }
+                }
+            }
         }
-        
+
         // handle tap on custom button
         gestureHandlers: [
             TapHandler {

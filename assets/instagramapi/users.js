@@ -100,8 +100,7 @@ function getUserMedia(userId, paginationId, callingPage) {
 			for ( var index in jsonObject.data) {
 				// get image object and store it into return object
 				var mediaItem = new InstagramMediaData();
-				mediaItem = mediaTransformator
-						.getMediaDataFromObject(jsonObject.data[index]);
+				mediaItem = mediaTransformator.getMediaDataFromObject(jsonObject.data[index]);
 				mediaDataArray[index] = mediaItem;
 			}
 
@@ -146,7 +145,7 @@ function getUserMedia(userId, paginationId, callingPage) {
 // First parameter is the user name to get the id for
 // Second parameter is the id of the calling page, which will receive the
 // userIdLoaded() signal
-function getUserIdByName(userName, callingPage) {
+function getUserIdByName(username, callingPage) {
 	// console.log("# Loading user profile for user with name " + userName);
 
 	var req = new XMLHttpRequest();
@@ -169,8 +168,14 @@ function getUserIdByName(userName, callingPage) {
 				}
 			}
 
+	        // fill instagramUserData structure
+	        var userData = new InstagramUserData();
+	        userData.userId = foundUserId;
+	        userData.username = username;
+	        userData.fullName = username;
+
 			// console.log("# Done loading user is by name");
-			callingPage.userIdLoaded(foundUserId, userName);
+			callingPage.userIdLoaded(userData);
 		} else {
 			// normally there is no need for error handling here the normal
 			// user page will execute getRelationship, which will handle the
@@ -194,7 +199,7 @@ function getUserIdByName(userName, callingPage) {
 
 	// only authenticated users can request the user id / do a user search
 	var instagramUserdata = auth.getStoredInstagramData();
-	var url = instagramkeys.instagramAPIUrl + "/v1/users/search?q=" + userName
+	var url = instagramkeys.instagramAPIUrl + "/v1/users/search?q=" + username
 			+ "&count=1&access_token=" + instagramUserdata["access_token"];
 
 	req.open("GET", url, true);
