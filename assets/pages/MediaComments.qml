@@ -88,9 +88,16 @@ Page {
                 }
                 
                 onProfileClicked: {
-                    // console.log("# Item clicked: " + mediaData.userData.userId);
+                    // console.log("# User clicked: " + mediaData.userData.userId);
                     var userDetailPage = userDetailComponent.createObject();
                     userDetailPage.userData = userData;
+                    navigationPane.push(userDetailPage);
+                }
+                
+                onDescriptionUsernameClicked: {
+                    // console.log("# User link clicked in comment: " + username);
+                    var userDetailPage = userDetailComponent.createObject();
+                    userDetailPage.loadUserDataByName(username);
                     navigationPane.push(userDetailPage);
                 }
             }

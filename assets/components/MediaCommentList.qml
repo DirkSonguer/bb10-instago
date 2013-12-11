@@ -33,6 +33,11 @@ Container {
     
     // signal if user was clicked
     signal profileClicked(variant userData)
+    
+    // signal that a link inside the description has been clicked
+    // this can either be a username or a hashtag
+    signal descriptionUsernameClicked(string username)
+    signal descriptionHashtagClicked(string hashtag)
 
     // property that holds the id of the next image
     // this is given by Instagram for easy pagination
@@ -77,6 +82,8 @@ Container {
         Qt.fullDisplaySize = DisplayInfo.width;
         Qt.itemClicked = mediaCommentListComponent.itemClicked;
         Qt.profileClicked = mediaCommentListComponent.profileClicked;
+        Qt.descriptionUsernameClicked = mediaCommentListComponent.descriptionUsernameClicked;
+        Qt.descriptionHashtagClicked = mediaCommentListComponent.descriptionHashtagClicked;
 
         if (mediaCommentListComponent.headerText != "") {
             mediaCommentList.scrollToPosition(0, ScrollAnimation.None);
@@ -173,7 +180,7 @@ Container {
                         // image description (profile picture, name and image description)
                         userimage: ListItemData.commentData.userData.profilePicture
                         username: ListItemData.commentData.userData.username
-                        imagecaption: ListItemData.commentData.text
+                        imagecaption: ListItemData.commentData.richText
 
                         // show only one line of the caption
                         captionMultiline: true
@@ -186,6 +193,15 @@ Container {
                         onDescriptionClicked: {
                             // send item clicked event
                             Qt.itemClicked(ListItemData.commentData);
+                        }
+                        
+                        onDescriptionUsernameClicked: {
+                            // send username clicked event
+                            Qt.descriptionUsernameClicked(username);
+                        }
+                        
+                        onDescriptionHashtagClicked: {
+                            
                         }
                     }
                 }

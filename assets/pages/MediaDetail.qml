@@ -303,7 +303,7 @@ Page {
                     }
                     
                     onDescriptionUsernameClicked: {
-                    	// console.log("# Username clicked in description: " + username);
+                    	// console.log("# User link clicked in description: " + username);
                         var userDetailPage = userDetailComponent.createObject();
                         userDetailPage.loadUserDataByName(username);
                         navigationPane.push(userDetailPage);
@@ -420,7 +420,6 @@ Page {
         // image description (profile picture, name and image description)
         mediaDetailMediaDescription.userimage = mediaData.userData.profilePicture;
         mediaDetailMediaDescription.username = mediaData.userData.username;
-        // mediaDetailMediaDescription.imagecaption = mediaData.caption;
         mediaDetailMediaDescription.imagecaption = mediaData.richCaption;
 
         // likes + comments
