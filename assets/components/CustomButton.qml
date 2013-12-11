@@ -121,6 +121,11 @@ Container {
             }
         }
     }
+    
+    onCreationCompleted: {
+        // set initial background
+        componentBackground = customButtonComponent.background;
+    }
 
     // handle ui touch behaviour
     onTouch: {
