@@ -1,5 +1,5 @@
 1
-88
+89
 classes/authenticationhandler.js
 classes/commenttransformator.js
 classes/configurationhandler.js
@@ -38,6 +38,7 @@ images/icons/icon_comments.png
 images/icons/icon_comments_dimmed.png
 images/icons/icon_home.png
 images/icons/icon_like.png
+images/icons/icon_location_dimmed.png
 images/icons/icon_lock_dimmed.png
 images/icons/icon_news.png
 images/icons/icon_pause.png

@@ -25,6 +25,9 @@ Container {
     // signal that map view has been clicked
     signal clicked()
 
+    // signal that map view was long pressed
+    signal longPress()
+
     // properties to make accessible
     property alias latitude: locationMapView.latitude
     property alias longitude: locationMapView.longitude
@@ -42,7 +45,7 @@ Container {
     // map position needs to be set by the using component
     MapView {
         id: locationMapView
-        
+
         // layout definition
         preferredWidth: DisplayInfo.width
         preferredHeight: 250
@@ -112,11 +115,16 @@ Container {
         locationMapPinContainer.visible = true;
     }
 
-    // handle tap on custom button
+    // handle tap and long press on map view
     gestureHandlers: [
         TapHandler {
             onTapped: {
                 locationMapComponent.clicked();
+            }
+        },
+        LongPressHandler {
+            onLongPressed: {
+                locationMapComponent.longPress();
             }
         }
     ]

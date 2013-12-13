@@ -14,6 +14,7 @@
 
 // import blackberry components
 import bb.cascades 1.2
+import bb.platform 1.2
 
 // set import directory for components
 import "../components"
@@ -327,6 +328,35 @@ Page {
                     // set initial visibility to false
                     // will be set true if the image has location data
                     visible: false
+
+                    onClicked: {
+                        console.log("# Media location clicked");
+                    }
+
+                    onLongPress: {
+                        console.log("# Media location long press");
+                    }
+                    
+                    // context menu for header map
+                    // this will be filled with share actions later after location data has been set
+                    contextActions: [
+                        ActionSet {
+                            id: locationHeaderActionSet
+                            title: "Location Actions"
+                            
+                            // invoke BB maps action
+                            ActionItem {
+                                id: locationBBMapsAction
+                                imageSource: "asset:///images/icons/icon_location_dimmed.png"
+                                title: "Open in Maps"
+                                
+                                // click action
+                                onTriggered: {
+                                    locationBBMapsInvoker.go();
+                                }
+                            }
+                        }
+                    ]                    
                 }
 
                 // comment previews
@@ -454,6 +484,14 @@ Page {
         } else {
             mediaDetailActionSet.remove(mediaDetailOpenBrowserAction);
         }
+        
+        // set data for bb maps invocation
+        locationBBMapsInvoker.locationLatitude = mediaData.locationLatitude;
+        locationBBMapsInvoker.locationLongitude = mediaData.locationLongitude;
+        locationBBMapsInvoker.locationName = mediaData.locationName;
+        locationBBMapsInvoker.centerLatitude = mediaData.locationLatitude;
+        locationBBMapsInvoker.centerLongitude = mediaData.locationLongitude;
+        locationBBMapsInvoker.altitude = 200;
     }
 
     // attach components
@@ -481,6 +519,11 @@ Page {
         ComponentDefinition {
             id: mediaHashtagComponent
             source: "HashtagMedia.qml"
+        },
+        // map invoker
+        // used to hand over location data to bb maps
+        LocationMapInvoker {
+            id: locationBBMapsInvoker
         }
     ]
 }
