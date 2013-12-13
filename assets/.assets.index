@@ -1,5 +1,5 @@
 1
-89
+90
 classes/authenticationhandler.js
 classes/commenttransformator.js
 classes/configurationhandler.js
@@ -67,6 +67,7 @@ instagramapi/upload.js
 instagramapi/users.js
 main.qml
 pages/HashtagMedia.qml
+pages/LocationMedia.qml
 pages/MediaComments.qml
 pages/MediaDetail.qml
 pages/MediaLikes.qml

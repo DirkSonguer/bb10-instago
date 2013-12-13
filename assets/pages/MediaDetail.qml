@@ -330,14 +330,13 @@ Page {
                     visible: false
 
                     onClicked: {
-                        console.log("# Media location clicked");
-                    }
-
-                    onLongPress: {
-                        console.log("# Media location long press");
+                        // console.log("# Media location clicked");
+                        var mediaLocationPage = mediaLocationComponent.createObject();
+                        mediaLocationPage.mediaData = mediaDetailPage.mediaData;
+                        navigationPane.push(mediaLocationPage);
                     }
                     
-                    // context menu for header map
+                    // context menu for location map
                     // this will be filled with share actions later after location data has been set
                     contextActions: [
                         ActionSet {
@@ -519,6 +518,12 @@ Page {
         ComponentDefinition {
             id: mediaHashtagComponent
             source: "HashtagMedia.qml"
+        },
+        // media location page
+        // will be called if user clicks on location map view
+        ComponentDefinition {
+            id: mediaLocationComponent
+            source: "LocationMedia.qml"
         },
         // map invoker
         // used to hand over location data to bb maps

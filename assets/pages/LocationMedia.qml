@@ -1,8 +1,8 @@
 // *************************************************** //
-// Hashtag Media Page
+// Location Media Page
 //
-// The hashtag page shows a grid of media items that
-// match a given Instagram hashtag.
+// The location page shows a grid of media items that
+// match a given Instagram location.
 //
 // Author: Dirk Songuer
 // License: GPL v2
@@ -11,6 +11,7 @@
 
 // import blackberry components
 import bb.cascades 1.2
+import bb.platform 1.2
 
 // set import directory for components
 import "../components"
@@ -18,19 +19,21 @@ import "../components"
 // shared js files
 import "../global/globals.js" as Globals
 import "../global/copytext.js" as Copytext
-import "../instagramapi/search.js" as SearchRepository
+import "../instagramapi/location.js" as LocationRepository
 
 Page {
-    id: hashtagMediaPage
+    id: locationMediaPage
+    
+    // signal if location data loading is complete
+    signal locationDataLoaded(variant mediaDataArray, string paginationId)
+    
+    // signal if location data loading encountered an error
+    signal locationDataError(variant errorData)
 
-    // signal if popular media data loading is complete
-    signal searchMediaDataLoaded(variant mediaDataArray, string paginationId)
-
-    // signal if popular media data loading encountered an error
-    signal searchDataError(variant errorData)
-
-    // search term for images to be shown in gallery
-    property string hashtagSearchTerm
+    // property containing the image data
+    // this is filled by the calling page
+    // image data is of type InstagramMediaData()
+    property variant mediaData
 
     // main content container
     Container {
@@ -39,14 +42,14 @@ Page {
         }
 
         MediaThumbnailGallery {
-            id: hashtagMediaGallery
+            id: locationMediaGallery
 
             // gallery sorted by index
             listSortingKey: "currentIndex"
             listSortAscending: true
 
             // gallery header
-            headerText: "Search"
+            headerText: "Location"
 
             onItemClicked: {
                 // console.log("# Item clicked: " + mediaData.mediaId);
@@ -58,7 +61,7 @@ Page {
             onListBottomReached: {
                 if (currentItemIndex > 0) {
                     // console.log("# Loading additional images");
-                    SearchRepository.getMediaSearchResults(hashtagSearchTerm, paginationNextMaxId, hashtagMediaPage);
+                    LocationRepository.getRecentMediaForLocation(mediaData.locationId, paginationNextMaxId, locationMediaPage);
 
                     // show toast that new images are loading
                     instagoCenterToast.body = "Loading more images..";
@@ -80,38 +83,38 @@ Page {
         }
     }
 
-    // new search term is given
-    onHashtagSearchTermChanged: {
-        // console.log("# Searching for hashtag " + hashtagMediaPage.hashtagSearchTerm);
+    // new media data array is given
+    onMediaDataChanged: {
+        // console.log("# Loading data for location with name " + mediaData.locationName + " and ID: " + mediaData.locationId)
 
         // show loader
         loadingIndicator.showLoader("Loading media items");
         
         // gallery header text
-        hashtagMediaGallery.headerText = "#" + hashtagMediaPage.hashtagSearchTerm;
+        locationMediaGallery.headerText = "#" + mediaData.locationName;
 
-        // load media items for search term
-        SearchRepository.getMediaSearchResults(hashtagSearchTerm, 0, hashtagMediaPage);
+        // load recent media data for given location
+        LocationRepository.getRecentMediaForLocation(mediaData.locationId, 0, locationMediaPage);
     }
 
-    // hashtag media data loaded and transformed
+    // location media data loaded and transformed
     // data is stored in "mediaDataArray" variant as array of type InstagramMediaData
-    onSearchMediaDataLoaded: {
+    onLocationDataLoaded: {
         // console.log("# Popular media data loaded. Found " + mediaDataArray.length + " items");
 
-        if (hashtagMediaGallery.paginationNextMaxId != paginationId) {
+        if (locationMediaGallery.paginationNextMaxId != paginationId) {
             // set new pagination id to component
-            hashtagMediaGallery.paginationNextMaxId = paginationId;
+            locationMediaGallery.paginationNextMaxId = paginationId;
 
             // iterate through data objects
             // note that the return array contains 16 items, but only 15 are needed for portrait gallery
             for (var index in mediaDataArray) {
                 // console.log("# Adding item with ID " + data[index].mediaId + " to gallery list data model");
-                hashtagMediaGallery.addToGallery(mediaDataArray[index]);
+                locationMediaGallery.addToGallery(mediaDataArray[index]);
 
                 // add image for header, use the first image
                 if (index == 0) {
-                    hashtagMediaGallery.headerImage = mediaDataArray[index].mediaStandardImage;
+                    locationMediaGallery.headerImage = mediaDataArray[index].mediaStandardImage;
                 }
             }
 
