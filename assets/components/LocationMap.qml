@@ -116,7 +116,7 @@ Container {
     gestureHandlers: [
         TapHandler {
             onTapped: {
-                customButtonComponent.clicked();
+                locationMapComponent.clicked();
             }
         }
     ]
