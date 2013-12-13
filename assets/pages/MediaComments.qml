@@ -100,6 +100,13 @@ Page {
                     userDetailPage.loadUserDataByName(username);
                     navigationPane.push(userDetailPage);
                 }
+                
+                onDescriptionHashtagClicked: {
+                    // console.log("# Hashtag link clicked in description: " + hashtag);
+                    var hashtagMediaPage = mediaHashtagComponent.createObject();
+                    hashtagMediaPage.hashtagSearchTerm = hashtag;
+                    navigationPane.push(hashtagMediaPage);                    
+                }
             }
 
             LoadingIndicator {
@@ -178,6 +185,12 @@ Page {
         ComponentDefinition {
             id: userDetailComponent
             source: "UserDetail.qml"
+        },
+        // media hashtag page
+        // will be called if user clicks on a hashtag in description
+        ComponentDefinition {
+            id: mediaHashtagComponent
+            source: "HashtagMedia.qml"
         },
         // timer component
         // used to delay reload after commenting

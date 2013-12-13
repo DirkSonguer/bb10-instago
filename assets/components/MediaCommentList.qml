@@ -201,7 +201,8 @@ Container {
                         }
                         
                         onDescriptionHashtagClicked: {
-                            
+                            // send hashtag clicked event
+                            Qt.descriptionHashtagClicked(hashtag);                           
                         }
                     }
                 }

@@ -301,18 +301,20 @@ Page {
                         userDetailPage.userData = mediaData.userData;
                         navigationPane.push(userDetailPage);
                     }
-                    
+
                     onDescriptionUsernameClicked: {
-                    	// console.log("# User link clicked in description: " + username);
+                        // console.log("# User link clicked in description: " + username);
                         var userDetailPage = userDetailComponent.createObject();
                         userDetailPage.loadUserDataByName(username);
                         navigationPane.push(userDetailPage);
                     }
 
                     onDescriptionHashtagClicked: {
-                        console.log("# Hashtag clicked in description: " + hashtag);
-                        
-                    }                    
+                        // console.log("# Hashtag link clicked in description: " + hashtag);
+                        var hashtagMediaPage = mediaHashtagComponent.createObject();
+                        hashtagMediaPage.hashtagSearchTerm = hashtag;
+                        navigationPane.push(hashtagMediaPage);
+                    }
                 }
 
                 // image location
@@ -473,6 +475,12 @@ Page {
         ComponentDefinition {
             id: mediaLikesComponent
             source: "MediaLikes.qml"
+        },
+        // media hashtag page
+        // will be called if user clicks on a hashtag in description
+        ComponentDefinition {
+            id: mediaHashtagComponent
+            source: "HashtagMedia.qml"
         }
     ]
 }
