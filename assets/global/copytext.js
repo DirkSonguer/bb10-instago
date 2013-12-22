@@ -34,6 +34,7 @@ var instagoAddLike = "Like";
 var instagoAddLikeSuccess = "Like added!";
 var instagoAddLikeError = "Could not add like. Instagram says: ";
 var instagoLikeNotLoggedIn = "Please log into your Instagram account to like images";
+var instagoShowLikes = "Show likes";
 
 var instagoRemoveLike = "Remove Like";
 var instagoRemoveLikeSuccess = "Like removed!";
@@ -43,6 +44,7 @@ var instagoAddComment = "Comment";
 var instagoAddCommentSuccess = "Added comment for image";
 var instagoAddCommentError = "Could not add comment for image. Instagram says: ";
 var instagoCommentNotLoggedIn = "Please log into your Instagram account to comment images";
+var instagoShowComments = "Show comments";
 
 var instagoDeleteCommentDialog = "Do you want to delete the selected comment?";
 var instagoDeleteCommentSuccess = "Deleted comment for image";

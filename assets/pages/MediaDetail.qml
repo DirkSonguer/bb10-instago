@@ -110,7 +110,7 @@ Page {
                             ActionItem {
                                 id: mediaDetailCommentImageAction
                                 imageSource: "asset:///images/icons/icon_comments.png"
-                                title: "Show comments"
+                                title: Copytext.instagoShowComments
 
                                 // click action
                                 onTriggered: {
@@ -152,6 +152,20 @@ Page {
                                         }
                                     }
                                 ]
+                            }
+
+                            // show like list action
+                            ActionItem {
+                                id: mediaDetailLikeListAction
+                                imageSource: "asset:///images/icons/icon_like_list.png"
+                                title: Copytext.instagoShowLikes
+
+                                // click action
+                                onTriggered: {
+                                    var mediaLikesPage = mediaLikesComponent.createObject();
+                                    mediaLikesPage.mediaData = mediaDetailPage.mediaData;
+                                    navigationPane.push(mediaLikesPage);
+                                }
                             }
 
                             // like image action
@@ -441,6 +455,7 @@ Page {
         // remove action items if user is not logged in
         if (! Authentication.auth.isAuthenticated()) {
             mediaDetailActionSet.remove(mediaDetailLikeImageAction);
+            mediaDetailActionSet.remove(mediaDetailLikeListAction);
             mediaDetailActionSet.remove(mediaDetailCommentImageAction);
         }
 
