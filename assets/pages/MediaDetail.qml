@@ -154,6 +154,21 @@ Page {
                                 ]
                             }
 
+                            // like image action
+                            ActionItem {
+                                id: mediaDetailOpenLocationAction
+                                imageSource: "asset:///images/icons/icon_location_dimmed.png"
+                                title: Copytext.instagoOpenLocation
+
+                                // click action
+                                onTriggered: {
+                                    // console.log("# Media location clicked");
+                                    var mediaLocationPage = mediaLocationComponent.createObject();
+                                    mediaLocationPage.mediaData = mediaDetailPage.mediaData;
+                                    navigationPane.push(mediaLocationPage);
+                                }
+                            }
+
                             // open in browser
                             InvokeActionItem {
                                 id: mediaDetailOpenBrowserAction
@@ -335,27 +350,27 @@ Page {
                         mediaLocationPage.mediaData = mediaDetailPage.mediaData;
                         navigationPane.push(mediaLocationPage);
                     }
-                    
+
                     // context menu for location map
                     // this will be filled with share actions later after location data has been set
                     contextActions: [
                         ActionSet {
                             id: locationHeaderActionSet
                             title: "Location Actions"
-                            
+
                             // invoke BB maps action
                             ActionItem {
                                 id: locationBBMapsAction
                                 imageSource: "asset:///images/icons/icon_location_dimmed.png"
                                 title: "Open in Maps"
-                                
+
                                 // click action
                                 onTriggered: {
                                     locationBBMapsInvoker.go();
                                 }
                             }
                         }
-                    ]                    
+                    ]
                 }
 
                 // comment previews
@@ -468,13 +483,27 @@ Page {
             mediaDetailCommentPreview.mediaId = mediaData.mediaId;
         }
 
-        // if the image has a location, show it in the location map component
+        // remove action
+        mediaDetailActionSet.remove(mediaDetailOpenLocationAction);
+
         if (mediaData.locationName != "") {
+            // if the image has a location, show it in the location map component
             mediaDetailLocation.latitude = mediaData.locationLatitude;
             mediaDetailLocation.longitude = mediaData.locationLongitude;
             mediaDetailLocation.altitude = 1500;
             mediaDetailLocation.pinText = mediaData.locationName;
             mediaDetailLocation.visible = true;
+
+            // activate location action
+            mediaDetailActionSet.add(mediaDetailOpenLocationAction);
+
+            // set data for bb maps invocation
+            locationBBMapsInvoker.locationLatitude = mediaData.locationLatitude;
+            locationBBMapsInvoker.locationLongitude = mediaData.locationLongitude;
+            locationBBMapsInvoker.locationName = mediaData.locationName;
+            locationBBMapsInvoker.centerLatitude = mediaData.locationLatitude;
+            locationBBMapsInvoker.centerLongitude = mediaData.locationLongitude;
+            locationBBMapsInvoker.altitude = 200;
         }
 
         // set browser invocation data accordingly
@@ -483,14 +512,6 @@ Page {
         } else {
             mediaDetailActionSet.remove(mediaDetailOpenBrowserAction);
         }
-        
-        // set data for bb maps invocation
-        locationBBMapsInvoker.locationLatitude = mediaData.locationLatitude;
-        locationBBMapsInvoker.locationLongitude = mediaData.locationLongitude;
-        locationBBMapsInvoker.locationName = mediaData.locationName;
-        locationBBMapsInvoker.centerLatitude = mediaData.locationLatitude;
-        locationBBMapsInvoker.centerLongitude = mediaData.locationLongitude;
-        locationBBMapsInvoker.altitude = 200;
     }
 
     // attach components

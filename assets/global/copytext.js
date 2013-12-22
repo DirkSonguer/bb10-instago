@@ -51,6 +51,7 @@ var instagoDeleteCommentError = "Could not delete comment for image. Instagram s
 var instagoFlagCommentSuccess = "Reported comment as inappropriate";
 var instagoFlagCommentError = "Could not flag comment as inappropriate. Instagram says: ";
 
+var instagoOpenLocation = "Show location";
 var instagoNoLocationFound = "No media items found for this location";
 var instagoQueryCurrentPosition = "Trying to fix your current location";
 
