@@ -402,7 +402,7 @@ Page {
                     visible: false
 
                     onClicked: {
-                        // console.log("# Comment preview clicked");
+                        console.log("# Comment preview clicked");
 
                         if (Authentication.auth.isAuthenticated()) {
                             // console.log("# Comment preview clicked");

@@ -84,6 +84,12 @@ Container {
     // background color definition
     background: Color.create(Globals.instagoDefaultBackgroundColor)
 
+    // this is a workaround to make the signals visible inside the listview item scope
+    // see here for details: http://supportforums.blackberry.com/t5/Cascades-Development/QML-Accessing-variables-defined-outside-a-list-component-from/m-p/1786265#M641
+    onCreationCompleted: {
+        Qt.commentsClicked = commentPreviewComponent.clicked;
+    }
+    
     // list view containing the individual comment items
     ListView {
         id: commentPreview
@@ -160,6 +166,16 @@ Container {
                         textStyle.textAlign: TextAlign.Left
                         text: ListItemData.commentData.text
                     }
+                    
+                    // TODO: This does not work for some reason
+                    // handle tap on comment preview component
+                    gestureHandlers: [
+                        TapHandler {
+                            onTapped: {
+                                Qt.commentsClicked();
+                            }
+                        }
+                    ]
                 }
             }
         ]
@@ -175,25 +191,15 @@ Container {
     onTouch: {
         // user pressed description
         if (event.touchType == TouchType.Down) {
-            // commentPreviewComponent.background = Color.create(Globals.instagoHighlightBackgroundColor);
+            commentPreviewComponent.background = Color.create(Globals.instagoHighlightBackgroundColor);
         }
 
         // user released description or is moving
         if ((event.touchType == TouchType.Up) || (event.touchType == TouchType.Cancel)) {
-            // commentPreviewComponent.background = Color.create(Globals.instagoDefaultBackgroundColor);
+            commentPreviewComponent.background = Color.create(Globals.instagoDefaultBackgroundColor);
         }
     }
     
-    // TODO: This does not work for some reason
-    // handle tap on comment preview component
-    gestureHandlers: [
-        TapHandler {
-            onTapped: {
-                commentPreviewComponent.clicked();
-            }
-        }
-    ]
-
     // attached objects
     attachedObjects: [
         // this will be the data model for the popular media list view
