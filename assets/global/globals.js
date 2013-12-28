@@ -10,7 +10,7 @@
 // See: http://choosealicense.com/licenses/gpl-v2/
 // *************************************************** //
 
-var currentApplicationVersion = "2.0.0";
+var currentApplicationVersion = "2.0.1";
 
 var instagoNewsURL = "http://instagoapp.tumblr.com/";
 
